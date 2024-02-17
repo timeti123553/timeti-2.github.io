@@ -1,0 +1,1022 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.7">
+    
+    
+      
+        <title>倒格子（Reciprocal Lattice） - TIMEti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reciprocal-lattice" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="TIMEti" class="md-header__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIMEti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              倒格子（Reciprocal Lattice）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  文章
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-tabs__link">
+          
+  
+  专栏
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%83%B3%E6%B3%95/" class="md-tabs__link">
+        
+  
+    
+  
+  想法
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-tabs__link">
+        
+  
+    
+  
+  收藏
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TIMEti" class="md-nav__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    TIMEti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    专栏
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    固体物理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    量子力学
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E6%96%AF%E6%A0%BC%E6%98%8E%E5%AD%90%28skyrmion%29%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    斯格明子(skyrmion)建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/MuMax3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MuMax3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/PWmat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWmat
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/VASP%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VASP建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%83%B3%E6%B3%95/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    想法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    收藏
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      格点如何进行傅里叶变换？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      倒格子
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      倒格子基矢
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      二维倒格子
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      倒格子与布拉菲格子的几何关系
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      倒格矢的长度与面间距
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      倒格子与基矢与正格子基矢的关系
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      例子
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-cubic" class="md-nav__link">
+    <span class="md-ellipsis">
+      简单立方（Simple Cubic）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body-centered-cubic" class="md-nav__link">
+    <span class="md-ellipsis">
+      体心立方（Body Centered Cubic）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#face-centered-cubic" class="md-nav__link">
+    <span class="md-ellipsis">
+      面心立方（Face Centered Cubic）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simple-hexagon" class="md-nav__link">
+    <span class="md-ellipsis">
+      简单六角（Simple Hexagon）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="reciprocal-lattice"><strong>倒格子（Reciprocal Lattice）</strong><a class="headerlink" href="#reciprocal-lattice" title="Permanent link">&para;</a></h1>
+<p>一个物理问题，既可以在正空间（坐标空间）描写，也可以在倒空间（动量）描写。</p>
+<p>对于一个问题，我们可以选择不同的描写方法。合适的描写方法可以帮我们简化问题。</p>
+<p><strong>坐标空间中用格矢（ <span class="arithmatex">\(\mathbf{R}_{l}\)</span> ）描写晶体平移周期性。</strong></p>
+<p>势能、电荷密度等满足叠加原理的物理量：<span class="arithmatex">\(\displaystyle F(\mathbf{r})=\sum_l f\left(\mathbf{r}-\mathbf{R}_{l}\right)\)</span></p>
+<p>如果晶体具有平移周期性，则格矢满足条件：<span class="arithmatex">\(\mathbf{R}_{l}=\mathbf{R}_{m}+\mathbf{R}_{n}\)</span></p>
+<p>满足叠加原理的物理量可以写作格矢 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> 的周期函数：<span class="arithmatex">\(F\left(\mathbf{r}+\mathbf{R}_{l}\right)=F(\mathbf{r})\)</span></p>
+<p>对物理量 <span class="arithmatex">\(F(\mathbf{r})\)</span> 作傅里叶展开：<span class="arithmatex">\(\displaystyle F(\mathbf{r})=\sum_{h} F_{\mathbf{K}_{h}} e^{-i\mathbf{K}_{h} \cdot \mathbf{r}}\)</span></p>
+<p><span class="arithmatex">\(F_{\mathbf{K}_{h}}\)</span>被称为傅里叶系数。</p>
+<p>将两边乘以共轭因子 <span class="arithmatex">\(\displaystyle e^{-i\mathbf{K}_{h} \cdot \mathbf{r}}\)</span> 后并积分，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle\frac{1}{V} \int F(\mathbf{r}) e^{-\mathbf{K}_{h} \cdot\mathbf{r}} d \mathbf{r}=\sum_{h'} F_{\mathbf{K}_{h'}} \frac{1}{V} \int e^{i\left(\mathbf{K}_{h'}-\mathbf{K}_{h}\right\rangle \mathbf{\cdot r}} d \mathbf{r}\]</div>
+<p>当且仅当 <span class="arithmatex">\(\mathbf{K}_{h'}=\mathbf{K}_{h}\)</span> 的时候，这个积分不为零，且等于 <span class="arithmatex">\(V\)</span> 。</p>
+<div class="arithmatex">\[\displaystyle\frac{1}{V} \int F(\mathbf{r}) e^{-\mathbf{K}_{h} \cdot\mathbf{r}} d \mathbf{r}=F_{\mathbf{K}_h}\frac{1}{V}V=F_{\mathbf{K}_h}\]</div>
+<p>因为 <span class="arithmatex">\(F(\mathbf{r})\)</span> 具有周期性，所以傅里叶系数对应的公式中加上格矢，傅里叶系数 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> 是不变的：</p>
+<div class="arithmatex">\[\displaystyle F_{\mathbf{K}_{h}}=\frac{1}{V} \int F(\mathbf{r}) e^{-\mathbf{K_h}\cdot \mathbf{r}} d \mathbf{r}=\frac{1}{V} \int F\left(\mathbf{r}+\mathbf{R}_{l}\right) e^{-\mathbf{K}_{h}\cdot \mathbf{r}} d \mathbf{r}\]</div>
+<p>做变量替换 <span class="arithmatex">\(\mathbf{r}^{\prime}=\mathbf{r}+\mathbf{R}_{l}\)</span> ，傅里叶系数可以变换为：</p>
+<div class="arithmatex">\[\begin{array}{ll} F_{\mathbf{K}_{h}}&amp;\displaystyle=\frac{1}{V} \int F\left(\mathbf{r}^{\prime}\right) e^{-i\left(\mathbf{K}_{h} \cdot \mathbf{r}^{\prime}-\mathbf{K}_{h} \cdot \mathbf{R}_{l}\right)} d \mathbf{r}^{\prime} \\&amp;\displaystyle=\left[\frac{1}{V} \int F\left(\mathbf{r}^{\prime}\right) e^{-i \mathbf{K}_{h}\cdot \mathbf{r}^{\prime}} d \mathbf{r}^{\prime}\right] e^{i \mathbf{K}_{h} \cdot \mathbf{R}_{l}}\\&amp;\displaystyle=F_{\mathbf{K}_{h}} e^{i \mathbf{K}_{h} \cdot \mathbf{R}_{l}} \\\end{array}\]</div>
+<p>上式可以写成： <span class="arithmatex">\(\displaystyle F_{\mathbf{K}_{h}}\left(1-e^{i \mathbf{K}_{h} \cdot \mathbf{R}_{l}}\right)=0\)</span></p>
+<p>显然<span class="arithmatex">\(\displaystyle  F_{\mathbf{K}_{h}} \neq 0\)</span>，所以我们可以知道，如果晶体具有周期性，则一定满足公式：<span class="arithmatex">\(e^{i \mathbf{K}_{h} \cdot \mathbf{R}_{l}}=1\)</span></p>
+<p>其中<span class="arithmatex">\(\mathbf{K}_{h} \bullet \mathbf{R}_{l}=2 \pi m\)</span>，<span class="arithmatex">\(m\)</span>是整数。</p>
+<h2 id="_1"><strong>格点如何进行傅里叶变换？</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>数学上如何用一个函数来描写格点？</p>
+<p>在数学上，我们用<span class="arithmatex">\(\delta\)</span>函数来描写晶体中的格点。</p>
+<p>将一个晶体中所有格点对应的<span class="arithmatex">\(\delta\)</span>函数加起来，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle\rho(\mathbf{r})=\sum_{\mathbf{R}_{l}} \delta\left(\mathbf{r}-\mathbf{R}_{l}\right)\]</div>
+<p>这是周期函数，因此可对其进行傅里叶变换：</p>
+<div class="arithmatex">\[\displaystyle\rho_{\mathbf{k}}=\int \rho(\mathbf{r}) e^{-i \mathbf{k} \cdot \mathbf{r}} d \mathbf{r}=\sum_{\mathbf{R}_{l}} \int \delta\left(\mathbf{r}-\mathbf{R}_{l}\right) e^{-i \mathbf{k} \cdot \mathbf{r}} d \mathbf{r}=\sum_{\mathbf{R}_{l}} e^{-\mathbf{k} \cdot \mathbf{R}_{l}}\]</div>
+<p>格点满足平移周期性，则 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 满足：<span class="arithmatex">\(\mathbf{K}_{h} \bullet \mathbf{R}_{l}=2 \pi m\)</span></p>
+<p>那么乘上不变因子 <span class="arithmatex">\(e^{i \mathbf{K}_{h} \cdot \mathbf{R}_{l}}=1\)</span> ，我们可以得到：<span class="arithmatex">\(\displaystyle\rho_{\mathbf{k}}=\sum_{\mathbf{R}_{l}} e^{-i\left(\mathbf{k}-\mathbf{K}_{h}\right)\cdot \mathbf{R}_l}\)</span></p>
+<p>利用泊松求和公式 <span class="arithmatex">\(\displaystyle\sum_{n=-\infty}^{\infty} \delta\left(t-n T_{0}\right)=\frac{1}{T_{0}} \sum_{n=-\infty}^{\infty} e^{j 2 \pi n \frac{1}{T_{0}} t}\)</span> ，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle\rho_{\mathbf{k}}=\sum_{\mathbf{R}_{l}} e^{i\left(\mathbf{k}- \mathbf{K}_{h}\right) \cdot \mathbf{R_l}}=\sum_{\mathbf{K}_{h}} \delta\left(\mathbf{k}-\mathbf{K}_{h}\right)\]</div>
+<p>即当矢量 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 与 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> 的乘积是 <span class="arithmatex">\(2\pi\)</span> 的整数倍的时候，坐标空间中以 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> 为中心的 <span class="arithmatex">\(\delta\)</span> 函数在傅里叶变换后，变为在动量空间中以 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 为中心的 <span class="arithmatex">\(\delta\)</span> 函数！</p>
+<p>我们可以发现：坐标空间几何点的傅里叶变换也是几何点！</p>
+<p><span class="arithmatex">\(\mathbf{K}_{h}\)</span> 与 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> 的关系定义了倒空间矢量，<span class="arithmatex">\(\mathbf{K}_{h}\)</span> 的量纲为 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> 量纲的倒数。</p>
+<h2 id="_2">倒格子<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title"><strong>定义</strong></p>
+<p>对布拉菲格子（正格子）中所有的格式 <span class="arithmatex">\(\mathbf{R}_{l}\)</span> ，有一系列动量空间矢量 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> ，满足 <span class="arithmatex">\(\displaystyle e^{i \mathbf{K}_{h} \cdot \mathbf{R}_{l}}=1\)</span> 和 <span class="arithmatex">\(\mathbf{K}_{h} \bullet \mathbf{R}_{l}=2 \pi m\)</span>（ <span class="arithmatex">\(m\)</span> 是整数）的全部端点 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 的集合，构成布拉菲格子的倒格子，这些点称为倒格点， <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 称为倒格矢。</p>
+</div>
+<p>等价关系：知道 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> ，就知道 <span class="arithmatex">\(\mathbf{R}_{l}\)</span>，反过来也一样。</p>
+<p>因为它们满足傅里叶变换关系，所以倒空间也称为傅里叶空间。</p>
+<h2 id="_3"><strong>倒格子基矢</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>布拉菲格子（正格子）的基矢为：<span class="arithmatex">\(\mathbf{R}_{l}=l_{1} \mathbf{a}_{1}+l_{2} \mathbf{a}_{2}+l_{3} \mathbf{a}_{3}\)</span></p>
+<p>将上式带入关系：<span class="arithmatex">\(\mathbf{K}_{h} \cdot \mathbf{R}_{l}=l_{l} \mathbf{K}_{h} \cdot \mathbf{a}_{1}+l_{2} \mathbf{K}_{h} \cdot \mathbf{a}_{2}+l_{3} \mathbf{K}_{h} \cdot \mathbf{a}_{3}=2 \pi m\)</span></p>
+<p>如果选择一组矢量 <span class="arithmatex">\(\bf b\)</span>，使其满足关系：<span class="arithmatex">\(\mathbf{b}_{i} \cdot \mathbf{a}_{j}=2 \pi \delta_{i j}\)</span></p>
+<p>那么矢量 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 就可由 <span class="arithmatex">\(\bf b\)</span> 组成： <span class="arithmatex">\(\mathbf{K}_{h}=h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{3} \mathbf{b}_{3}\)</span></p>
+<p>这样就定义了倒格子基矢，因为它可以满足正、倒格矢之间的 <span class="arithmatex">\(\mathbf{K}_{h} \bullet \mathbf{R}_{l}=2 \pi m\)</span> 的关系。</p>
+<p>因为形式上与正格矢一样，所以 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 也具有平移对称性（周期性）。</p>
+<p>我们可以用基矢和整数表示平移对称性。</p>
+<p><span class="arithmatex">\(\mathbf{K}_{h}\)</span>定义了倒空间的布拉菲格子，<span class="arithmatex">\(\mathbf{b}_i\)</span> 就是倒格子基矢。</p>
+<p><span class="arithmatex">\(\mathbf{b}_{i} \cdot \mathbf{a}_{j}=2 \pi \delta_{i j}\)</span>表示正、倒格矢的基矢之间是正交关系！即 <span class="arithmatex">\(\bf b_1\)</span> 与 <span class="arithmatex">\(\bf a_2\)</span> 和 <span class="arithmatex">\(\bf a_3\)</span> 正交！</p>
+<p>看 <span class="arithmatex">\(\bf a_2\)</span> 和 <span class="arithmatex">\(\bf a_3\)</span> 确定的平面，即 <span class="arithmatex">\(\bf a_2\times a_3\)</span> 矢量垂直于该平面。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-2.png" width="1000" /></a>
+</figure>
+<p>因为 <span class="arithmatex">\(\bf b_1\)</span> 与 <span class="arithmatex">\(\bf a_2\)</span> 和 <span class="arithmatex">\(\bf a_3\)</span> 分别正交，所以矢量 <span class="arithmatex">\(\bf b_1\)</span> 与矢量 <span class="arithmatex">\(\bf a_2\times a_3\)</span> 平行！</p>
+<p>因此，可设 <span class="arithmatex">\(\mathbf{b}_{1}=\eta\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)\)</span> 。</p>
+<p>我们可以利用正交关系确定 <span class="arithmatex">\(\eta\)</span> ：</p>
+<div class="arithmatex">\[
+\begin{align*}
+\mathbf{a}_{1} \cdot \mathbf{b}_{1} &amp;= \eta \mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right) = 2 \pi \\
+\eta &amp;= \frac{2 \pi}{\mathbf{a_{1}} \cdot\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} = \frac{2 \pi}{\Omega} \\
+\mathbf{b}_{1} &amp;= \frac{2 \pi}{\Omega}\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right) \\
+\Omega &amp;= \left|\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)\right|
+\end{align*}
+\]</div>
+<p>同理，我们可以求出倒空间所有的基矢：</p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle\rm\mathbf{b}_{1}=2 \pi \frac{\mathbf{a}_{2} \times \mathbf{a}_{3}}{\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} \\\displaystyle\rm\mathbf{b}_{2}=2 \pi \frac{\mathbf{a}_{3} \times \mathbf{a}_{1}}{\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} \\\displaystyle\rm\mathbf{b}_{3}=2 \pi \frac{\mathbf{a}_{1} \times \mathbf{a}_{2}}{\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)}\end{array}\]</div>
+<p>有些教科书也将这个关系作为倒格子基矢的定义，即由这三个矢量可以定义倒格矢，倒格矢给出的端点集合构成倒格子。</p>
+<p><strong>正格子和倒格子互为倒正，即正格子也可以看作倒格子的倒格子。</strong></p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle\mathbf{b}_{1}=2 \pi \frac{\mathbf{a}_{2} \times \mathbf{a}_{3}}{\mathbf{a}_{1} \cdot\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} \\\displaystyle\mathbf{b}_{2}=2 \pi \frac{\mathbf{a}_{3} \times \mathbf{a}_{1}}{\mathbf{a}_{1} \cdot\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} \\\displaystyle\mathbf{b}_{3}=2 \pi \frac{\mathbf{a}_{1} \times \mathbf{a}_{2}}{\mathbf{a}_{1} \cdot\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)}\end{array}\Leftrightarrow \begin{array}{l}\displaystyle\mathbf{a}_{1}=2 \pi \frac{\mathbf{b}_{2} \times \mathbf{b}_{3}}{\mathbf{b}_{1} \cdot\left(\mathbf{b}_{2} \times \mathbf{b}_{3}\right)} \\\displaystyle\mathbf{a}_{2}=2 \pi \frac{\mathbf{b}_{3} \times \mathbf{b}_{1}}{\mathbf{b}_{1} \cdot\left(\mathbf{b}_{2} \times \mathbf{b}_{3}\right)} \\\displaystyle\mathbf{a}_{3}=2 \pi \frac{\mathbf{b}_{1} \times \mathbf{b}_{2}}{\mathbf{b}_{1} \cdot\left(\mathbf{b}_{2} \times \mathbf{b}_{3}\right)}\end{array}\]</div>
+<p>倒格矢： <span class="arithmatex">\(\mathbf{K}_{h}=h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{3} \mathbf{b}_{3}\)</span></p>
+<p>满足平移对称性：<span class="arithmatex">\(\mathbf{K}_{h}=\mathbf{K}_{h^{\prime}}+\mathbf{K}_{h^{\prime \prime}}\)</span></p>
+<p>在量纲上，倒格子原胞体积是正格子原胞体积的倒数：</p>
+<div class="arithmatex">\[\displaystyle\Omega^{*}=\left|\mathbf{b}_{1} \cdot\left(\mathbf{b}_{2} \times \mathbf{b}_{3}\right)\right|=\frac{(2 \pi)^{3}}{\Omega}\]</div>
+<h2 id="_4"><strong>二维倒格子</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>我们将其中一个维度看成是单位矢量：<span class="arithmatex">\(\mathbf{a}_{3}=\hat{\mathbf{k}}\)</span></p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle\rm\mathbf{b}_{1}=2 \pi \frac{\mathbf{a}_{2} \times \hat{\mathbf{k}}}{\hat{\mathbf{k}} \cdot\left(\mathbf{a}_{1} \times \mathbf{a}_{2}\right)} \\\displaystyle\rm\mathbf{b}_{2}=2 \pi \frac{\hat{\mathbf{k}} \times \mathbf{a}_{1}}{\hat{\mathbf{k}} \cdot\left(\mathbf{a}_{1} \times \mathbf{a}_{2}\right)}\end{array}\]</div>
+<div class="arithmatex">\[\begin{array}{l} \mathbf{a}_{1}=a \hat{\mathbf{i}} \\ \mathbf{a}_{2}=b \hat{\mathbf{j}}\end{array}\Rightarrow\begin{array}{l}\displaystyle\mathbf{b}_{1}=\frac{2 \pi}{a} \hat{\mathbf{i}} \\\displaystyle\mathbf{b}_{2}=\frac{2 \pi}{b} \hat{\mathbf{j}}\end{array}\]</div>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-3.png" width="1000" /></a>
+</figure>
+<h2 id="_5"><strong>倒格子与布拉菲格子的几何关系</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>正、倒格子描述不同空间的晶体对称性。</p>
+<p>正、倒格子对应的几何关系：</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-4.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-4.png" width="1000" /></a>
+</figure>
+<p><span class="arithmatex">\(\mathbf{K}_{h}=h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{3} \mathbf{b}_{3}\)</span> 与晶面 <span class="arithmatex">\((h_1h_2h_3)\)</span> 正交。</p>
+<p>倒格式的方向就是晶面的法向。</p>
+<p>注：不是密勒指数 <span class="arithmatex">\((hkl)\)</span> ，而是晶面指数 <span class="arithmatex">\((h_1h_2h_3)\)</span> 。</p>
+<p>该晶面族最靠近原点晶面的截距分别为：<span class="arithmatex">\(\displaystyle\frac{a_1}{h_1}\)</span>，<span class="arithmatex">\(\displaystyle\frac{a_2}{h_2}\)</span>，<span class="arithmatex">\(\displaystyle\frac{a_3}{h_3}\)</span>；</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-5.png" width="1000" /></a>
+</figure>
+<p>证明：</p>
+<div class="arithmatex">\[
+\begin{align*}
+\mathbf{C A} &amp;= \mathbf{O A}-\mathbf{O C}=\frac{\mathbf{a}_{1}}{h_{1}}-\frac{\mathbf{a}_{3}}{h_{3}} \\
+\mathbf{CB} &amp;= \mathbf{OB}-\mathbf{OC}=\frac{\mathbf{a}_{2}}{h_{2}}-\frac{\mathbf{a}_{3}}{h_{3}} \\
+\mathbf{K}_{h} \cdot \mathbf{C A} &amp;= \left(h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{1} \mathbf{b}_{3}\right) \cdot\left(\frac{\mathbf{a_1}}{h_{1}}-\frac{\mathbf{a}_{3}}{h_{3}}\right)=0 \\
+\mathbf{K}_{h} \cdot \mathbf{C B} &amp;= \left(h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{1} \mathbf{b}_{3}\right) \cdot\left(\frac{\mathbf{a}_{2}}{h_{2}}-\frac{\mathbf{a}_{3}}{h_{3}}\right)=0
+\end{align*}
+\]</div>
+<p>所以我们可以证得：<span class="arithmatex">\(\mathbf{K}_{h}\)</span>垂直于平面 <span class="arithmatex">\(\bf ABC\)</span> ，即 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 与晶面 <span class="arithmatex">\((h_1h_2h_3)\)</span> 正交。</p>
+<h2 id="_6"><strong>倒格矢的长度与面间距</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>设晶面 <span class="arithmatex">\((h_1h_2h_3)\)</span> 的面间距为 <span class="arithmatex">\(d\)</span> ；</p>
+<p>则最靠近原点的晶面到原点的距离即 <span class="arithmatex">\(\mathbf{OA}\)</span> 在 <span class="arithmatex">\(\mathbf{K}_{h}\)</span> 上的投影：</p>
+<div class="arithmatex">\[\begin{aligned}\displaystyle d &amp;\displaystyle =\frac{\mathbf{a}_{1}}{h_{1}} \cdot \frac{\mathbf{K}_{h}}{\left|\mathbf{K}_{h}\right|} \\\displaystyle &amp; =\frac{\mathbf{a}_{1} \cdot\left(h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{3} \mathbf{b}_{3}\right)}{h_{1}\left|h_{1} \mathbf{b}_{1}+h_{2} \mathbf{b}_{2}+h_{3} \mathbf{b}_{3}\right|} \\\displaystyle &amp; =\frac{2 \pi}{\left|\mathbf{K}_{h}\right|}\end{aligned}\]</div>
+<div class="arithmatex">\[\displaystyle\mid\mathbf{K}_{h}\mid=\frac{2 \pi}{d_{h}}\]</div>
+<div class="arithmatex">\[\displaystyle\mathbf{K}_{h}=\frac{2 \pi}{d_h} \hat{\mathbf{n}}_{h}\]</div>
+<p>注：面间距是与晶面指数而不是密勒指数相关。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-6.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-6.png" width="1000" /></a>
+</figure>
+<p>自原点 <span class="arithmatex">\(\bf O\)</span> 引晶面族法线 <span class="arithmatex">\(\bf N\)</span> ，截取 <span class="arithmatex">\(\bf P\)</span> 使 <span class="arithmatex">\(\displaystyle \mathbf{OP}=\frac{2\pi}{d}\)</span> 。</p>
+<p><span class="arithmatex">\(\bf P\)</span>点即倒格点，沿 <span class="arithmatex">\(\bf N\)</span> 平移 <span class="arithmatex">\(\bf OP\)</span> ，形成格子，即倒格子。</p>
+<p>这样我们可以把晶面和倒格点相互联系起来，即将衍射极大与晶面相联系起来。</p>
+<h2 id="_7"><strong>倒格子与基矢与正格子基矢的关系</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>正格子基矢组成 <span class="arithmatex">\(\mathbf{a}_{1} \mathbf{a}_{2}, \mathbf{a}_{2} \mathbf{a}_{3}, \mathbf{a}_{3} \mathbf{a}_{1}\)</span> 坐标面，各有对应晶面，面间距分别是 $ d_{1}, d_{2}, d_{3}$ 。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-7.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-7.png" width="1000" /></a>
+</figure>
+<p>可作 <span class="arithmatex">\(\bf OP\)</span> 垂直于 <span class="arithmatex">\(\mathbf{a}_{1} \mathbf{a}_{2}\)</span> 晶面，取长度为 <span class="arithmatex">\(\displaystyle b_3=\frac{2\pi}{d_3}\)</span> 。同理，得 $ b_2,b_3$ 。</p>
+<h2 id="_8"><strong>例子</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="simple-cubic"><strong>简单立方（Simple Cubic）</strong><a class="headerlink" href="#simple-cubic" title="Permanent link">&para;</a></h3>
+<p>注：简单立方格子的倒格子是简单立方格子。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-8.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-8.png" width="1000" /></a>
+</figure>
+<h3 id="body-centered-cubic"><strong>体心立方（Body Centered Cubic）</strong><a class="headerlink" href="#body-centered-cubic" title="Permanent link">&para;</a></h3>
+<p>注：体心立方格子的倒格子是面心立方格子。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-9.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-9.png" width="1000" /></a>
+</figure>
+<h3 id="face-centered-cubic"><strong>面心立方（Face Centered Cubic）</strong><a class="headerlink" href="#face-centered-cubic" title="Permanent link">&para;</a></h3>
+<p>注：面心立方格子的倒格子是体心立方格子。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-10.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-10.png" width="1000" /></a>
+</figure>
+<h3 id="simple-hexagon"><strong>简单六角（Simple Hexagon）</strong><a class="headerlink" href="#simple-hexagon" title="Permanent link">&para;</a></h3>
+<p>注：简单六角格子的倒格子是简单六角格子。</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-11.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-11.png" width="1000" /></a>
+</figure>
+<h2 id="_9"><strong>例题</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>面心立方下述晶面的面间距是多少？</p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-12.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-12.png" width="1000" /></a>
+</figure>
+<p>解：</p>
+<p>首先，上述晶面的密勒指数是：<span class="arithmatex">\(\rm (100)\)</span></p>
+<p>以原胞基矢为单位，三个方向上的截距为：<span class="arithmatex">\(\infty, 1,1\)</span></p>
+<p>截距的倒数互质的最小整数为（晶面指数）：<span class="arithmatex">\(\rm (011)\)</span></p>
+<figure>
+  <a class="glightbox" href="../../images/article-2/article-2-13.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="../../images/article-2/article-2-13.png" width="1000" /></a>
+</figure>
+<p>根据晶面间距公式 <span class="arithmatex">\(\displaystyle d=\frac{2 \pi}{\left|\mathbf{K}_{h}\right|}\)</span> 和上述面心立方的倒格子基矢，我们可以得到面心立方格子的晶面间距为：</p>
+<div class="arithmatex">\[\displaystyle d=\frac{2 \pi}{\mathbf{K}_{h}}=\frac{2 \pi}{\mathbf{b}_{2}+\mathbf{b}_{3}}=\frac{2 \pi}{\displaystyle\frac{2 \pi}{a}[(+\hat{\mathbf{i}}-\hat{\mathbf{j}}+\hat{\mathbf{k}})+(+\hat{\mathbf{i}}+\hat{\mathbf{j}}-\hat{\mathbf{k}})]}=\frac{a}{2}\]</div>
+<h2 id="_10"><strong>问题</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p><strong>问题1：固体物理中为什么要引入倒空间（动量空间）的概念？</strong></p>
+<p>在固体物理中，引入倒空间（也称为动量空间或 <span class="arithmatex">\(\bf k\)</span> 空间）的概念是非常重要的，原因有几方面：</p>
+<ol>
+<li><strong>简化问题：</strong>倒空间是通过傅里叶变换从实空间（物理空间，即我们通常观察到的空间）转换而来的。在处理固体中的电子行为和晶体结构时，使用倒空间可以简化问题。例如，晶体的周期性边界条件在倒空间中更容易处理，因为晶格的周期性在倒空间中表现为离散的点，这使得分析和计算晶体的电子结构和振动模式变得更加直观和简单。</li>
+<li><strong>布拉格衍射：</strong>倒空间在分析晶体的 X 射线衍射中尤其有用。布拉格定律描述了晶体中原子平面对 X 射线的衍射，这可以在倒空间中非常自然地表示。在倒空间中，晶体的布拉格平面对应于特定的点，这些点的位置与晶体结构的周期性直接相关。通过研究这些点，科学家可以直观地理解和分析晶体的结构特征。</li>
+<li><strong>电子能带结构：</strong>在固体物理中，电子的行为可以通过其能带结构来描述，而能带结构在倒空间中表示更为直接。倒空间中的每个点对应于一个特定的波矢（动量），这允许直接计算和表示电子的能量分布和禁带结构。这对于理解和预测材料的电子性质至关重要，如导电性、绝缘性和半导体性质。</li>
+<li><strong>波动性质和周期性：</strong>固体中的电子、声子（晶格振动的量子）和其他准粒子的行为通常具有波动性质，这些波动性质在倒空间中更容易分析。例如，声子的色散关系（即声子能量与其动量的关系）通常在倒空间中给出，这有助于理解固体中热力学和机械性质的基础。</li>
+<li><strong>Bloch 定理：</strong>Bloch 定理是固体物理中的一个基本定理，它表明在周期性势场中的电子波函数可以表示为平面波和周期性函数的乘积。这一定理的自然语言就是倒空间，因为它直接关联了电子的波矢（动量）和晶体的周期性。</li>
+</ol>
+<p>总之，倒空间的引入为理解和分析固体中的复杂现象提供了一种强有力的工具，使得许多原本在实空间中难以处理的问题变得更加可解和直观。</p>
+<p><strong>问题2： 给定的正格子是否只有唯一的倒格子与之对应？</strong></p>
+<p>在晶体物理中，给定的正格子确实只有一个唯一对应的倒格子。正格子是用来描述晶体中原子排列的三维网格，而倒格子则是用来描述晶体的波动性质，如电子波或 X 射线的衍射模式。</p>
+<p>倒格子的构造是基于正格子的，其基矢量与正格子的基矢量之间存在特定的数学关系。这种关系确保了每一个正格子只对应一个唯一的倒格子。倒格子的基矢量是正格子基矢量的函数，通过特定的数学变换得到，这种变换包括计算正格子基矢量的互相垂直的向量并进行归一化处理。</p>
+<p>倒格子的概念在分析和理解晶体内部的波动性质（如电子的行为、光波和声波的传播等）方面非常重要，因为它提供了一个方便的数学框架来研究这些性质。这种唯一对应关系保证了晶体的物理性质可以通过研究其倒格子得到全面的理解。</p>
+<p><strong>问题3：给定的正格子基矢是否只有唯一的倒格子基矢与之对应？</strong></p>
+<p>在固体物理中，正格子与倒格子的概念是用于描述晶体结构的重要工具。正格子定义了晶体中原子或分子的周期性排列，而倒格子则是用来描述波动性质，如电子波和声子波在晶体中的传播。</p>
+<p>给定的正格子基矢确实只有一组唯一的倒格子基矢与之对应。倒格子基矢是通过正格子基矢通过一组特定的数学变换得到的，这个变换基于正格子基矢构建一个与原晶体具有相同对称性但在倒空间中的格子。倒格子的基矢与正格子的基矢满足以下关系：</p>
+<p>如果正格子的基矢是 <span class="arithmatex">\(\mathbf{a}_{1}, \mathbf{a}_{2}, \mathbf{a}_{3}\)</span> ，那么对应的倒格子基矢 <span class="arithmatex">\(\mathbf{b}_{1}, \mathbf{b}_{2}, \mathbf{b}_{3}\)</span>可以通过下面的公式计算得到：</p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle\rm\mathbf{b}_{1}=2 \pi \frac{\mathbf{a}_{2} \times \mathbf{a}_{3}}{\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} \\\displaystyle\rm\mathbf{b}_{2}=2 \pi \frac{\mathbf{a}_{3} \times \mathbf{a}_{1}}{\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)} \\\displaystyle\rm\mathbf{b}_{3}=2 \pi \frac{\mathbf{a}_{1} \times \mathbf{a}_{2}}{\mathbf{a}_{1} \bullet\left(\mathbf{a}_{2} \times \mathbf{a}_{3}\right)}\end{array}\]</div>
+<p>这些公式确保了倒格子基矢与正格子基矢之间的正交性和体积关系，从而使得倒格子基矢唯一对应于一组给定的正格子基矢。这种唯一性是晶体物理和固体物理研究中的基本性质，是分析晶体中电子行为和声子散射过程的基础。</p>
+<p><strong>问题4：正格矢 <span class="arithmatex">\(\mathbf{R}_l\)</span> 是否只有唯一的倒格式 <span class="arithmatex">\(\mathbf{K}_h\)</span> 与之对应？</strong></p>
+<p>不是的，对于一个给定的正格矢 <span class="arithmatex">\(\mathbf{R}_l\)</span> ，并不存在唯一的倒格矢 <span class="arithmatex">\(\mathbf{K}_h\)</span> 与之对应。这是因为正格矢和倒格矢定义在不同的空间中，它们遵循的是一种正交性关系，而非一一对应的关系。</p>
+<p>正格矢 <span class="arithmatex">\(\mathbf{R}_l\)</span> 描述的是晶体直接空间（或称为实空间）中的周期性结构，它表示晶体中原子或分子重复出现的位置。倒格矢 <span class="arithmatex">\(\mathbf{K}_h\)</span> 则定义在倒空间中，用来描述波动性质，如电子波函数的相位变化。正格矢和倒格矢之间的关系通常通过布拉菲定理（Bragg's law）在物理上得到体现，而数学上它们遵循的是：</p>
+<div class="arithmatex">\[e^{i\mathbf{K}_h \cdot \mathbf{R}_l} = 1\]</div>
+<p>这个方程表明，当倒格矢 <span class="arithmatex">\(\mathbf{K}_h\)</span> 与某个正格矢 <span class="arithmatex">\(\mathbf{R}_l\)</span> 的点积满足 <span class="arithmatex">\(2\pi\)</span> 的整数倍时，波函数的相位变化为 <span class="arithmatex">\(2\pi m\)</span>（<span class="arithmatex">\(m\)</span>是整数），意味着波函数回到了其原始值。这说明对于给定的 <span class="arithmatex">\(\mathbf{R}_l\)</span> ，存在多个 <span class="arithmatex">\(\mathbf{K}_h\)</span> 可以满足上述条件，因为倒空间中有无限多个点可以与 <span class="arithmatex">\(\mathbf{R}_l\)</span> 形成这样的点积关系。</p>
+<p>因此，可以说正格矢 <span class="arithmatex">\(\mathbf{R}_l\)</span> 并没有与之唯一对应的倒格矢 <span class="arithmatex">\(\mathbf{K}_h\)</span> ，而是有多个倒格矢可以与一个正格矢满足特定的相位关系。</p>
+<p><strong>问题5：倒格子是否保持其对应正格子的宏观对称性？</strong></p>
+<p>倒格子确实保持了其对应正格子的对称性，但这种对称性是在倒空间（也称为倒易空间）中表现出来的。正格子的对称性通过傅里叶变换转换成倒格子的对称性，因此倒格子的对称操作和正格子的对称操作是相对应的。这意味着，如果正格子具有某种对称性，如旋转对称、反射对称等，其倒格子也将表现出对应的对称性，但这些对称性是在倒格子定义的空间中体现的。</p>
+<p>例如，如果一个正格子有简单立方对称性，其倒格子也会有相应的简单立方对称性。然而，对称性的具体表现形式取决于它们是在实空间还是倒空间中考虑的。简而言之，虽然倒格子和正格子的对称性类型相同，但它们的对称元素（如对称轴、对称面）的具体位置和方向可能会有所不同，因为这两种格子分别存在于实空间和倒空间中。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.prune", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.caa56a14.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
