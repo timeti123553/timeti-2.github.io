@@ -1,0 +1,1266 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.7">
+    
+    
+      
+        <title>简述 Hartree-Fock 方法 - TIMEti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-3XP0F4X3PX"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-3XP0F4X3PX",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-3XP0F4X3PX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hartree-fock" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="TIMEti" class="md-header__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIMEti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              简述 Hartree-Fock 方法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  文章
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-tabs__link">
+          
+  
+  专栏
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%83%B3%E6%B3%95/2024.01.29/" class="md-tabs__link">
+          
+  
+  想法
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-tabs__link">
+        
+  
+    
+  
+  收藏
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TIMEti" class="md-nav__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    TIMEti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    专栏
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    固体物理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    量子力学
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E6%96%AF%E6%A0%BC%E6%98%8E%E5%AD%90%28skyrmion%29%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    斯格明子(skyrmion)建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/MuMax3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MuMax3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/PWmat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWmat
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/VASP%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VASP建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    想法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            想法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%83%B3%E6%B3%95/2024.01.29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024.01.29
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    收藏
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      背景
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hartree-fock_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是 Hartree-Fock 方法？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      电子的多体问题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hartree-fock-slater" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hartree-Fock 波函数与 Slater 行列式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roothaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      基集与 Roothaan 方程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hartree-fock_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hartree-Fock 方程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hartree-Fock 方程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      单电子和双电子积分
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      变分法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      库仑算符和交换算符
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hartree-fock_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      自洽场方法；计算机如何求解 Hartree-Fock 方程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自洽场方法；计算机如何求解 Hartree-Fock 方程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      密度矩阵
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fock" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fock 矩阵
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      自洽场算法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      讨论
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="hartree-fock"><strong>简述 Hartree-Fock 方法</strong><a class="headerlink" href="#hartree-fock" title="Permanent link">&para;</a></h1>
+<p>本篇文章的内容主要来自：<a href="https://insilicosci.com/hartree-fock-method-a-simple-explanation/">Hartree Fock Method: A Simple Explanation</a></p>
+<h2 id="_1"><strong>背景</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/1.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/1.PNG" width="600" /></a>
+  <figcaption>Douglas Rayner Hartree</figcaption>
+</figure>
+<p><a href="https://repository.aip.org/islandora/object/nbla:298842">图片链接</a></p>
+<p>为了解决多电子体系薛定谔方程近似求解的问题，量子化学家道 Douglas Hartree 在 1928 年提出了 Hartree 假设，<strong>将每个电子看做是在其他所有电子构成的平均势场中运动的粒子，并且首先提出了迭代法的思路。</strong>Hartree 根据他的假设，将体系电子哈密顿算子分解为若干个单电子哈密顿算子的简单代数和，每个单电子哈密顿算子中只包含一个电子的坐标，因而体系多电子波函数可以表示为单电子波函数的简单乘积，这就是 Hartree 方程。但是由于 Hartree 没有考虑电子波函数的反对称要求，他的 Hartree 方程实际上是非常不成功的。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/2.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/2.PNG" width="600" /></a>
+  <figcaption>Vladimir Fock</figcaption>
+</figure>
+<p><a href="https://english.spbu.ru/news-events/calendar/vladimir-focks-125th-anniversary">图片链接</a></p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/3.png" width="600" /></a>
+  <figcaption>John C. Slater</figcaption>
+</figure>
+<p><a href="https://scarc.library.oregonstate.edu/coll/pauling/bond/pictures/portrait-slater-large.html">图片链接</a></p>
+<p><strong>John C. Slater（1929）和 Vladimir Fock（1930）分别独立的提出了单行列式多电子体系波函数和泡利原理的自洽场迭代方程，这就是今天的 Hartree-Fock 方程。</strong>但是由于计算上的困难，Hartree-Fock 方程诞生后整整沉寂了二十年，<strong>在 1951 年，量子化学家 Clemens C. J. Roothaan 想到将分子轨道用原子轨道的线性组合来近似展开，而得到了闭壳层结构的 Roothaan 方程。</strong><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/4.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/4.png" width="600" /></a>
+  <figcaption>John C. Slater 当时发表的文章</figcaption>
+</figure>
+<p><a href="https://doi.org/10.1103/PhysRev.35.210.2">文章链接</a></p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/5.png" width="600" /></a>
+  <figcaption>Vladimir Fock 当时发布的文章</figcaption>
+</figure>
+<p><a href="https://link.springer.com/article/10.1007/BF01340294">文章链接</a></p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/6.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/6.png" width="600" /></a>
+  <figcaption>Clemens C. J. Roothaan</figcaption>
+</figure>
+<p><a href="https://news.uchicago.edu/story/clemens-cj-roothaan-eminent-quantum-chemist-and-concentration-camp-survivor-1918-2019">图片链接</a></p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/7.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/7.png" width="600" /></a>
+  <figcaption>Clemens C. J. Roothaan 发表 Roothaan 方程的文章</figcaption>
+</figure>
+<p><a href="https://doi.org/10.1103/RevModPhys.23.69">图片链接</a></p>
+<p>如果你对学习计算化学感兴趣，你不能忽视 Hartree-Fock 理论。尽管目前研究人员很少在研究中直接使用 Hartree-Fock 方法，但它是几乎所有电子结构方法的基石。Hartree-Fock 方法是解决量子力学问题的实用方法，在描述原子和分子的电子结构时，量子力学是无可替代的。然而，理解 Hartree-Fock 理论是一项艰巨的挑战，它的困难使许多新手计算化学家不得不跳过它。如果说实话，我已经这样做了一段时间，但后来我意识到，每当我试图学习计算化学的新主题时，这个理论就会困扰我。</p>
+<p>掌握 Hartree-Fock 方法需要对线性代数有扎实的理解和大量的智力努力。然而，在这篇文章中，我试图对 Hartree-Fock 理论进行一个简单而有见地的解释，这可以作为掌握计算方法的起点。</p>
+<h2 id="hartree-fock_1"><strong>什么是 Hartree-Fock 方法？</strong><a class="headerlink" href="#hartree-fock_1" title="Permanent link">&para;</a></h2>
+<p>简而言之，Hartree-Fock 方法是求解多体电子系统的时间无关薛定谔方程的一种近似迭代计算方法。</p>
+<p>只有应用量子力学规则并求解传说中的薛定谔方程，才能对原子系统进行正确的描述，薛定谔方程解释了原子和亚原子粒子的运动。但正如我们从量子力学教科书中所知道的，薛定谔方程只适用于少数基本的单电子类氢系统。因此，我们需要更复杂系统的近似方法。<strong>在量子化学中，有两种基本理论可以近似多电子系统的电子结构：价键理论和分子轨道理论，这两种理论均相当于 Hartree-Fock 理论。Hartree-Fock 方法更易于计算机编码，因此是求解与时间无关的薛定谔方程的主要近似方法。</strong></p>
+<p>Hartree-Fock 近似将多电子波函数分解为一组单电子波函数，称为分子轨道——事实上，每个化学家心目中普遍存在的分子轨道概念源于 Hartree-Fock 理论。我们也把 Hartree-Fock 方法称为自洽场方法，因为它是寻找薛定谔方程解的特殊迭代方法，我将在下一节中解释。</p>
+<p>正如我稍后将解释的，Hartree-Fock 方法本身的准确性不足，因为它没有考虑电子相关性。因此，如今研究人员很少直接使用它。但是 Hartree-Fock 模型是大多数流行的电子结构方法背后的基础理论。事实上，我们有许多精确的计算方法，从 Hartree-Fock 方程开始，然后以某种方式固定其电子相关性。它们被称为后 Hartree-Fock 方法。此外，密度泛函理论的所有半经验方法和 Kohn–Sham 实现都是基于 Hartree-Fock 方法。</p>
+<h2 id="_2"><strong>电子的多体问题</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>正如我之前提到的，理论化学的基本问题是求解由原子核和电子组成的多体电子系统的薛定谔方程。本节将简要描述这个问题，然后解释出色的 Hartree 和 Fock 的解决方案。</p>
+<p>让我们从非相对论性时间无关薛定谔方程的一般形式开始。</p>
+<div class="arithmatex">\[H|\Psi\rangle=E|\Psi\rangle\]</div>
+<p>要求解上述薛定谔方程，我们必须知道系统的哈密顿量和波函数。根据量子力学，由几个原子核和电子组成的多体系统的哈密顿算符为：</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/8.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/8.png" width="1000" /></a>
+</figure>
+<p>为了简单起见，上面的方程式采用原子单位。它的项分别表示电子的动能、原子核的动能、电子和原子核之间的库仑引力、电子之间的排斥力和原子核间的排斥力。你可以在量子化学课本上找到这个方程的推导方法。然而，Born-Oppenheimer 近似指出，由于原子核比电子重得多，移动速度慢得多，我们可以考虑电子在固定原子核的场中移动。因此，我们可以将上式中的第二项等同于零，并将最后一项视为常数。这样导致的误差可以忽略不计，因为向算符添加任何常数不会影响算符的特征函数，只会添加到算符的特征值。剩下的项被称为电子哈密顿量，它们表示 <span class="arithmatex">\(N\)</span> 个电子在 <span class="arithmatex">\(M\)</span> 个固定核的场中的运动。</p>
+<div class="arithmatex">\[\displaystyle H_{\text {elec }}=-\sum_{i=1}^{N} \frac{1}{2} \nabla_{i}^{2}-\sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}\]</div>
+<p>如果我们求解电子哈密顿量的薛定谔方程，该解包括电子能量和描述电子运动的电子波函数。</p>
+<div class="arithmatex">\[H_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle=E_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle\]</div>
+<p>电子波函数明确取决于电子坐标，但参数取决于核坐标，因此，尽管电子波函数不包括核坐标，但对于不同的原子核排列，<span class="arithmatex">\(\Psi_{\text {elec }}\)</span> 是不同的函数。固定核的总能量还包括恒定的核斥力。</p>
+<div class="arithmatex">\[\displaystyle E_{\text {tot }}=E_{\text {elec }}+\sum_{A=1}^{M} \sum_{B&gt;A}^{M} \frac{Z_{A} Z_{B}}{R_{A B}}\]</div>
+<p>如果我们能求解电子的薛定谔方程，我们就可以在推导电子方程的相同假设下，通过引入核哈密顿量来描述核的运动。因此，计算化学的主要问题是求解电子薛定谔方程，这是 Hartree-Fock 方法的最终目标。</p>
+<p>为了求解电子薛定谔方程，我们别无选择，只能将 <span class="arithmatex">\(N\)</span> 电子方程分解为一组单电子方程：</p>
+<div class="arithmatex">\[h\left(x_{i}\right) \chi_{j}\left(x_{i}\right)=\varepsilon_{j} \chi_{j}\left(x_{i}\right)\]</div>
+<p>要做到这一点，电子哈密顿量 <span class="arithmatex">\(\displaystyle H_{\text {elec }}=-\sum_{i=1}^{N} \frac{1}{2} \nabla_{i}^{2}-\sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}\)</span> 必须分离为一组单电子哈密顿量。</p>
+<div class="arithmatex">\[\displaystyle H_{\text {elec }}=-\sum_{i=1}^{N} \frac{1}{2} \nabla_{i}^{2}-\sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}=\sum_{i=1}^{N} h\left(x_{i}\right)\]</div>
+<p>这个方程中的第一项是单电子动能的总和。第二个是每个电子和所有原子核之间的吸引力之和。因此，前两项是可分离的——注意，分离是基于电子的。但是，最后一项是所有电子对之间的排斥力之和，不可分割为单个电子项。<strong>Hartree 建议我们可以平均地近似电子-电子排斥。这意味着，我们可以计算每个电子与所有其他电子的平均场之间的排斥力，而不是计算所有电子对的排斥力。</strong>通过这样做，我们可以将第三项分离为一组单电子项，并将哈密顿量写成单电子算符的和：</p>
+<div class="arithmatex">\[\begin{array}{c}\displaystyle H_{\text {elec }}=\sum_{i=1}^{N} f\left(x_{i}\right)\\\displaystyle f\left(x_{i}\right)=-\frac{1}{2} \nabla_{i}^{2}-\sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+v^{H F}\left(x_{i}\right)\end{array}\]</div>
+<p><span class="arithmatex">\(v^{H F}\)</span> 是第 <span class="arithmatex">\(i\)</span> 个电子由于其他电子而经历的平均电势，<span class="arithmatex">\(f(x)\)</span> 是一个单电子算符，称为 Fock 算符。使用 Fock 算符，我们可以将电子薛定谔方程分解为一组单电子方程。</p>
+<div class="arithmatex">\[f\left(x_{i}\right) \chi\left(x_{i}\right)=\varepsilon \chi\left(x_{i}\right)\]</div>
+<p>尽管这个方程是一个单电子问题，但 Hartree-Fock 势（<span class="arithmatex">\(v^{H F}\)</span>）取决于整个系统的波函数。因此，这是一个非线性问题，必须迭代求解。Hartree-Fock 方法的基本思想是，使用初始试验波函数，计算平均场，然后使用该平均场求解特征值方程<span class="arithmatex">\(f\left(x_{i}\right) \chi\left(x_{i}\right)=\varepsilon \chi\left(x_{i}\right)\)</span>，并产生新的波函数。使用新的波函数来计算新的平均场，并重复此过程，直到满足某些收敛标准为止。自洽场（SCF）是 Hartree-Fock 方法的另一个名称，我将在最后一节中详细解释。</p>
+<h2 id="hartree-fock-slater"><strong>Hartree-Fock 波函数与 Slater 行列式</strong><a class="headerlink" href="#hartree-fock-slater" title="Permanent link">&para;</a></h2>
+<p>既然我们已经知道了方程 <span class="arithmatex">\(H|\Psi\rangle=E|\Psi\rangle\)</span> 中的哈密顿量，我们就必须指定许多电子系统的波函数的形式。首先，波函数必须是可分离的，才能满足方程 <span class="arithmatex">\(H_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle=E_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle\)</span>。Hartree 近似地考虑了不相关（相互独立）的电子，以建立可分离的波函数。波函数的平方是在特定体积的空间中发现电子的概率，同时发生两个独立事件的概率等于它们各自概率的乘积。因此，<span class="arithmatex">\(N\)</span>个不相关电子的电子波函数必须等于一个电子波函数的乘积。</p>
+<div class="arithmatex">\[\Psi_{H P}\left(x_{1}, x_{2}, \cdots, x_{N}\right)=\chi_{i}\left(x_{1}\right) \chi_{j}\left(x_{2}\right) \cdots \chi_{k}\left(x_{N}\right)\]</div>
+<p>这个方程被称为 Hartree 乘积。<span class="arithmatex">\(\chi\left(x\right)\)</span> 是被称为自旋轨道的单电子波函数，它们中的每一个都是三个空间坐标和一个量子性质的函数，称为自旋坐标。然而，Hartree 乘积作为电子波函数具有严重的流动性。也就是说，它与电子的不可区分性不一致。注意，如果我们在 Hartree 乘积中交换两个电子，结果项是不同的。</p>
+<div class="arithmatex">\[\chi_{i}\left(x_{1}\right) \chi_{j}\left(x_{2}\right) \cdots \chi_{k}\left(x_{N}\right) \neq \chi_{i}\left(x_{2}\right) \chi_{j}\left(x_{1}\right) \cdots \chi_{k}\left(x_{N}\right)\]</div>
+<p>此外，根据泡利不相容原理，电子波函数必须是反对称的，这意味着随着任意两个电子的空间和自旋坐标的互换，波函数的符号会发生变化。</p>
+<div class="arithmatex">\[\Psi\left(x_{1}, x_{2}, \cdots, x_{N}\right)=-\Psi\left(x_{2}, x_{1}, \cdots, x_{N}\right)\]</div>
+<p>为了满足这些要求，我们可以使用 Hartree 乘积的某些线性组合——注意，如果波函数是可接受的，那么它的线性组合也是可接受的。考虑一个双电子波函数，如果电子一和电子二分别占据 <span class="arithmatex">\(\chi_{i}\)</span> 和 <span class="arithmatex">\(\chi_{j}\)</span> 自旋轨道，我们有：</p>
+<div class="arithmatex">\[\Psi_{H P}\left(x_{1}, x_{2}\right)=\chi_{i}\left(x_{1}\right) \chi_{j}\left(x_{2}\right)\]</div>
+<p>此外，我们可以通过将电子 1 放在 <span class="arithmatex">\(\chi_{j}\)</span> 中，将电子 2 放在 <span class="arithmatex">\(\chi_{i}\)</span> 中，得到另一个 Hartree 乘积。</p>
+<div class="arithmatex">\[\Psi_{H P}\left(x_{2}, x_{1}\right)=\chi_{i}\left(x_{2}\right) \chi_{j}\left(x_{1}\right)\]</div>
+<p>这些 Hartree 乘积都不是反对称的，它们的电子也不可区分，但我们可以通过线性组合它们来形成反对称波函数。</p>
+<div class="arithmatex">\[\displaystyle \Psi\left(x_{1}, x_{2}\right)=2^{\displaystyle -\frac{1}{2}}\left[\chi_{i}\left(x_{1}\right) \chi_{j}\left(x_{2}\right)-\chi_{i}\left(x_{2}\right) \chi_{j}\left(x_{1}\right)\right]\]</div>
+<p><span class="arithmatex">\(\displaystyle 2^{\displaystyle -\frac{1}{2}}\)</span> 是一个归一化因子，减号确保波函数是不对称的。为了整齐起见，我们可以把这个方程写成 <span class="arithmatex">\(2\times2\)</span> 的行列式。</p>
+<div class="arithmatex">\[\Psi\left(x_{1}, x_{2}\right)=2^{-1 / 2}\left|\begin{array}{ll}\chi_{i}\left(x_{1}\right) &amp; \chi_{j}\left(x_{1}\right) \\\chi_{i}\left(x_{2}\right) &amp; \chi_{j}\left(x_{2}\right)\end{array}\right|\]</div>
+<p>同样，每个 <span class="arithmatex">\(N\)</span> 电子波函数都可以写成一个 <span class="arithmatex">\(N\times N\)</span> 的行列式，称为 Slatter 行列式。</p>
+<div class="arithmatex">\[\displaystyle \Psi\left(x_{1}, x_{2}, \cdots, x_{N}\right)=(N !)^{\displaystyle -\frac{1}{2}}\left|\begin{array}{cccc}\chi_{i}\left(x_{1}\right) &amp; \chi_{j}\left(x_{1}\right) &amp; \cdots &amp; \chi_{k}\left(x_{1}\right) \\\chi_{i}\left(x_{2}\right) &amp; \chi_{j}\left(x_{2}\right) &amp; \cdots &amp; \chi_{k}\left(x_{2}\right) \\\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\\chi_{i}\left(x_{N}\right) &amp; \chi_{j}\left(x_{N}\right) &amp; \cdots &amp; \chi_{k}\left(x_{N}\right)\end{array}\right|\]</div>
+<p>请注意，每一行都属于 Slatter 行列式中的一个电子，每一列都代表一个自旋轨道。Hartree 乘积是一个完全不相关的波函数，但反对称的 Slater 行列式引入了电子之间的一些相关性。<strong>也就是说，具有平行自旋的电子不可能在相同的空间轨道上，因为在这种情况下，两行斯莱特行列式相等——记住，如果一个行列式的两行相同，那么行列式为零。</strong>因此，Hartree-Fock 方法考虑了一种类型的相关性，称为交换相互作用。然而，由于 Hartree Fock 方法没有考虑具有相反自旋的电子之间的相关性，因此它通常被称为不相关方法。</p>
+<p>Slatter 行列式可以通过不同的组合来建立。因此，我们可以得到多个 Slatter 行列式。考虑到双电子波函数的情况，我们有两个空间轨道 <span class="arithmatex">\(\psi_1\)</span> 和 <span class="arithmatex">\(\psi_2\)</span> 以及由它们构建的四个自旋轨道，<span class="arithmatex">\(\psi_1\alpha\)</span>、<span class="arithmatex">\(\psi_1\beta\)</span>、<span class="arithmatex">\(\psi_2\alpha\)</span>和 <span class="arithmatex">\(\psi_2\beta\)</span>。但在这种情况下，要建立一个 Slater 行列式，我们只需要两个自旋轨道，当考虑到所有排列时，有六种不同的可能组合，可以从四个自旋轨道中得到一个两电子的 Slater 行列式。</p>
+<div class="arithmatex">\[\begin{array}{l}\chi_{1}\left(x_{1}\right)=\psi_{1}\left(r_{1}\right) \varsigma(\alpha) \\\chi_{2}\left(x_{2}\right)=\psi_{1}\left(r_{1}\right) \varsigma(\beta) \\\chi_{3}\left(x_{3}\right)=\psi_{2}\left(r_{2}\right) \varsigma(\alpha) \\\chi_{4}\left(x_{4}\right)=\psi_{2}\left(r_{2}\right) \varsigma(\beta) \end{array}\Rightarrow \left\{\begin{matrix}   \Psi_{0^{\prime}}\left(x_{1}, x_{2}\right)=\left|\chi_{1}\left(x_{1}\right) \chi_{2}\left(x_{2}\right)\right\rangle \\\Psi_{1'}\left(x_{1}, x_{3}\right)=\left|\chi_{1}\left(x_{1}\right) \chi_{3}\left(x_{3}\right)\right\rangle\\\Psi_{2^{\prime}}\left(x_{1}, x_{4}\right)=\left|\chi_{1}\left(x_{1}\right) \chi_{4}\left(x_{4}\right)\right\rangle\\\Psi_{3'}\left(x_{2}, x_{3}\right)=\left|\chi_{2}\left(x_{2}\right) \chi_{3}\left(x_{3}\right)\right\rangle\\\Psi_{4'}\left(x_{2}, x_{4}\right)=\left|\chi_{2}\left(x_{2}\right) \chi_{4}\left(x_{4}\right)\right\rangle\\\Psi_{5^{\prime}}\left(x_{3}, x_{4}\right)=\left|\chi_{3}\left(x_{3}\right) \chi_{4}\left(x_{4}\right)\right\rangle\end{matrix}\right. \]</div>
+<p>四个自旋轨道产生六个 Slatter 行列式。为了简洁起见，我们使用了更简洁的符号来显示 Slatter 行列式。</p>
+<div class="arithmatex">\[\left|\chi_{i}\left(x_{n}\right) \chi_{j}\left(x_{m}\right)\right\rangle=2^{-1 / 2}\left|\begin{array}{cc}\chi_{i}\left(x_{n}\right) &amp; \chi_{j}\left(x_{n}\right) \\\chi_{i}\left(x_{m}\right) &amp; \chi_{j}\left(x_{m}\right)\end{array}\right|\]</div>
+<p>一般来说，有 <span class="arithmatex">\(N\)</span> 个电子和 <span class="arithmatex">\(M\)</span> 个自旋轨道，我们可以构建 <span class="arithmatex">\(\displaystyle \frac{M !}{N !(M-N) !}\)</span> 种不同的 Slatter 行列式。然而，Hartree-Fock 方法只使用其中一个称为 Hartree-Fock 基态行列式的方法。其他的 Slatter 行列式可以代表电子系统的激发态。此外，这些行列式的线性组合是一个更准确的波函数，它更准确地考虑了电子之间的相关性。配置交互（CI）是一种更复杂且计算繁琐的方法，它利用这些行列式的线性组合来描述电子系统。使用单个 Slater 行列式可以说等于以平均方式处理电子-电子排斥，这是 Hartree-Fock 近似的本质。</p>
+<h2 id="roothaan"><strong>基集与 Roothaan 方程</strong><a class="headerlink" href="#roothaan" title="Permanent link">&para;</a></h2>
+<p>既然我们知道电子波函数可以由自旋轨道的线性组合建立，关键问题是如何找到自旋轨道。每个自旋轨道包括两个部分，空间函数和自旋函数。空间函数是三个电子空间坐标的函数，自旋函数与电子自旋有关，这是一种量子属性。</p>
+<div class="arithmatex">\[\chi_{i}(x)=\psi_{j}(r) \varsigma(s)\]</div>
+<p>由于哈密顿算符 <span class="arithmatex">\(\displaystyle H_{\text {elec }}=\sum_{i=1}^{N} f\left(x_{i}\right)\)</span> 不影响自旋函数，我们可以将自旋函数视为常数系数。</p>
+<div class="arithmatex">\[f\left(x_{i}\right) \psi_{j}\left(r_{i}\right) \varsigma\left(s_{i}\right)=\varsigma\left(s_{i}\right) f\left(x_{i}\right) \psi_{j}(r)=\varsigma\left(s_{i}\right) \varepsilon \psi_{j}\left(r_{i}\right)=\varepsilon \psi_{j}\left(r_{i}\right) \varsigma\left(s_{i}\right)\]</div>
+<p>因此，要解决这个问题，我们只需要确定自旋轨道的空间部分。Clemens C.J.Roothaan 和 George G.Hall 都是当时的研究生，他们独立地证明了空间分量可以被视为一组已知的空间基函数，即基集。</p>
+<div class="arithmatex">\[\displaystyle \psi_{i}(r)=\sum_{\nu=1}^{K} C_{\nu i} \varphi_{\nu}(r) \quad, i=1,2, \cdots, K\]</div>
+<p><span class="arithmatex">\(C\)</span> 和 <span class="arithmatex">\(\varphi\)</span> 分别表示该方程中的展开系数和已知函数。<strong>Roothan-Hall 方程的重要性在于，它将寻找 Hartree-Fock 分子轨道的问题简化为计算一组膨胀系数的问题，该膨胀系数可以用系数矩阵表示。</strong>因此，我们可以将 Hartree-Fock 方程 <span class="arithmatex">\(f\left(x_{i}\right) \chi\left(x_{i}\right)=\varepsilon \chi\left(x_{i}\right)\)</span> 写成一个可解的矩阵方程，可以用计算机软件进行处理。</p>
+<div class="arithmatex">\[\displaystyle f\left(x_{i}\right) \sum_{\nu} C_{\nu i} \varphi_{\nu}\left(r_{i}\right)=\varepsilon_{i} \sum_{\nu} C_{\nu i} \varphi_{\nu}\left(r_{i}\right)\]</div>
+<p>就精度而言，如果我们可以使用任何完整的基集，它有一个无限的 <span class="arithmatex">\(K\)</span> 集，并且跨越整个相空间，那么无论基函数的形式如何，展开都是精确的。但是，有限基集仅在其函数所跨越的空间中是精确的，因此由哪些基函数构成基集是至关重要的；然而，根据经验，<span class="arithmatex">\(K\)</span> 越大，基集越大，分子轨道就越精确。但是，在现实世界的计算问题中，使用巨大的基集并不是一个实际的选择，因为电子结构计算的成本随着基集的大小而迅速增加。因此，我们总是要适当的选择基集的大小。</p>
+<h2 id="hartree-fock_2"><strong>Hartree-Fock 方程</strong><a class="headerlink" href="#hartree-fock_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3"><strong>单电子和双电子积分</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>正如我之前所说，Hartree-Fock 方法旨在求解多体电子系统的电子薛定谔方程：</p>
+<div class="arithmatex">\[H_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle=E_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle\]</div>
+<p>这是一个特征值方程，通过求解方程，我的意思是找到适合方程的 <span class="arithmatex">\(\Psi_{\text {elec }}\)</span> 向量和 <span class="arithmatex">\(E_{\text {elec }}\)</span> 值。不幸的是，对于许多人体电子系统，我们不能精确地求解这个方程。然而，我们可以利用变分法找到它的近似解。变分法指出，任何近似波函数的能量值都高于或等于精确能量。换句话说，如果我们最小化关于自旋轨道的电子能，我们可以在Hartree-Fock 理论的限制下找到最接近精确的波函数，它被称为 Hartree Fock 基态波函数。</p>
+<p>为了应用变分法，让我们首先重新排列方程 <span class="arithmatex">\(H_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle=E_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle\)</span> 的能量。</p>
+<div class="arithmatex">\[E_{\text {elec }}\left(\left\{\chi_{a}\right\}\right)=\left\langle\Psi_{\text {elec }}\left|H_{\text {elec }}\right| \Psi_{\text {elec }}\right\rangle\]</div>
+<p>我们可以用 <span class="arithmatex">\(\displaystyle H_{\text {elec }}=-\sum_{i=1}^{N} \frac{1}{2} \nabla_{i}^{2}-\sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}\)</span> 代替 <span class="arithmatex">\(H_{\text {elec }}\)</span> ，用一个 Slater 行列式代替 <span class="arithmatex">\(| \Psi_{\text {elec }}\rangle\)</span>，用 Hartree-Fock 近似求出能量方程。</p>
+<div class="arithmatex">\[\displaystyle E_{\text {elec }}=\left\langle\chi_{1} \chi_{2} \cdots \chi_{a} \chi_{b} \cdots \chi_{N}\left|-\sum_{i=1}^{N} \frac{1}{2} \nabla_{i}^{2}-\sum_{i=1}^{N} \sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}\right| \chi_{1} \chi_{2} \cdots \chi_{a} \chi_{b} \cdots \chi_{N}\right\rangle\]</div>
+<p>在这个方程中，为了简洁起见，我对 Slater 行列式使用了线性速记符号。电子哈密顿量包括两种类型的算符。前两项是单电子算符。这些算符只取决于一个电子的位置或动量，不考虑与其他电子的相互作用。作为双电子算符，最后一项是所有电子对之间的排斥力之和，因此涉及两个电子同时的位置。</p>
+<div class="arithmatex">\[\displaystyle E_{\text {elec }}=\left\langle\chi_{1} \chi_{2} \cdots \chi_{N}\left|\sum_{i=1}^{N}\left(-\frac{1}{2} \nabla_{i}^{2}-\sum_{A=1}^{M} \frac{Z_{A}}{r_{i A}}\right)+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}\right| \chi_{1} \chi_{2} \cdots \chi_{N}\right\rangle\]</div>
+<p>为了简单起见，让我们用 <span class="arithmatex">\(h_{\text {one }}\)</span> 表示单电子运算子。</p>
+<div class="arithmatex">\[\displaystyle E_{\text {elec }}=\left\langle\chi_{1} \chi_{2} \cdots \chi_{N}\left|\sum_{i=1}^{N} h_{\text {one }}+\sum_{i=1}^{N} \sum_{j&gt;i}^{N} \frac{1}{r_{i j}}\right| \chi_{1} \chi_{2} \cdots \chi_{N}\right\rangle\]</div>
+<p>我们可以把上述方程看作一个矩阵方程。根据运算符的类型，存在用于评估此类方程的规则。使用这些规则，你可以找到能量的表达式：</p>
+<div class="arithmatex">\[\begin{array}{ll}E_{\text {elec }}=&amp;\displaystyle \sum_{a=1}^{N} \int d x_{1} \chi_{a}^{*}\left(x_{1}\right) h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) \\&amp;\displaystyle+\frac{1}{2} \sum_{a=1}^{N} \sum_{b=1}^{N}\left[\int d x_{1} d x_{2} \chi_{a}^{*}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{1} d x_{2} \chi_{a}^{*}\left(x_{1}\right) \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]\end{array}\]</div>
+<p>我还没有疯到在这篇文章中引入这个方程的推导；相反，我想提请大家注意方程的组成部分第一个求和是在所有的自旋轨道上，内部积分是在单个电子（<span class="arithmatex">\(dx_1\)</span>）的坐标上。这个单电子可以是特定自旋轨道中的任何电子；然而，为了方便起见，我们选择积分的虚设变量为 <span class="arithmatex">\(x_1\)</span>。方程的这一部分称为单电子积分。第二个求和是在所有成对的自旋轨道上进行的，<span class="arithmatex">\(\displaystyle\frac{1}{2}\)</span> 系数是为了避免对这些对进行两次计数。这部分的积分是在两个电子（<span class="arithmatex">\(dx_1\)</span>，<span class="arithmatex">\(dx_2\)</span>）的坐标上进行的。类似地，这两个电子可以是任何电子，积分被称为双电子积分。注意，在电子能量方程中只有 <span class="arithmatex">\(N\)</span> 个单电子积分，但两个电子积分的数量与 <span class="arithmatex">\(N^4\)</span> 成正比。这就是为什么两个电子积分总是需要很长时间才能计算出来的原因。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/9.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/9.png" width="1000" /></a>
+</figure>
+<p>上图是 GAMESS US 软件输出的一部分显示了苯分子在 HF/3-21g 上的双电子积分计算。</p>
+<p>双电子积分的数量为 1957454 。</p>
+<p>苯分子的化学式：<span class="arithmatex">\(\rm C_6H_6\)</span></p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/10.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/10.png" width="1000" /></a>
+</figure>
+<p><a href="https://www.acs.org/molecule-of-the-week/archive/b/benzene.html">图片链接</a></p>
+<p>苯分子有 42 个电子，HF/3-21g 给每个电子配 3 个基函数，共 126 个基函数。</p>
+<p>双电子积分为 <span class="arithmatex">\(O(N^3)\)</span> 量级正好 <span class="arithmatex">\(126^3=2000376\sim2\times10^6\)</span> 个双电子积分。</p>
+<p>这与计算中的 1957454 个双电子积分的数量正好符合。</p>
+<h3 id="_4"><strong>变分法</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>现在我们有了电子能量的表达式，我们可以用变分法来求解电子薛定谔方程。根据变分定理，精确的波函数总是比任何近似的波函数具有更低的能量值，因此最精确的 Hartree-Fock 波函数在改变自旋轨道（基集系数）方面是最小的。我们把这个波函数的能量称为 Hartree-Fock 基态能量（<span class="arithmatex">\(E_0\)</span>）。因此，<span class="arithmatex">\(\delta E_{0}\)</span> 为零，我们可以写出以下方程。</p>
+<div class="arithmatex">\[\begin{array}{ll}\delta E_{0}=&amp;\displaystyle\sum_{a=1}^{N} \int d x_{1} \delta \chi_{a}^{*}\left(x_{1}\right) h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) \\&amp;\displaystyle+\sum_{a=1}^{N} \sum_{b=1}^{N}\left[\int d x_{1} d x_{2} \delta \chi_{a}^{*}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{1} d x_{2} \delta \chi_{a}^{*}\left(x_{1}\right) \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]+C C\end{array}\]</div>
+<p>在这个方程中，<span class="arithmatex">\(CC\)</span> 表示由微分过程产生的左边那一项的复共轭。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/11.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/11.png" width="600" /></a>
+  <figcaption>变分法和 Hartree-Fock 近似</figcaption>
+</figure>
+<p>如果所有的基集系数都是独立的，我们可以使用上面的方程来直接最小化能量；但是事实却不是这样，一些基集系数不是相互独立的。自旋轨道的归一化要求暗示了这一点。</p>
+<div class="arithmatex">\[\begin{array}{ll}\displaystyle \int d x_{1} \chi_{a}^{*}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)=1\\\displaystyle \int d x_{1} \chi_{a}^{*}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)-1=0\end{array}\]</div>
+<p>根据 <span class="arithmatex">\(f\left(x_{i}\right) \psi_{j}\left(r_{i}\right) \varsigma\left(s_{i}\right)=\varsigma\left(s_{i}\right) f\left(x_{i}\right) \psi_{j}(r)=\varsigma\left(s_{i}\right) \varepsilon \psi_{j}\left(r_{i}\right)=\varepsilon \psi_{j}\left(r_{i}\right) \varsigma\left(s_{i}\right)\)</span> 和 <span class="arithmatex">\(\displaystyle \psi_{i}(r)=\sum_{\nu=1}^{K} C_{\nu i} \varphi_{\nu}(r)\)</span>，我们可以写出：</p>
+<div class="arithmatex">\[\displaystyle \int d x_{1} \varsigma^{*}(s) \varsigma(s) \sum_{\nu=1}^{K} C_{\nu i}^{*} \varphi_{\nu}^{*}\left(r_{1}\right) \sum_{\nu=1}^{K} C_{\nu i} \varphi_{\nu}\left(r_{1}\right)-1=0\]</div>
+<p>由于自旋函数和空间函数也是正交的，这个方程可以简化为：</p>
+<div class="arithmatex">\[\displaystyle \sum_{\nu=1}^{K} C_{\nu i}^{2}-1=0\]</div>
+<p>上述方程表明，在每个自旋轨道中，基集系数（<span class="arithmatex">\(C_{\nu i}\)</span>）之一取决于其他系数，因此 <span class="arithmatex">\(E_0\)</span> 是 <span class="arithmatex">\(C_{\nu i}\)</span> 的约束函数。在数学中，求约束函数局部极小值的标准方法是拉格朗日不确定乘子法。在这个方法中，我们引入了一个新的变量，称为拉格朗日乘子，并定义了一个与乘子和所有其他变量相关的新函数 <span class="arithmatex">\(L\)</span>；然后，我们最小化所有变量的 <span class="arithmatex">\(L\)</span>。现在让我们使用拉格朗日方法来求 <span class="arithmatex">\(\delta E_{0}\)</span>。</p>
+<div class="arithmatex">\[\displaystyle L\left[\left\{\chi_{a}\right\}\right]=E_{0}\left[\left\{\chi_{a}\right\}\right]-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{a b}\left(\int d x \chi_{a}^{*} \chi_{b}-\delta_{a b}\right)\]</div>
+<p>注意，我们只需在能量表达式中加一个零就可以建立拉格朗日函数，因为自旋轨道是归一化的。</p>
+<div class="arithmatex">\[\begin{array}{ll}\displaystyle \int d x_{1} \chi_{a}^{*}\left(x_{1}\right) \chi_{b}\left(x_{2}\right)=\delta_{a b}\\\displaystyle \int d x_{1} \chi_{a}^{*}\left(x_{1}\right) \chi_{b}\left(x_{2}\right)-\delta_{a b}=0\end{array}\]</div>
+<p>所以 <span class="arithmatex">\(L\)</span> 和 <span class="arithmatex">\(E\)</span> 的最小值出现在 <span class="arithmatex">\(\delta L\)</span> 等于零的同一点上：</p>
+<div class="arithmatex">\[\displaystyle \delta L=\delta E_{0}-\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \delta \int d x_{1} \chi_{a}^{*} \chi_{b}=0\]</div>
+<p>上述方程中的第二项可以写成：</p>
+<div class="arithmatex">\[\begin{aligned}\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \delta \int d x_{1} \chi_{a}^{*} \chi_{b} &amp; =\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a}\left(\int d x_{1} \delta \chi_{a}^{*} \chi_{b}+\int d x_{1} \chi_{a}^{*} \delta \chi_{b}\right) \\&amp; =\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \int d x_{1} \delta \chi_{a}^{*} \chi_{b}+\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{a b} \int d x_{1} \chi_{b}^{*} \delta \chi_{a} \\&amp; =\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \int d x_{1} \delta \chi_{a}^{*} \chi_{b}+\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a}^{*}\left(\int d x_{1} \chi_{a}^{*} \delta \chi_{b}\right)^{*} \\&amp; =\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \int d x_{1} \delta \chi_{a}^{*} \chi_{b}+C C\end{aligned}\]</div>
+<p>其中 <span class="arithmatex">\(CC\)</span> 表示左边项的复共轭。根据上述方程和</p>
+<div class="arithmatex">\[\begin{array}{ll}\delta E_{0}=&amp;\displaystyle\sum_{a=1}^{N} \int d x_{1} \delta \chi_{a}^{*}\left(x_{1}\right) h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) \\&amp;\displaystyle+\sum_{a=1}^{N} \sum_{b=1}^{N}\left[\int d x_{1} d x_{2} \delta \chi_{a}^{*}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{1} d x_{2} \delta \chi_{a}^{*}\left(x_{1}\right) \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]+C C\end{array}\]</div>
+<p>我们可以将<span class="arithmatex">\(\delta L\)</span>写成：</p>
+<div class="arithmatex">\[\begin{array}{ll}\delta L=&amp;\displaystyle \sum_{a=1}^{N} \int d x_{1} \delta \chi_{a}^{*}\left(x_{1}\right) h_{o n e}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) \\&amp;\displaystyle +\sum_{a=1}^{N} \sum_{b=1}^{N}\left[\int d x_{1} d x_{2} \delta \chi_{a}^{*}\left(x_{1}\right) \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{1} d x_{2} \delta \chi_{a}^{*}\left(x_{1}\right) \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right] \\&amp;\displaystyle +\sum_{a=1}^{N} \sum_{b=1}^{N} \varepsilon_{b a} \int d x_{1} \delta \chi_{a}^{*} \chi_{b}+C C\end{array}\]</div>
+<p>上述方程也可以写成：</p>
+<div class="arithmatex">\[\displaystyle \delta L=\sum_{a=1}^{N} \int d x_{1} \delta \chi_{a}^{*}\left(x_{1}\right)\left\{h_{o n e}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)+\sum_{b=1}^{N}\left[\int d x_{2} \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{2} \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]-\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right)\right\}+C C\]</div>
+<p>我们可以忽略复共轭部分，因为如果 <span class="arithmatex">\(A+A^*=0\)</span> ，那么 <span class="arithmatex">\(A=0\)</span>。</p>
+<div class="arithmatex">\[\displaystyle\delta L=\sum_{a=1}^{N} \int d x_{1} \delta \chi_{a}^{*}\left(x_{1}\right)\left\{h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)+\sum_{b=1}^{N}\left[\int d x_{2} \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{2} \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]-\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right)\right\}=0\]</div>
+<p>因此</p>
+<div class="arithmatex">\[\displaystyle h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)+\sum_{b=1}^{N}\left[\int d x_{2} \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{2} \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]-\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right)=0\]</div>
+<h3 id="_5"><strong>库仑算符和交换算符</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>现在让我们将库仑算符 <span class="arithmatex">\(J\)</span> 和交换算符 <span class="arithmatex">\(K\)</span> 定义为：</p>
+<div class="arithmatex">\[\begin{array}{ll}\displaystyle J_{b}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)&amp;\displaystyle=\left[\int d x_{2} \chi_{b}^{*}\left(x_{2}\right) r_{12}^{-1} \chi_{b}\left(x_{2}\right)\right] \chi_{a}\left(x_{1}\right)\\&amp;\displaystyle=\left[\int d x_{2}\left|\chi_{b}\left(x_{2}\right)\right|^{2} r_{12}^{-1}\right] \chi_{a}\left(x_{1}\right)\end{array}\]</div>
+<div class="arithmatex">\[\displaystyle K_{b}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)=\left[\int d x_{2} \chi_{b}^{*}\left(x_{2}\right) r_{12}^{-1} \chi_{a}\left(x_{2}\right)\right] \chi_{b}\left(x_{1}\right)\]</div>
+<p>库仑算符有一个直接的解释。原子单位中两个电子之间的精确库仑相互作用是 <span class="arithmatex">\(r_{12}^{-1}\)</span>。</p>
+<p>同样，在 Hartree-Fock 近似中，<span class="arithmatex">\(\chi_{a}\)</span> 中的电子 1 经历一个从 <span class="arithmatex">\(\chi_{b}\)</span> 到 <span class="arithmatex">\(\displaystyle \int d x_{2}\left|\chi_{b}\left(x_{2}\right)\right|^{2} r_{12}^{-1}\)</span> 的单电子势，因为在方程</p>
+<div class="arithmatex">\[
+\displaystyle h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)+\sum_{b=1}^{N}\left[\int d x_{2} \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{2} \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]-\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right)=0
+\]</div>
+<p>中，总和是在所有自旋轨道上，每个电子都感受到来自所有其他电子的库仑排斥。请注意，求和中的每个积分都独立于其他积分，这就是为什么 Hartree-Fock 近似没有考虑电子之间的库仑相关性。</p>
+<p>另一方面，交换算符没有可感知的经典解释，它是由具有平行自旋的电子之间的交换相关性引起的，我之前已经解释过了。Hartree-Fock 方程中交换算子的存在意味着 Hartree-Fock 方法不是完全不相关的，并考虑了具有平行自旋的电子之间的相关性。使用库仑算子和交换算子，我们可以将方程</p>
+<div class="arithmatex">\[
+\displaystyle h_{\text {one }}\left(x_{1}\right) \chi_{a}\left(x_{1}\right)+\sum_{b=1}^{N}\left[\int d x_{2} \chi_{a}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{b}\left(x_{2}\right)-\int d x_{2} \chi_{b}\left(x_{1}\right) r_{12}^{-1} \chi_{b}^{*}\left(x_{2}\right) \chi_{a}\left(x_{2}\right)\right]-\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right)=0
+\]</div>
+<p>转化为：</p>
+<div class="arithmatex">\[\displaystyle \left[h_{\text {one }}\left(x_{1}\right)+\sum_{b=1}^{N} J_{b}\left(x_{1}\right)-K_{b}\left(x_{1}\right)\right] \chi_{a}\left(x_{1}\right)=\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right), \quad a=1,2, \ldots, N\]</div>
+<p>这就是 Hartree-Fock 方程。注意，我们将一个不可解的多电子问题 <span class="arithmatex">\(H_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle=E_{\text {elec }}\left|\Psi_{\text {elec }}\right\rangle\)</span> 分离为 <span class="arithmatex">\(N\)</span> 个可解的——尽管近似的——单电子问题。方程右侧出现求和是因为 Slater 行列式是由一组自旋轨道形成的，这些轨道提供了一定程度的灵活性；即在不改变期望值 <span class="arithmatex">\(E_0\)</span> 的情况下可以存在不同的自旋轨道组合。然而，由于 <span class="arithmatex">\(\varepsilon\)</span> 是哈密顿矩阵，我们总能找到一个将 <span class="arithmatex">\(\varepsilon\)</span> 转化为对角矩阵的酉矩阵。对应于这个特定的对角线 <span class="arithmatex">\(\varepsilon\)</span> 矩阵的唯一的一组自旋轨道称为正则自旋轨道集。通常将上述方程写成其规范（标准）形式，与方程 <span class="arithmatex">\(f\left(x_{i}\right) \chi\left(x_{i}\right)=\varepsilon \chi\left(x_{i}\right)\)</span> 相同。</p>
+<h2 id="hartree-fock_3"><strong>自洽场方法；计算机如何求解 Hartree-Fock 方程</strong><a class="headerlink" href="#hartree-fock_3" title="Permanent link">&para;</a></h2>
+<p>现在我们已经熟悉了 Hartree-Fock 方程，以及如何为它建立一个合适的波函数，在最后一节中，我可以解释计算机如何求解多体电子系统的 Hartree-Fock 方程。求解 Hartree-Fock 方程的具体过程称为自洽场（SCF）方法。SCF是 Hartree-Fock 方法的另一个名称，这两个术语在计算文献中可以互换使用。让我们再一次看看 Hartree-Fock 方程的正则形式。</p>
+<div class="arithmatex">\[f\left(x_{i}\right) \chi\left(x_{i}\right)=\varepsilon \chi\left(x_{i}\right)\]</div>
+<p><span class="arithmatex">\(\chi\)</span> 表示由该方程中的空间函数和自旋函数组成的自旋轨道。自旋函数只有两个值（<span class="arithmatex">\(\alpha\)</span>和<span class="arithmatex">\(\beta\)</span>），在自洽场计算之前，可以根据泡利排除原理确定其值。在 Hartree-Fock 方法中，处理自旋函数有三种形式：限制闭壳、非限制开壳和限制开壳。我们可以根据电子系统的多重性应用其中一个，并从方程 <span class="arithmatex">\(f\left(x_{i}\right) \chi\left(x_{i}\right)=\varepsilon \chi\left(x_{i}\right)\)</span> 中消除自旋函数。</p>
+<div class="arithmatex">\[f\left(r_{1}\right) \psi_{i}\left(r_{1}\right)=\varepsilon_{i} \psi_{i}\left(r_{1}\right)\]</div>
+<p>由于 Roothaan 对 SCF 方法的贡献，我们可以将空间函数视为一组已知的基函数。</p>
+<div class="arithmatex">\[\displaystyle \psi_{i}=\sum_{\mu=1}^{K} C_{\mu i} \phi_{\mu}, \quad i=1,2, \ldots, K\]</div>
+<p>通过将基集代入方程 <span class="arithmatex">\(f\left(r_{1}\right) \psi_{i}\left(r_{1}\right)=\varepsilon_{i} \psi_{i}\left(r_{1}\right)\)</span>，我们可以将 Hartree-Fock 方程写成：</p>
+<div class="arithmatex">\[\displaystyle f\left(r_{1}\right) \sum_{\nu} C_{\nu i} \phi_{\nu}\left(r_{1}\right)=\varepsilon_{i} \sum_{\nu} C_{\nu i} \phi_{\nu}\left(r_{1}\right)\]</div>
+<p>这是一个积分微分方程；然而，乘以左边的 <span class="arithmatex">\(\phi^{*}\)</span> 并对其进行积分，我们可以将其转化为一个更便于计算机使用的矩阵方程。</p>
+<div class="arithmatex">\[\displaystyle \sum_{\nu} C_{\nu i} \int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) f\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)=\varepsilon_{i} \sum_{\nu} C_{\nu i} \int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)\]</div>
+<p>如果您不能将这些项视为矩阵方程，请将 <span class="arithmatex">\(\mu\)</span> 和 <span class="arithmatex">\(\nu\)</span> 视为矩阵索引，其值范围从 1 到 <span class="arithmatex">\(K\)</span>。</p>
+<p>现在让我们定义两个新矩阵。</p>
+<p>（1）重叠矩阵 <span class="arithmatex">\(S\)</span> 的每个元素符合公式：<span class="arithmatex">\(\displaystyle S_{\mu \nu}=\int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)\)</span></p>
+<p>重叠矩阵量化通常彼此不正交的基函数之间的重叠。<span class="arithmatex">\(S\)</span> 的对角线元素是单位的，非对角线元素的值范围从 1 到 0 。非对角元素的符号取决于两个基函数的相对符号及其相对方向。<strong><span class="arithmatex">\(S\)</span> 的非对角元素越接近 1 ，两个基函数的重叠就越多。</strong></p>
+<p>（2）Fock 矩阵 <span class="arithmatex">\(F\)</span> 的每个元素符合公式：<span class="arithmatex">\(\displaystyle F_{\mu \nu}=\int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) f\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)\)</span></p>
+<p>Fock 矩阵 <span class="arithmatex">\(F\)</span> 是 Fock 算符 <span class="arithmatex">\(f(x)\)</span> 的矩阵表示——正如我在上一节中定义的一个单电子算子——具有基函数集 <span class="arithmatex">\(\{\Phi\}\)</span>。由于等式 <span class="arithmatex">\(\displaystyle \psi_{i}=\sum_{\mu=1}^{K} C_{\mu i} \phi_{\mu}\)</span> 中的求和索引（<span class="arithmatex">\(\mu\)</span>和<span class="arithmatex">\(\nu\)</span>）范围从 1 到 <span class="arithmatex">\(K\)</span>，因此重叠矩阵和 Fock 矩阵都是 <span class="arithmatex">\(K\times K\)</span> 方阵。 它们也是哈密顿形式的，这意味着我们可以通过酉矩阵将它们正交化。</p>
+<p>有了这些定义，现在我们可以把方程 <span class="arithmatex">\(\displaystyle \sum_{\nu} C_{\nu i} \int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) f\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)=\varepsilon_{i} \sum_{\nu} C_{\nu i} \int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)\)</span> 写成：</p>
+<div class="arithmatex">\[\displaystyle \sum_{\nu} F_{\mu \nu} C_{\nu i}=\varepsilon_{i} \sum_{\nu} S_{\mu \nu} C_{\nu i}, \quad i=1,2, \ldots, K\]</div>
+<p>也可以写为：</p>
+<div class="arithmatex">\[F C=S C \varepsilon\]</div>
+<p>在该方程中，称为 Roothann 方程，<span class="arithmatex">\(C\)</span> 是包含基函数展开系数的 <span class="arithmatex">\(K\times K\)</span> 方阵，<span class="arithmatex">\(\varepsilon\)</span> 是轨道能量的对角矩阵。</p>
+<div class="arithmatex">\[C=\left(\begin{array}{cccc}C_{11} &amp; C_{12} &amp; \cdots &amp; C_{1 K} \\C_{21} &amp; C_{22} &amp; \cdots &amp; C_{2 K} \\\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\C_{k 1} &amp; C_{K 2} &amp; \cdots &amp; C_{K K}\end{array}\right)\]</div>
+<p>从计算软件的角度求解 Roothaan 方程，或者等效地求解 Hartree-Fock 方程，意味着找到一个适当的系数矩阵 <span class="arithmatex">\(C\)</span>，使系统的总能量最小化。Roothaan 方程 <span class="arithmatex">\(F C=S C \varepsilon\)</span> 不是标准的特征值问题，因为基函数的非正交性导致了重叠矩阵。因此，我们需要考虑一个使基函数正交的过程。如果我们设法使基函数正交，重叠矩阵就变成了单位矩阵， Roothaan 方程就变成了一组标准特征值问题。</p>
+<div class="arithmatex">\[F C=C \varepsilon\]</div>
+<p>如果我们有一组非正交基函数 <span class="arithmatex">\(\{\Phi\}\)</span>，那么总是有可能找到一个将非正交集变换为正交集的变换矩阵 <span class="arithmatex">\(X\)</span> 。</p>
+<div class="arithmatex">\[\displaystyle \phi_{\mu}^{\prime}=\sum_{\nu} X_{\nu \mu} \phi_{\nu}, \quad \mu=1,2, \ldots, K\]</div>
+<p>并且</p>
+<div class="arithmatex">\[\displaystyle \int d r \phi_{\mu}^{\prime}(r) \phi_{\nu}^{\prime}(r)=\delta_{\mu \nu}\]</div>
+<p>我们可以使用这个变换矩阵将重叠矩阵转换为单位矩阵。</p>
+<div class="arithmatex">\[X^{\dagger} S X=1\]</div>
+<p>有两种方法可以找到变换矩阵——对称正交化和规范正交化——这两种方法我在本文中不会解释。然而，具有 <span class="arithmatex">\(X\)</span>，我们可以将基函数正交化，并从 Roothaan 方程中消除重叠矩阵 <span class="arithmatex">\(S\)</span>。然后，我们可以通过对 Fock 矩阵进行对角化来直接求解方程。然而，我们必须变换所有的两个电子积分，这是非常耗时的。Hartree-Fock 方法使用了一种更有效的方法来处理这个问题。考虑一个与矩阵 <span class="arithmatex">\(X\)</span> 相关的新系数矩阵 <span class="arithmatex">\(C'\)</span>：</p>
+<div class="arithmatex">\[
+\begin{array}{ll}C^{\prime}=X^{-1} C\\C=X C^{\prime}\end{array}
+\]</div>
+<p>其中 <span class="arithmatex">\(X^{-1}\)</span> 是变换矩阵的逆。将上述方程中的 <span class="arithmatex">\(C\)</span> 代入 Roothaan 方程 <span class="arithmatex">\(F C=S C \varepsilon\)</span>，得到</p>
+<div class="arithmatex">\[F X C^{\prime}=S X C^{\prime} \varepsilon\]</div>
+<p>如果我们定义一个变换的Fock矩阵 <span class="arithmatex">\(F'\)</span>，使得</p>
+<div class="arithmatex">\[F^{\prime}=X^{\dagger} F X\]</div>
+<p>我们可以将变换后的 Roothaan 方程定义为：</p>
+<div class="arithmatex">\[F^{\prime} C^{\prime}=C^{\prime} \varepsilon\]</div>
+<p>求解 Roothaan 方程的 SCF 形式是求变换矩阵、变换 Fock 矩阵和求解变换后的 Roothaan 方程。最后，根据等式 <span class="arithmatex">\(C^{\prime}=X^{-1} C, \quad C=X C^{\prime}\)</span> 计算系数矩阵。事实上，自我一致的现场教学比这更为复杂。Roothaan 方程是非线性的，需要通过迭代方法求解，因为 Fock 矩阵取决于展开系数。在解释自洽场过程之前，我们需要知道密度矩阵的概念和 Fock 矩阵的显式。</p>
+<h3 id="_6"><strong>密度矩阵</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>我们从量子力学中知道，在特定体积 <span class="arithmatex">\(dr\)</span> 中找到电子的概率，即该电子的电荷密度，等于 <span class="arithmatex">\(\left|\psi_{a}(r)\right|^2\)</span>。现在考虑一个由单个行列式波函数描述的闭壳层系统，其中所有占据的分子轨道都包含两个电子。在该系统中，总电荷密度为：</p>
+<div class="arithmatex">\[\displaystyle \rho(r)=2 \sum_{a}^{N / 2}\left|\psi_{a}(r)\right|^{2}\]</div>
+<p>让我们把分子轨道从方程 <span class="arithmatex">\(\displaystyle \psi_{i}=\sum_{\mu=1}^{K} C_{\mu i} \phi_{\mu}\)</span> 中展开为一组基函数：</p>
+<div class="arithmatex">\[
+\begin{array}{ll}\displaystyle \rho(r)=2 \sum_{a}^{N / 2} \psi_{a}^{*}(r) \psi_{a}(r)\\\displaystyle \rho(r)=2 \sum_{a}^{N / 2} \sum_{\nu} C_{\nu a}^{*} \phi_{\nu}^{*}(r) \sum_{\mu} C_{\mu a} \phi_{\mu}(r)\\\displaystyle \rho(r)=\sum_{\mu \nu}\left[2 \sum_{a}^{N / 2} C_{\mu a} C_{\nu a}^{*}\right] \phi_{\mu}(r) \phi_{\nu}^{*}(r)\end{array}
+\]</div>
+<p>根据这个方程，我们可以将密度矩阵定义为：</p>
+<div class="arithmatex">\[\displaystyle D_{\mu \nu}=2 \sum_{a}^{N / 2} C_{\mu a} C_{\nu a}^{*}\]</div>
+<p>密度矩阵与展开系数直接相关，它可以完全表示 Hartree-Fock 波函数。密度矩阵很重要，因为在自洽场指令中， Fock 算符是根据密度矩阵写成的（你将在下面的小节中看到它），它迭代求解关于电荷密度的 Hartree-Fock 方程。Hartree-Fock 代码首先猜测描述系统电子位置的电荷密度。然后他们用这个推测的电荷密度来估计一个初始的 Fock 算符。使用这个算符，他们求解单电子类薛定谔方程 <span class="arithmatex">\(f\left(r_{1}\right) \psi_{i}\left(r_{1}\right)=\varepsilon_{i} \psi_{i}\left(r_{1}\right)\)</span>，找到分子轨道 <span class="arithmatex">\(\left\{\psi_{i}\right\}\)</span>。然后，他们可以根据这些最近的分子轨道建立更好的电荷密度，并猜测更准确的 Fock 算符。自洽场算法重复这个过程，直到 Fock 算符不再改变。<strong>换言之，SCF 过程继续使 Fock 算符和电荷密度相互作用的循环，直到产生特定电荷密度的场（ Fock 算符的两个电子部分）与根据该电荷密度计算的场相同（一致）。因此，我们也将 Hartree-Fock 方法称为自洽场方法。</strong>在下面的小节中，我们仔细检查 Fock 算符，以找到它的显式表达式，我们将在最后一部分中使用它来演示 Hartree-Fock 方法是如何工作的。</p>
+<h3 id="fock"><strong>Fock 矩阵</strong><a class="headerlink" href="#fock" title="Permanent link">&para;</a></h3>
+<p>让我们再来看看方程 <span class="arithmatex">\(\displaystyle \left[h_{\text {one }}\left(x_{1}\right)+\sum_{b=1}^{N} J_{b}\left(x_{1}\right)-K_{b}\left(x_{1}\right)\right] \chi_{a}\left(x_{1}\right)=\sum_{b=1}^{N} \varepsilon_{b a} \chi_{b}\left(x_{1}\right)\)</span>。在这个方程中，Fock 算符是：</p>
+<div class="arithmatex">\[\displaystyle f\left(x_{1}\right)=h_{\text {one }}\left(x_{1}\right)+\sum_{b=1}^{N} J_{b}\left(x_{1}\right)-K_{b}\left(x_{1}\right)\]</div>
+<p>然而，如果我们考虑 Hartree-Fock 方程的最简单形式，即限制闭壳 Hartree-Fock 方程，则 Fock 算符与上述方程略有不同。</p>
+<div class="arithmatex">\[
+\begin{array}{ll}\displaystyle f\left(r_{1}\right)=h_{\text {one }}\left(r_{1}\right)+\sum_{a}^{N / 2} 2 J_{a}\left(r_{1}\right)-K_{b}\left(r_{1}\right)\\\displaystyle J_{a}\left(r_{1}\right)=\int d r_{2} \psi_{a}^{*}\left(r_{2}\right) r_{12}^{-1} \psi_{a}\left(r_{2}\right)\\\displaystyle K_{b}\left(r_{1}\right) \psi_{a}\left(r_{1}\right)=\left[\int d r_{2} \psi_{b}^{*}\left(r_{2}\right) r_{12}^{-1} \psi_{a}\left(r_{2}\right)\right] \psi_{b}\left(r_{1}\right)\end{array}
+\]</div>
+<p>为了目标，我们定义一个新的算符 <span class="arithmatex">\(P_{12}\)</span>，它交换电子 1 和 2 并重写交换算符。</p>
+<div class="arithmatex">\[
+\begin{array}{ll}P_{12} \psi_{b}\left(r_{2}\right) \psi_{a}\left(r_{1}\right)=\psi_{a}\left(r_{2}\right) \psi_{b}\left(r_{1}\right)\\\displaystyle K_{b}\left(r_{1}\right) \psi_{a}\left(r_{1}\right)=\left[\int d r_{2} \psi_{b}^{*}\left(r_{2}\right) r_{12}^{-1} P_{12} \psi_{b}\left(r_{2}\right)\right] \psi_{a}\left(r_{1}\right)\end{array}
+\]</div>
+<p>现在我们可以把 Fock 算符写成：</p>
+<div class="arithmatex">\[\displaystyle f\left(r_{1}\right)=h_{\text {one }}\left(r_{1}\right)+\sum_{a}^{N / 2} \int d r_{2} \psi_{a}^{*}\left(r_{2}\right) r_{12}^{-1}\left(2-P_{12}\right) \psi_{b}\left(r_{2}\right)\]</div>
+<p>然后将基函数 <span class="arithmatex">\(\displaystyle \psi_{i}=\sum_{\mu=1}^{K} C_{\mu i} \phi_{\mu}\)</span> 合并到其中。</p>
+<div class="arithmatex">\[\displaystyle f\left(r_{1}\right)=h_{\text {one }}\left(r_{1}\right)+\sum_{a}^{N / 2} \int d r_{2} \sum_{\mu} C_{\mu a}^{*} \phi_{\mu}^{*}\left(r_{2}\right) r_{12}^{-1}\left(2-P_{12}\right) \sum_{\nu} C_{\nu a} \phi_{\nu}\left(r_{2}\right)\]</div>
+<p>我们可以从积分中提取膨胀系数，并将其定义为密度矩阵 <span class="arithmatex">\(\displaystyle D_{\mu \nu}=2 \sum_{a}^{N / 2} C_{\mu a} C_{\nu a}^{*}\)</span>。</p>
+<div class="arithmatex">\[
+\begin{array}{ll}\displaystyle f\left(r_{1}\right)=h_{\text {one }}\left(r_{1}\right)+\sum_{a}^{N / 2} \sum_{\mu \nu} C_{\mu a}^{*} C_{\nu a} \int d r_{2} \sum_{\mu} \phi_{\mu}^{*}\left(r_{2}\right) r_{12}^{-1}\left(2-P_{12}\right) \sum_{\nu} \phi_{\nu}\left(r_{2}\right)\\\displaystyle f\left(r_{1}\right)=h_{\text {one }}\left(r_{1}\right)+\frac{1}{2} \sum_{\mu \nu} D_{\mu \nu} \int d r_{2} \phi_{\mu}^{*}\left(r_{2}\right) r_{12}^{-1}\left(2-P_{12}\right) r_{12}^{-1} \phi_{\nu}\left(r_{2}\right)\end{array}
+\]</div>
+<p>最后，使用 Fock 矩阵的定义 <span class="arithmatex">\(\displaystyle F_{\mu \nu}=\int d r_{1} \phi_{\mu}^{*}\left(r_{1}\right) f\left(r_{1}\right) \phi_{\nu}\left(r_{1}\right)\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle F_{\lambda \sigma}=\int d r_{1} \phi_{\lambda}^{*}\left(r_{1}\right) h_{\text {one }}\left(r_{1}\right) \phi_{\sigma}\left(r_{1}\right)+\sum_{\mu \nu} D_{\mu \nu} \int d r_{1} d r_{2} \phi_{\lambda}^{*}\left(r_{1}\right) \phi_{\mu}^{*}\left(r_{2}\right) r_{12}^{-1}\left(1-\frac{1}{2} P_{12}\right) r_{12}^{-1} \phi_{\nu}\left(r_{2}\right) \phi_{\sigma}\left(r_{1}\right)\]</div>
+<p>第一个积分项，称为核心哈密顿量 <span class="arithmatex">\(H_{core}\)</span>，只涉及一个电子算符（见上文），每次都在一个电子（<span class="arithmatex">\(r_1\)</span>）的坐标上。核心哈密顿量表示一个电子的动能和核引力，忽略了与其他电子的排斥。与全 Fock 矩阵不同，核心哈密顿矩阵只需要计算一次，作为自洽场过程的开始。Fock 矩阵的剩余部分是两个电子部分，用 <span class="arithmatex">\(G\)</span> 表示，它由密度矩阵和两个电子积分组成。</p>
+<div class="arithmatex">\[
+\begin{array}{ll}\displaystyle F_{\lambda \sigma}=H_{\lambda \sigma}^{c o r e}+\sum_{\mu \nu} D_{\mu \nu}[\text { two }- \text { electron integrals }]\\F_{\lambda \sigma}=H_{\lambda \sigma}^{\text {core }}+G_{\lambda \sigma}\end{array}
+\]</div>
+<p>至此，我们有足够的理论来正确描述自洽场过程，这是最后一部分的主题。</p>
+<h3 id="_7"><strong>自洽场算法</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>本节描述了计算代码为求解分子的受限闭壳层 Hartree-Fock 方程所执行的实际过程。开放式 shell 系统的指令非常相似，它们是许多计算方法的核心。以下文章有助于电子结构软件的用户和开发人员了解计算软件外壳下发生的事情。然而，本节的先决条件是理解我在本文前几部分中提出的概念和理论，因此，如果您发现以下段落不明确，请返回并阅读前几节。注意：术语自洽场和 Hartree-Fock 指的是相同的方法，所以可以随意互换使用。SCF 方法如下所示：</p>
+<ol>
+<li>从输入文件中指定核坐标、原子序数、电子数和基集。</li>
+<li>计算重叠矩阵 <span class="arithmatex">\(S\)</span> 、核心哈密顿量 <span class="arithmatex">\(H_{core}\)</span> 和两个电子积分的第一个估计。</li>
+<li>通过对重叠矩阵 <span class="arithmatex">\(S\)</span> 进行对角化来找到变换矩阵 <span class="arithmatex">\(X\)</span>。</li>
+<li>猜测初始密度矩阵 <span class="arithmatex">\(D\)</span>。</li>
+<li>根据密度矩阵 <span class="arithmatex">\(D\)</span> 和两个电子积分计算两个电子矩阵 <span class="arithmatex">\(G\)</span>。</li>
+<li>通过将 <span class="arithmatex">\(H\)</span> 与 <span class="arithmatex">\(G\)</span> 相加来计算第一个 Fock 矩阵 <span class="arithmatex">\(F\)</span>。</li>
+<li>使用变换矩阵变换 Fock 矩阵，<span class="arithmatex">\(F^{\prime}=X^{\dagger} F X\)</span>。</li>
+<li>求解变换后的 Roothaan 方程，<span class="arithmatex">\(F^{\prime} C^{\prime}=C^{\prime} \varepsilon\)</span>。</li>
+<li>计算膨胀系数，<span class="arithmatex">\(C=X C^{\prime}\)</span>。</li>
+<li>根据使用 <span class="arithmatex">\(C\)</span> 和新密度矩阵 <span class="arithmatex">\(D\)</span>。</li>
+<li>将新的密度矩阵与旧的密度矩阵进行比较，并检查它们之间的差异。如果差值大于特定的收敛标准，则返回步骤 5 。如果差异小于标准，请转到最后一步。</li>
+<li>根据 Fock 和 Density 矩阵计算总能量。</li>
+</ol>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/12.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E7%AE%80%E8%BF%B0%20Hartree-Fock%20%E6%96%B9%E6%B3%95/12.png" width="600" /></a>
+  <figcaption>自洽场理论的算法</figcaption>
+</figure>
+<h2 id="_8"><strong>讨论</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p><strong>Hartree 方法和 Hartree-Fock 方法有什么区别？</strong></p>
+<p>Hartree 方法和 Hartree-Fock 方法是量子化学中用于电子结构计算的方法，它们之间存在一些重要的区别，同时也是相互关联的重要概念：</p>
+<p><strong>1、Hartree 方法：</strong></p>
+<ul>
+<li>Hartree 方法是最早的量子力学多电子体系的计算方法之一。</li>
+<li>它基于自洽场的概念，即每个电子都在由其他电子产生的平均电场中运动。</li>
+<li>Hartree 方法忽略了电子间的交换相互作用，即电子具有不可区分性所带来的效应。</li>
+<li>关键的是，Hartree 方法使用玻色子波函数进行计算，这在处理电子结构时是一个重要的限制，因为电子实际上是费米子。</li>
+</ul>
+<p><strong>2、Hartree-Fock 方法：</strong></p>
+<ul>
+<li>Hartree-Fock 方法是 Hartree 方法的一个改进版本，它考虑了电子之间的交换相互作用。</li>
+<li>这种方法基于 Slater 行列式，通过引入交换项来考虑电子的不可区分性和泡利不相容原理，这意味着它使用费米子波函数。</li>
+<li>Hartree-Fock 方法因此能更准确地描述电子间的相互作用，尤其是对于闭壳层系统。</li>
+<li>但它仍然忽略了电子相关效应（即电子之间的动态相互作用），这在一些系统中可能非常重要。</li>
+</ul>
+<p>综上所述，Hartree-Fock 方法相较于 Hartree 方法提供了一个更准确的框架，特别是因为它考虑了电子间的交换作用，并使用费米子波函数，这更符合实际的电子行为。尽管如此，两者都有其局限性，尤其是在处理电子相关性方面。</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://en.wikipedia.org/wiki/Hartree%E2%80%93Fock_method">https://en.wikipedia.org/wiki/Hartree%E2%80%93Fock_method</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+    data-repo="timeti123553/timeti2.github.io"
+    data-repo-id="R_kgDOLSbkvQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLSbkvc4CdR2E"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.prune", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.caa56a14.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
