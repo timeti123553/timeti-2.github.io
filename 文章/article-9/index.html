@@ -1,0 +1,1212 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.7">
+    
+    
+      
+        <title>谐振子与 Hermite 多项式 - TIMEti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.f2e4d321.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-3XP0F4X3PX"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-3XP0F4X3PX",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-3XP0F4X3PX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hermite" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="TIMEti" class="md-header__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIMEti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              谐振子与 Hermite 多项式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  文章
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-tabs__link">
+          
+  
+  专栏
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%83%B3%E6%B3%95/2024.01.29/" class="md-tabs__link">
+          
+  
+  想法
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-tabs__link">
+        
+  
+    
+  
+  收藏
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TIMEti" class="md-nav__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    TIMEti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    专栏
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            专栏
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    固体物理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    量子力学
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/%E6%96%AF%E6%A0%BC%E6%98%8E%E5%AD%90%28skyrmion%29%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    斯格明子(skyrmion)建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/MuMax3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MuMax3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/PWmat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWmat
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%93%E6%A0%8F/VASP%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VASP建模
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    想法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            想法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%83%B3%E6%B3%95/2024.01.29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2024.01.29
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    收藏
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      背景
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      理论推导
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="理论推导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      建立微分方程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      近似解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      精确解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      正交性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      递推关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      谐振子
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      性质分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="性质分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      基态
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      谐振子的不确定系关系
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="hermite"><strong>谐振子与 Hermite 多项式</strong><a class="headerlink" href="#hermite" title="Permanent link">&para;</a></h1>
+<p>本文主要参考书籍：</p>
+<p><a href="https://book.sciencereading.cn/shop/book/Booksimple/show.do?id=B6120F168F80C486D80AC103E9C05D3D2000">曾谨言著. 2013. 量子力学. 卷Ⅰ  |  5版[M]. 北京：科学出版社</a></p>
+<p><a href="https://book.sciencereading.cn/shop/book/Booksimple/show.do?id=BD0E4016D78767E8AE053010B0A0A46BA000">孙婷雅 编. 2004. 量子力学教程习题剖析[M]. 北京：科学出版社</a></p>
+<p><a href="https://link.springer.com/10.1007/978-3-031-14020-4">Bruce Cameron Reed. 2022. Quantum Mechanics: An Enhanced Primer [M]. Springer Cham.</a></p>
+<h2 id="_1"><strong>背景</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>在数学中，Hermite 多项式（Hermite polynomials）是一种经典的正交多项式族，得名于法国数学家夏尔·埃尔米特（Charles Hermite）。</p>
+<p>在概率论中，埃奇沃斯级数的表达式中就要用到 Hermite 多项式。</p>
+<p>在组合数学中，Hermite 多项式是阿佩尔方程的解。</p>
+<p>子啊物理学中，Hermite 多项式给出了量子谐振子的本征态。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/1.png" width="600" /></a>
+  <figcaption>Charles Hermite</figcaption>
+</figure>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%A4%8F%E7%88%BE%C2%B7%E5%9F%83%E7%88%BE%E7%B1%B3%E7%89%B9#/media/File:Charles_Hermite_circa_1901_edit.jpg">图片链接</a></p>
+<p><strong>在概率论中常用的形式：</strong></p>
+<div class="arithmatex">\[\displaystyle H_{n}^{\mathrm{prob} }(x)=(-1)^{n} e^{\frac{x^{2}}{2}} \frac{d^{n}}{d x^{n}} e^{-\frac{x^{2}}{2}}\]</div>
+<p><strong>在物理学中常用的形式：</strong></p>
+<div class="arithmatex">\[\displaystyle H_{n}^{\mathrm{phys} }(x)=(-1)^{n} e^{x^{2}} \frac{d^{n}}{d x^{n}} e^{-x^{2}}\]</div>
+<p>两种形式之间的转化关系：</p>
+<div class="arithmatex">\[\displaystyle H_{n}^{\text {phys }}(x)=2^{\frac{n}{2}} H_{n}^{\text {prob }}(\sqrt{2} x)\]</div>
+<p>前六个概率学和物理学中的 Hermite 多项式：</p>
+<div class="arithmatex">\[\begin{array}{|l|l|l|}\hline \bf{序号} &amp; \bf{概率学} &amp; \bf{物理学} \\\hline H_{0}(x) &amp; 1 &amp; 1 \\\hline H_{1}(x) &amp; x &amp; 2x \\\hline H_{2}(x) &amp; x^{2}-1 &amp; 4x^{2}-2 \\\hline H_{3}(x) &amp; x^{3}-3x &amp; 8x^{3}-12x \\\hline H_{4}(x) &amp; x^{4}-6x^{2}+3 &amp; 16x^{4}-48x^{2}+12 \\\hline H_{5}(x) &amp; x^{5}-10x^{3}+15x &amp; 32x^{5}-160x^{3}+120x \\\hline\end{array}\]</div>
+<p>前 11 个概率学中的 Hermite 多项式：</p>
+<div class="arithmatex">\[\begin{array}{l}H e_{0}(x)=1 \\H e_{1}(x)=x \\H e_{2}(x)=x^{2}-1 \\H e_{3}(x)=x^{3}-3 x \\H e_{4}(x)=x^{4}-6 x^{2}+3 \\H e_{5}(x)=x^{5}-10 x^{3}+15 x \\H e_{6}(x)=x^{6}-15 x^{4}+45 x^{2}-15 \\H e_{7}(x)=x^{7}-21 x^{5}+105 x^{3}-105 x \\H e_{8}(x)=x^{8}-28 x^{6}+210 x^{4}-420 x^{2}+105 \\H e_{9}(x)=x^{9}-36 x^{7}+378 x^{5}-1260 x^{3}+945 x \\H e_{10}(x)=x^{10}-45 x^{8}+630 x^{6}-3150 x^{4}+4725 x^{2}-945\end{array}\]</div>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/2.png" width="800" /></a>
+  <figcaption>前 6 个概率学中的 Hermite 多项式</figcaption>
+</figure>
+<p><a href="https://en.wikipedia.org/wiki/Hermite_polynomials#/media/File:Hermite_poly.svg">图片链接</a></p>
+<p>前 11 个物理学中的 Hermite 多项式：</p>
+<div class="arithmatex">\[\begin{array}{l}H_{0}(x)=1 \\H_{1}(x)=2 x \\H_{2}(x)=4 x^{2}-2 \\H_{3}(x)=8 x^{3}-12 x \\H_{4}(x)=16 x^{4}-48 x^{2}+12 \\H_{5}(x)=32 x^{5}-160 x^{3}+120 x \\H_{6}(x)=64 x^{6}-480 x^{4}+720 x^{2}-120 \\H_{7}(x)=128 x^{7}-1344 x^{5}+3360 x^{3}-1680 x \\H_{8}(x)=256 x^{8}-3584 x^{6}+13440 x^{4}-13440 x^{2}+1680 \\H_{9}(x)=512 x^{9}-9216 x^{7}+48384 x^{5}-80640 x^{3}+30240 x \\H_{10}(x)=1024 x^{10}-23040 x^{8}+161280 x^{6}-403200 x^{4}+302400 x^{2}-30240\end{array}\]</div>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/3.png" width="800" /></a>
+  <figcaption>前 6 个物理学中的 Hermite 多项式</figcaption>
+</figure>
+<p><a href="https://en.wikipedia.org/wiki/File:Hermite_poly_phys.svg">图片链接</a></p>
+<h2 id="_2"><strong>理论推导</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3"><strong>建立微分方程</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>一维谐振子受到的线性恢复力：</p>
+<div class="arithmatex">\[F=-k x \quad(-\infty \leq x \leq \infty)\]</div>
+<p>这种系统的经典模型是质量 <span class="arithmatex">\(m\)</span> 附着在力常数为 <span class="arithmatex">\(k\)</span> 的弹簧上。如果弹簧从其平衡位置拉伸（或压缩）一个位移 <span class="arithmatex">\(x\)</span> ，它将以与 <span class="arithmatex">\(x\)</span> 成比例的力向后拉（或推动），结果是正弦简谐运动，以周期 <span class="arithmatex">\(\displaystyle T=2 \pi \sqrt{\frac{m}{k}}\)</span> 秒重复。在原子水平上，双原子分子的行为非常接近于两个原子核通过弹簧连接。</p>
+<p>对应于线性恢复力的电势通过对力方程进行积分而获得（谐振子电势）：</p>
+<div class="arithmatex">\[\displaystyle V(x)=-\int F d x=\int k x d x=\frac{kx^{2}}{2}+c\]</div>
+<p>其中 <span class="arithmatex">\(c\)</span> 是积分常数。</p>
+<p>通常，常数 <span class="arithmatex">\(c\)</span> 不再被进一步考虑，因为 <span class="arithmatex">\(c\)</span> 的非零值的效果将是将允许的能级提高或降低该量，只有势能的差异在物理上是有意义的。</p>
+<p>对应的薛定谔方程为：</p>
+<div class="arithmatex">\[\displaystyle -\frac{\hbar^{2}}{2 m} \frac{d^{2} \psi(x)}{d x^{2}}+\frac{1}{2} k x^{2} \psi(x)=E \psi(x)\]</div>
+<p>我们假设谐振子的质量为 <span class="arithmatex">\(\mu\)</span>，并令 <span class="arithmatex">\(\displaystyle \omega_{0}=\sqrt{\frac{k}{\mu}}\)</span>，则哈密顿量可以表示为：</p>
+<div class="arithmatex">\[\displaystyle H=\frac{p_{x}^{2}}{2 \mu}+\frac{1}{2} \mu \omega_{0}^{2} x^{2}\]</div>
+<p>则薛定谔方程还可以写为：</p>
+<div class="arithmatex">\[\displaystyle \left(-\frac{\hbar^{2}}{2 \mu} \frac{\mathrm{d}^{2}}{\mathrm{~d} x^{2}}+\frac{1}{2} \mu \omega_{0}^{2} x^{2}\right) \psi(x)=E \psi(x)\]</div>
+<p>注：严格的谐振子势是一个无限深势阱，粒子只存在束缚态，当 <span class="arithmatex">\(|x| \rightarrow \infty\)</span> 的时候，波函数 <span class="arithmatex">\(\psi(x)\to 0\)</span>。</p>
+<p>引入无量纲参数：</p>
+<div class="arithmatex">\[
+\begin{array}{ll}z=\alpha x\\\displaystyle \alpha=\sqrt{\frac{\mu \omega_{0}}{\hbar}}\\\displaystyle \lambda=E / \frac{1}{2} \hbar \omega_{0}\end{array}
+\]</div>
+<p>则一维谐振子的薛定谔方程可以写为：</p>
+<div class="arithmatex">\[\displaystyle \frac{\mathrm{d}^{2}}{\mathrm{~d} z^{2}} \psi+\left(\lambda-z^{2}\right) \psi=0\]</div>
+<h3 id="_4"><strong>近似解</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>因为谐振子是束缚态，在 <span class="arithmatex">\(|x| \rightarrow \infty\)</span>，即 <span class="arithmatex">\(|z|\to\infty\)</span> 的时候，<span class="arithmatex">\(\psi(x)\to 0\)</span>。</p>
+<p>当 <span class="arithmatex">\(|\xi|\to\infty\)</span> 时，方程 <span class="arithmatex">\(\displaystyle \frac{\mathrm{d}^{2}}{\mathrm{~d} z^{2}} \psi+\left(\lambda-z^{2}\right) \psi=0\)</span> 可以近似表示为：</p>
+<div class="arithmatex">\[\displaystyle \frac{\mathrm{d}^{2}}{\mathrm{~d} z^{2}} \psi-z^{2} \psi=0\]</div>
+<p>因为解是束缚态，所以我们猜测的解的形式为：</p>
+<div class="arithmatex">\[\psi(z) \sim A \exp \left(\beta z^{n}\right), \quad(z \rightarrow \pm \infty)\]</div>
+<p>其中 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 和 <span class="arithmatex">\(n\)</span> 有待确定。</p>
+<p>将猜测的解带入 <span class="arithmatex">\(\displaystyle \frac{d^{2} \psi(z)}{d z^{2}}\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \frac{d^{2} \psi(z)}{d z^{2}}=\left[n^{2} \beta^{2} z^{2 n-2}+n(n-1) \beta z^{n-2}\right] \psi(z)\]</div>
+<p>带回公式 <span class="arithmatex">\(\displaystyle \frac{\mathrm{d}^{2}}{\mathrm{~d} z^{2}} \psi-z^{2} \psi=0\)</span>，我们可以发现：</p>
+<div class="arithmatex">\[\displaystyle n^{2} \beta^{2} z^{2 n-2}+n(n-1) \beta z^{n-2} \sim z^{2}\]</div>
+<p>除非上述公式 <span class="arithmatex">\(z\)</span> 的幂次是一样的，否则上式没有意义。</p>
+<p>我们不考虑负幂的情况（否则原点就是无穷大），则 <span class="arithmatex">\(n\)</span> 一定是正的。</p>
+<p>对于 <span class="arithmatex">\(z\rightarrow \pm \infty\)</span> 情况，公式左侧 <span class="arithmatex">\(n^{2} \beta^{2} z^{2 n-2}\)</span> 占据主导，我们可以给出：</p>
+<div class="arithmatex">\[n^{2} \beta^{2} z^{2 n-2} \sim z^{2}\]</div>
+<p>当 <span class="arithmatex">\(2 n-2=2\)</span> 或 <span class="arithmatex">\(n=2\)</span> 的时候，<span class="arithmatex">\(z\)</span> 的幂次才正常。</p>
+<p>并且在 <span class="arithmatex">\(n^{2} \beta^{2}=1\)</span> 或 <span class="arithmatex">\(\displaystyle \beta= \pm \frac{1}{2}\)</span> 时，系数才可以校准。</p>
+<p>当 <span class="arithmatex">\(\displaystyle \beta=  \frac{1}{2}\)</span> 时，渐进解的形式为：<span class="arithmatex">\(\displaystyle \psi(z) \propto \exp \left(\frac{z^{2}}{2}\right)\)</span></p>
+<p>这样的解不可能归一化，所以最后的解只有在 <span class="arithmatex">\(\displaystyle \beta=-\frac{1}{2}\)</span> 时才可以存在：</p>
+<div class="arithmatex">\[\displaystyle \psi(z) \sim A \exp \left(-\frac{z^{2}}{2}\right), \quad(z \rightarrow \pm \infty)\]</div>
+<p>此时，我们还有系数 <span class="arithmatex">\(A\)</span> 没有解出来。但是我们现在我们只有近似解，在精确求解的时候，前面的系数可能改变，所以系数 <span class="arithmatex">\(A\)</span> 我们可以稍后处理。</p>
+<h3 id="_5"><strong>精确解</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>我们希望精确解的求解过程可以建立在上面近似解的基础上。</p>
+<p>我们可以假设 <span class="arithmatex">\(\psi\)</span> 可以表示为两个函数的乘积，其中一项是上面的近似解，另一项是未知函数 <span class="arithmatex">\(u(z)\)</span>：</p>
+<div class="arithmatex">\[\displaystyle \psi(z)=\exp \left(-\frac{1}{2} z^{2}\right) u(z)\]</div>
+<p><strong>我们如何知道这是否是一个有效的假设？</strong></p>
+<p>答案是我们没有，至少现在还没有。就像在任何试错的情况下一样，只有在事后看看它是否能起作用，才能知道是否有效。</p>
+<p><strong><span class="arithmatex">\(u(z)\)</span> 的具体形式是什么？</strong></p>
+<p>从初等微积分中我们可以知道，<span class="arithmatex">\(z\)</span> 的任何函数形式都可以表示为泰勒级数或麦克劳林级数展开式。</p>
+<p>我们可以将 <span class="arithmatex">\(u(z)\)</span> 进行泰克展开：</p>
+<p>在 <span class="arithmatex">\(z=0\)</span> 点领域（<span class="arithmatex">\(|z|&lt;\infty\)</span> 范围）中，对 <span class="arithmatex">\(u(z)\)</span> 作泰勒展开：</p>
+<div class="arithmatex">\[\displaystyle u(z)=\sum_{k=0}^{\infty} C_{k} z^{k}\]</div>
+<p><strong>注：这里我们默认 <span class="arithmatex">\(u(z)\)</span> 是没有负幂的，因为负幂项会导致在 <span class="arithmatex">\(z=0\)</span> 点存在无穷大。虽然无穷大不会影响 <span class="arithmatex">\(u(z)\)</span> 的合理性（只要 <span class="arithmatex">\(u(z)\)</span> 是归一化的），但在这里我们忽略存在负幂的情况。</strong></p>
+<p>将我们假设的解 <span class="arithmatex">\(\displaystyle \psi(z)=\exp \left(-\frac{1}{2} z^{2}\right) u(z)\)</span> 带入 $\displaystyle \frac{\mathrm{d}^{2}\psi}{\mathrm{~d} z^{2}} $，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \frac{d^{2} \psi}{d z^{2}}=\left(\frac{d^{2} H}{d z^{2}}-2 z \frac{d H}{d z}+\left(z^{2}-1\right) H\right) e^{-\frac{z^{2}}{2}}\]</div>
+<p>再将 $\displaystyle \frac{\mathrm{d}^{2}\psi}{\mathrm{~d} z^{2}} $ 的具体形式带入薛定谔方程 <span class="arithmatex">\(\displaystyle \frac{\mathrm{d}^{2}}{\mathrm{~d} z^{2}} \psi+\left(\lambda-z^{2}\right) \psi=0\)</span>，并消除常见的指数因子，我们可以得到 <span class="arithmatex">\(u(z)\)</span> 的微分方程：</p>
+<div class="arithmatex">\[u^{\prime \prime}-2 z u^{\prime}+(\lambda-1) u=0\]</div>
+<p>这就是 Hermite 方程。</p>
+<p><span class="arithmatex">\(\displaystyle u(z)=\sum_{k=0}^{\infty} C_{k} z^{k}\)</span> 的一阶导数和二阶导数的具体形式为：</p>
+<div class="arithmatex">\[
+\begin{array}{ll}\displaystyle \frac{d u}{d z}=\sum_{k=0}^{\infty} k C_{k} z^{k-1}\\\displaystyle \frac{d^{2} u}{d z^{2}}=\sum_{n=0}^{\infty} k(k-1) C_{k} z^{k-2}\end{array}
+\]</div>
+<p>将 <span class="arithmatex">\(\displaystyle u(z)=\sum_{k=0}^{\infty} C_{k} z^{k}\)</span>、<span class="arithmatex">\(\displaystyle \frac{d u}{d z}=\sum_{k=0}^{\infty} k C_{k} z^{k-1}\)</span> 和 <span class="arithmatex">\(\displaystyle \frac{d^{2} u}{d z^{2}}=\sum_{n=0}^{\infty} k(k-1) C_{k} z^{k-2}\)</span> 带入薛定谔方程 <span class="arithmatex">\(u^{\prime \prime}-2 z u^{\prime}+(\lambda-1) u=0\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \sum_{k=0}^{\infty} k(k-1) C_{k} \xi^{k-2}+\sum_{k=0}^{\infty}[\lambda-1-2 k] C_{k} \xi^{k}=0\]</div>
+<p>我们发现在 <span class="arithmatex">\(k=0,1\)</span> 的项为零：</p>
+<div class="arithmatex">\[\displaystyle \sum_{k=0}^{\infty} k(k-1) C_{k} z^{k-2}=0+0+\sum_{k=2}^{\infty} k(k-1) C_{k} z^{k-2}\]</div>
+<p>为了从 0 开始计数，我们定了一个新的索引 <span class="arithmatex">\(j=k-2\)</span>，则上式可以写成：</p>
+<div class="arithmatex">\[\displaystyle \sum_{k=0}^{\infty} k(k-1) C_{k} z^{k-2}=\sum_{k=2}^{\infty} k(k-1) C_{k} z^{k-2}=\sum_{j=0}^{\infty}(j+2)(j+1) C_{j+2} z^{j}\]</div>
+<p>由于 <span class="arithmatex">\(k\)</span> 和 <span class="arithmatex">\(j\)</span> 都是伪索引，我们可以将 <span class="arithmatex">\(j\)</span> 重新标记为 <span class="arithmatex">\(k\)</span>（就是换个符号表示而已）。</p>
+<div class="arithmatex">\[\displaystyle \sum_{k=0}^{\infty} k(k-1) C_{k} z^{k-2}=\sum_{k=0}^{\infty}(k+2)(k+1) C_{k+2} z^{k}\]</div>
+<p>将上式带入 <span class="arithmatex">\(\displaystyle \sum_{k=0}^{\infty} k(k-1) C_{k} \xi^{k-2}+\sum_{k=0}^{\infty}[\lambda-1-2 k] C_{k} \xi^{k}=0\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \sum_{k=0}^{\infty}\left[(k+1)(k+2) C_{k+2}+(\lambda-1-2 k) C_{k}\right] z^{k}=0\]</div>
+<p>这种指数过程的变换是常用于微分方程级数解的一种有用技巧。</p>
+<p>从上式，我们可以解出 <span class="arithmatex">\(C_k\)</span> 之间的递推关系：</p>
+<div class="arithmatex">\[\displaystyle C_{k+2}=\frac{2 k-(\lambda-1)}{(k+2)(k+1)} C_{k}, \quad k=0,1,2, \cdots\]</div>
+<p>因此，所有偶次幂项的系数都可以用 <span class="arithmatex">\(C_0\)</span> 表示，所有奇次幂项系数都可以用 <span class="arithmatex">\(C_1\)</span> 表示。</p>
+<p><span class="arithmatex">\(C_0\)</span> 和 <span class="arithmatex">\(C_1\)</span> 是两个任意常数，从而求得方程 <span class="arithmatex">\(u^{\prime \prime}-2 z u^{\prime}+(\lambda-1) u=0\)</span> 的两个线性无关的解：</p>
+<div class="arithmatex">\[\begin{array}{l}u_{1}(z)=C_{0}+C_{2} z^{2}+C_{4} z^{4}+\cdots \\u_{2}(z)=C_{1} z+C_{3} z^{3}+C_{5} z^{5}+\cdots\end{array}\]</div>
+<p>当 <span class="arithmatex">\(z\)</span> 为有限值的时候，上述两个式子都收敛。</p>
+<p>但在 <span class="arithmatex">\(|z| \rightarrow \infty\)</span> 时有问题。</p>
+<p>通过公式 <span class="arithmatex">\(\displaystyle C_{k+2}=\frac{2 k-(\lambda-1)}{(k+2)(k+1)} C_{k}\)</span>，我们可以发现：</p>
+<p>当 <span class="arithmatex">\(k \rightarrow \infty\)</span> 的时候，<span class="arithmatex">\(\displaystyle \frac{C_{k+2}}{C_{k}}\approx \frac{2}{k}\)</span>；</p>
+<p>当 <span class="arithmatex">\(k=2m\)</span>（偶数）的时候，<span class="arithmatex">\(\displaystyle \frac{C_{2 m+2}}{C_{2 m}} \approx \frac{1}{m}\)</span>；</p>
+<p><span class="arithmatex">\(\exp \left(z^{2}\right)\)</span> 的泰勒展开：<span class="arithmatex">\(\displaystyle \exp \left(z^{2}\right)=\sum_{m=0}^{\infty} \frac{z^{2 m}}{m !}\)</span></p>
+<p><span class="arithmatex">\(k=2m\)</span> 时，我们发现 <span class="arithmatex">\(u_1(z)\)</span> 相邻项系数的比值与 <span class="arithmatex">\(\exp \left(z^{2}\right)\)</span> 相邻项系数的比值相同。</p>
+<p>因此，当 <span class="arithmatex">\(|z| \rightarrow \infty\)</span> 时，<span class="arithmatex">\(u_1(z)\)</span> 的发散行为与 <span class="arithmatex">\(\exp \left(z^{2}\right)\)</span> 相同。</p>
+<p>同理，当 <span class="arithmatex">\(|z| \rightarrow \infty\)</span> 时，<span class="arithmatex">\(u_2(z)\)</span> 的发散行为与 <span class="arithmatex">\(z\exp \left(z^{2}\right)\)</span> 相同。</p>
+<p>这样的解带入谐振子波函数 <span class="arithmatex">\(\displaystyle \psi \propto \exp \left(-\frac{1}{2} \xi^{2}\right) u(\xi)\)</span> 都不满足波函数在无穷远点的边界条件。</p>
+<p>因此，为了得到物理上允许的解，我们必须要求 <span class="arithmatex">\(u_1(z)\)</span> 和 <span class="arithmatex">\(u_2(z)\)</span> 两个级数解中至少有一个为中断多项式。</p>
+<p>根据公式 <span class="arithmatex">\(\displaystyle C_{k+2}=\frac{2 k-(\lambda-1)}{(k+2)(k+1)} C_{k}\)</span>，我们可以发现，当 <span class="arithmatex">\(\lambda-1=2 n\)</span>（<span class="arithmatex">\(n=0,1,2, \cdots\)</span>）时，级数将中断为多项式。</p>
+<p>此时，<span class="arithmatex">\(C_{n+2}\)</span>、<span class="arithmatex">\(C_{n+4}\)</span>、<span class="arithmatex">\(C_{n+6}\)</span>、......都将为零。</p>
+<p>当 <span class="arithmatex">\(n\)</span> 为偶数的时候，<span class="arithmatex">\(u_1(z)\)</span> 中断为多项式，<span class="arithmatex">\(u_2(z)\)</span> 仍为无穷级数。</p>
+<p>当 <span class="arithmatex">\(n\)</span> 为奇数的时候，<span class="arithmatex">\(u_2(z)\)</span> 中断为多项式，<span class="arithmatex">\(u_1(z)\)</span> 仍为无穷级数。</p>
+<p>但无论如何（不论 <span class="arithmatex">\(n\)</span> 为偶数或奇数），只要 <span class="arithmatex">\(\lambda-1=2 n\)</span> 成立，我们就找到了一个多项式解。</p>
+<p>将 <span class="arithmatex">\(\lambda-1=2 n\)</span> 带入谐振子波函数 <span class="arithmatex">\(\displaystyle \psi \propto \exp \left(-\frac{1}{2} z^{2}\right) u(z)\)</span> ，我们也就找到了在物理上允许的一个谐振子波函数。</p>
+<p>当 <span class="arithmatex">\(\lambda-1=2 n\)</span> 成立时，Hermite 方程 <span class="arithmatex">\(u^{\prime \prime}-2 z u^{\prime}+(\lambda-1) u=0\)</span> 有一个多项式解（另一个解为无穷级数）。</p>
+<p>习惯上规定其最高次项系数 <span class="arithmatex">\(C_{n}=2^{n}\)</span>，这样的多项式称为 Hermite 多项式。</p>
+<p>把 <span class="arithmatex">\(\lambda-1=2 n\)</span> 带入 <span class="arithmatex">\(\displaystyle C_{k+2}=\frac{2 k-(\lambda-1)}{(k+2)(k+1)} C_{k}\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle C_{k}=-\frac{(k+2)(k+1)}{2(n-k)} C_{k+2}\]</div>
+<p>为了方便，我们进行替换 <span class="arithmatex">\(k \rightarrow n-k\)</span>，上式可以修改为：</p>
+<div class="arithmatex">\[\displaystyle C_{n-k}=-\frac{(n-k+2)(n-k+1)}{2 k} C_{n-k+2}\]</div>
+<p>取 <span class="arithmatex">\(C_{n}=2^{n}\)</span>，并依次令 <span class="arithmatex">\(k=2,4,6, \cdots,\)</span>得出：</p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle C_{n-2}=-n(n-1) \cdot 2^{n-2} \\\displaystyle C_{n-4}=+\frac{n(n-1)(n-2)(n-3)}{2 !} 2^{n-4} \\\displaystyle C_{n-6}=-\frac{n(n-1)(n-2)(n-3)(n-4)(n-5)}{3 !} 2^{n-6} \\\cdots \end{array}\]</div>
+<p>因此</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{H}_{n}(z)= &amp; (2 z)^{n}-n(n-1)(2 z)^{n-2}+\frac{n(n-1)(n-2)(n-3)}{2 !}(2 z)^{n-4}-\cdots+\cdots+(-1)^{\left[\frac{n}{2}\right]} \cdot \frac{n !}{\left[\frac{n}{2}\right] !}(2 z)^{n-2\left[\frac{n}{2}\right]}\end{aligned}\]</div>
+<p>其中 <span class="arithmatex">\(\displaystyle \left[\frac{n}{2}\right]\)</span> 表示不大于 <span class="arithmatex">\(\displaystyle \frac{n}{2}\)</span> 的最大整数，具体形式为：</p>
+<div class="arithmatex">\[\displaystyle \left[\frac{n}{2}\right]=\left\{\begin{array}{ll}\displaystyle \frac{n}{2} &amp;\displaystyle  (n \text { 为偶数 }) \\\displaystyle \frac{n-1}{2} &amp;\displaystyle  (n \text { 为奇数 })\end{array}\right.\]</div>
+<p>此即 Hermite 多项式。</p>
+<p>可以证明，Hermite 多项式的生成函数（generating function）为：</p>
+<div class="arithmatex">\[\displaystyle \exp \left(-s^{2}+2 z s\right)=\sum_{n=0}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} s^{n}\]</div>
+<p>因此</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{H}_{n}(z) &amp; =\left.\frac{\mathrm{d}^{n}}{\mathrm{~d} s^{n}} \exp \left(-s^{2}+2 z s\right)\right|_{s=0}\\&amp;=\left.\exp \left(z^{2}\right) \cdot \frac{\mathrm{d}^{n}}{\mathrm{~d} s^{n}} \exp \left[-(s-z)^{2}\right]\right|_{s=0} \\&amp; =\left.(-1)^{n} \exp \left(z^{2}\right) \cdot \frac{\mathrm{d}^{n}}{\mathrm{~d} z^{n}} \exp \left[-(s-z)^{2}\right]\right|_{s=0}\end{aligned}\]</div>
+<p>所以</p>
+<div class="arithmatex">\[\displaystyle \mathrm{H}_{n}(z)=(-1)^{n} \exp \left(z^{2}\right) \frac{\mathrm{d}^{n}}{\mathrm{~d} z^{n}} \exp \left(-z^{2}\right)\]</div>
+<p>不难直接验证，上式给出的 <span class="arithmatex">\(\mathrm{H}_{n}(z)\)</span> 确实是微分方程 <span class="arithmatex">\(u^{\prime \prime}-2 z u^{\prime}+(\lambda-1) u=0\)</span> 的解。</p>
+<p>其次，公式 <span class="arithmatex">\(\displaystyle \mathrm{H}_{n}(z)=(-1)^{n} \exp \left(z^{2}\right) \frac{\mathrm{d}^{n}}{\mathrm{~d} z^{n}} \exp \left(-z^{2}\right)\)</span> 是一个 <span class="arithmatex">\(n\)</span> 次多项式。</p>
+<p>因为对 <span class="arithmatex">\(\exp \left(-z^{2}\right)\)</span> 求导一次，就多出一个含 <span class="arithmatex">\(z\)</span> 的项。</p>
+<p>例如：<span class="arithmatex">\(\displaystyle \frac{\mathrm{d}}{\mathrm{d} z} \exp \left(-z^{2}\right)=-2 z \exp \left(-z^{2}\right)\)</span></p>
+<p>对 <span class="arithmatex">\(\exp \left(-z^{2}\right)\)</span> 进行 <span class="arithmatex">\(n\)</span> 次求导后，多项式 <span class="arithmatex">\(\mathrm{H}_{n}(z)\)</span> 的最高次项将是：</p>
+<div class="arithmatex">\[\displaystyle (-1)^{n} \cdot \exp \left(z^{2}\right) \cdot(-2 z)^{n} \cdot \exp \left(-z^{2}\right)=2^{n} \cdot z^{n}\]</div>
+<p>这与下述公式最高次项的结果相同：</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{H}_{n}(z)= &amp; (2 z)^{n}-n(n-1)(2 z)^{n-2}+\frac{n(n-1)(n-2)(n-3)}{2 !}(2 z)^{n-4}-\cdots+\cdots+(-1)^{\left[\frac{n}{2}\right]} \cdot \frac{n !}{\left[\frac{n}{2}\right] !}(2 z)^{n-2\left[\frac{n}{2}\right]}\end{aligned}\]</div>
+<p>对于一定的 <span class="arithmatex">\(n\)</span>，微分方程 <span class="arithmatex">\(u^{\prime \prime}-2 z u^{\prime}+(\lambda-1) u=0\)</span> 的多项式解只有一个。</p>
+<p>因此</p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{H}_{n}(z)= &amp; (2 z)^{n}-n(n-1)(2 z)^{n-2}+\frac{n(n-1)(n-2)(n-3)}{2 !}(2 z)^{n-4}-\cdots+\cdots+(-1)^{\left[\frac{n}{2}\right]} \cdot \frac{n !}{\left[\frac{n}{2}\right] !}(2 z)^{n-2\left[\frac{n}{2}\right]}\end{aligned}\]</div>
+<p>与</p>
+<div class="arithmatex">\[\displaystyle \mathrm{H}_{n}(z)=(-1)^{n} \exp \left(z^{2}\right) \frac{\mathrm{d}^{n}}{\mathrm{~d} z^{n}} \exp \left(-z^{2}\right)\]</div>
+<p>全同。</p>
+<h3 id="_6"><strong>正交性</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>利用公式 <span class="arithmatex">\(\displaystyle \exp \left(-s^{2}+2 z s\right)=\sum_{n=0}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} s^{n}\)</span> 或 <span class="arithmatex">\(\displaystyle \mathrm{H}_{n}(z)=(-1)^{n} \exp \left(z^{2}\right) \frac{\mathrm{d}^{n}}{\mathrm{~d} z^{n}} \exp \left(-z^{2}\right)\)</span>，都不难证明 Hermite 多项式的正交性公式为：</p>
+<div class="arithmatex">\[\displaystyle \int_{-\infty}^{+\infty} \mathrm{H}_{m}(z) \mathrm{H}_{n}(z) \exp \left(-z^{2}\right) \mathrm{d} z=\sqrt{\pi} 2^{n} \cdot n ! \delta_{m n}\]</div>
+<p><span class="arithmatex">\(\exp \left(-z^{2}\right)\)</span> 称为权重因子。</p>
+<p>下面用生成函数 <span class="arithmatex">\(\displaystyle \exp \left(-s^{2}+2 z s\right)=\sum_{n=0}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} s^{n}\)</span> 来证明。</p>
+<p>利用</p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle \exp \left(-t^{2}+2 z t\right)=\sum_{m=0}^{\infty}\frac{\mathrm{H}_{m}(z) t^{m}}{m !} \\\displaystyle \exp \left(-s^{2}+2 z s\right)=\sum_{n=0}^{\infty}\frac{\mathrm{H}_{n}(z) s^{n}}{n !}\end{array}\]</div>
+<p>相乘得到</p>
+<div class="arithmatex">\[\begin{aligned}\exp \left[-\left(t^{2}+s^{2}\right)+2 z(t+s)\right] &amp; =\exp \left(2 t s+z^{2}\right) \cdot \exp \left[-(t+s-z)^{2}\right] \\&amp; =\sum^{\infty}_{m,n=0} \frac{\mathrm{H}_{m}(z) \mathrm{H}_{n}(z) t^{m} s^{n}}{m ! n !}\end{aligned}\]</div>
+<p>两边乘以 <span class="arithmatex">\(\exp \left(-z^{2}\right)\)</span> 并积分</p>
+<div class="arithmatex">\[\displaystyle \exp (2 t s) \int_{-\infty}^{+\infty} \exp \left[-(z-t-s)^{2}\right] \mathrm{d} z=\sum_{m, n=0}^{\infty} \frac{t^{m} s^{n}}{m ! n !} \cdot \int_{-\infty}^{+\infty} \mathrm{H}_{m}(z) \mathrm{H}_{n}(z) \exp \left(-z^{2}\right) \mathrm{d} z\]</div>
+<p>上式的左边部分</p>
+<div class="arithmatex">\[\begin{aligned}\exp (2 t s) \int_{-\infty}^{+\infty} \exp \left[-(z-t-s)^{2}\right] \mathrm{d} z&amp; =\exp (2 t s) \int_{-\infty}^{+\infty} \exp \left(-\xi^{2}\right) \mathrm{d} \xi \\&amp; =\exp (2 t s) \sqrt{\pi}\\&amp;=\sqrt{\pi} \sum_{n=0}^{\infty} \frac{(2 t s)^{n}}{n !}\end{aligned}\]</div>
+<p>所以我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \sqrt{\pi} \sum_{n=0}^{\infty} \frac{(2 t s)^{n}}{n !}=\sum_{m, n=0}^{\infty} \frac{t^{m} s^{n}}{m ! n !} \cdot \int_{-\infty}^{+\infty} \mathrm{H}_{m}(z) \mathrm{H}_{n}(z) \exp \left(-z^{2}\right) \mathrm{d} z\]</div>
+<div class="arithmatex">\[\displaystyle \Rightarrow \int_{-\infty}^{+\infty} \mathrm{H}_{m}(z) \mathrm{H}_{n}(z) \exp \left(-z^{2}\right) \mathrm{d} z=\sqrt{\pi} 2^{n} \cdot n ! \delta_{m n}\]</div>
+<h3 id="_7"><strong>递推关系</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>生成函数式 <span class="arithmatex">\(\displaystyle \exp \left(-s^{2}+2 z s\right)=\sum_{n=0}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} s^{n}\)</span> 两边对 <span class="arithmatex">\(s\)</span> 求导，我们可以得到：</p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle \text { 左边 }=(-2 s+2 z) \exp \left(-s^{2}+2 z s\right)=(-2 s+2 z) \sum_{n=0}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} s^{n} \\\displaystyle \text { 右边 }=\sum_{n=1}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} n s^{n-1}=\sum_{n=0}^{\infty} \frac{\mathrm{H}_{n+1}(z)}{n !} s^{n}\end{array}\]</div>
+<p>比较两边 <span class="arithmatex">\(s\)</span> 同幂项的系数，我们就可以得到 Hermite 多项式的递推关系：</p>
+<div class="arithmatex">\[\mathrm{H}_{n+1}(z)-2 z \mathrm{H}_{n}(z)+2 n \mathrm{H}_{n-1}(z)=0\]</div>
+<p>同理，对生成函数式 <span class="arithmatex">\(\displaystyle \exp \left(-s^{2}+2 z s\right)=\sum_{n=0}^{\infty} \frac{\mathrm{H}_{n}(z)}{n !} s^{n}\)</span> 两边对 <span class="arithmatex">\(z\)</span> 求导，我们可以得到：</p>
+<div class="arithmatex">\[\mathrm{H}_{n}^{\prime}(z)=2 n \mathrm{H}_{n-1}(z)\]</div>
+<h3 id="_8"><strong>谐振子</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>将 <span class="arithmatex">\(\lambda-1=2 n\)</span> 带入 <span class="arithmatex">\(\displaystyle \lambda=E / \frac{1}{2} \hbar \omega_{0}\)</span>，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle E=E_{n}=\left(n+\frac{1}{2}\right) \hbar \omega_{0}, \quad n=0,1,2, \cdots\]</div>
+<p>这就是谐振子能量可能的取值，即能量本征值。</p>
+<p>由于谐振子是束缚态，所以能量是量子化的。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/4.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/4.png" width="800" /></a>
+  <figcaption>一维谐振子</figcaption>
+</figure>
+<p><a href="https://www.cantorsparadise.com/the-quantum-harmonic-oscillator-diracs-approach-f847569b9df0">图片链接</a></p>
+<p>谐振子能量是均匀分布的，相邻能级之间差 <span class="arithmatex">\(\hbar \omega_{0}\)</span>。</p>
+<p>谐振子的基态能量（零点能）为：<span class="arithmatex">\(\displaystyle E_{0}=\frac{1}{2} \hbar \omega_{0}\)</span></p>
+<div class="arithmatex">\[\begin{aligned}\mathrm{H}_{n}(z)= &amp; (2 z)^{n}-n(n-1)(2 z)^{n-2}+\frac{n(n-1)(n-2)(n-3)}{2 !}(2 z)^{n-4}-\cdots+\cdots+(-1)^{\left[\frac{n}{2}\right]} \cdot \frac{n !}{\left[\frac{n}{2}\right] !}(2 z)^{n-2\left[\frac{n}{2}\right]}\end{aligned}\]</div>
+<p>上式是谐振子的一个解（另外一个解是无穷级数）。</p>
+<p>前 11 个 Hermite 多项式：</p>
+<div class="arithmatex">\[\begin{aligned}H_{0}(z) &amp; =1 \\H_{1}(z) &amp; =2 z \\H_{2}(z) &amp; =4 z^{2}-2 \\H_{3}(z) &amp; =8 z^{3}-12 z \\H_{4}(z) &amp; =16 z^{4}-48 z^{2}+12 \\H_{5}(z) &amp; =32 z^{5}-160 z^{3}+120 z \\H_{6}(z) &amp; =64 z^{6}-480 z^{4}+720 z^{2}-120 \\H_{7}(z) &amp; =128 z^{7}-1344 z^{5}+3360 z^{3}-1680 z \\H_{8}(z) &amp; =256 z^{8}-3584 z^{6}+13440 z^{4}-13440 z^{2}+1680 \\H_{9}(z) &amp; =512 z^{9}-9216 z^{7}+48384 z^{5}-80640 z^{3}+30240 z \\H_{10}(z) &amp; =1024 z^{10}-23040 z^{8}+161280 z^{6}-403200 z^{4}+302400 z^{2}-30240\end{aligned}\]</div>
+<p>利用正交公式：</p>
+<div class="arithmatex">\[\displaystyle \int_{-\infty}^{+\infty} \mathrm{H}_{m}(z) \mathrm{H}_{n}(z) \exp \left(-z^{2}\right) \mathrm{d} z=\sqrt{\pi} 2^{n} \cdot n ! \delta_{m n}\]</div>
+<p>我们可以得到归一化的谐振子波函数（实函数）：</p>
+<div class="arithmatex">\[\begin{array}{l}\displaystyle \psi_{n}(x)=N_{n} \exp \left(-\frac{1}{2} \alpha^{2} x^{2}\right) \mathrm{H}_{n}(a x) \\\displaystyle N_{n}=\left(\frac{\alpha}{\sqrt{\pi} 2^{n} n !}\right)^{\frac{1}{2}} \quad(\text { 归一化常数 }) \\\displaystyle \int_{-\infty}^{+\infty} \psi_{m}(x) \psi_{n}(x) \mathrm{d} x=\delta_{m n}\end{array}\]</div>
+<p>谐振子前四条能级的的能量本征函数：</p>
+<div class="arithmatex">\[\begin{array}{ll}\displaystyle \psi_{0}(x)=\frac{\sqrt{\alpha}}{\pi^{1 / 4}} \exp \left(-\frac{1}{2} \alpha^{2} x^{2}\right)\\\displaystyle \psi_{1}(x)=\frac{\sqrt{2 \alpha}}{\pi^{1 / 4}} \alpha x \exp \left(-\frac{1}{2} \alpha^{2} x^{2}\right) \\\displaystyle \psi_{2}(x)=\frac{1}{\pi^{1 / 4}} \sqrt{\frac{\alpha}{2}}\left(2 \alpha^{2} x^{2}-1\right) \exp \left(-\frac{1}{2} \alpha^{2} x^{2}\right) \\\displaystyle \psi_{3}(x)=\frac{\sqrt{3 \alpha}}{\pi^{1 / 4}} \alpha x\left(\frac{2}{3} \alpha^{2} x^{2}-1\right) \exp \left(-\frac{1}{2} \alpha^{2} x^{2}\right)\end{array}\]</div>
+<p>我们还可以发现能量本征函数的奇偶性与 <span class="arithmatex">\(n\)</span> 有关：</p>
+<div class="arithmatex">\[\psi_{n}(-x)=(-1)^{n} \psi_{n}(x)\]</div>
+<h2 id="_9"><strong>性质分析</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10"><strong>基态</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/5.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/5.png" width="800" /></a>
+  <figcaption>基态的能量和概率分布</figcaption>
+</figure>
+<p>基态能量：<span class="arithmatex">\(\displaystyle E_{0}=\frac{1}{2} \hbar \omega_{0}\)</span></p>
+<p>基态概率分布：<span class="arithmatex">\(\displaystyle \left|\psi_{0}(x)\right|^{2}=\frac{\alpha}{\sqrt{\pi}} \exp \left(-\alpha^{2} x^{2}\right)\)</span></p>
+<p>在 <span class="arithmatex">\(x=0\)</span> 处出现谐振子的概率最大。</p>
+<p>从经典力学出发，粒子将限制在 <span class="arithmatex">\(|\alpha x| \leqslant 1\)</span> 范围中运动，因为在 <span class="arithmatex">\(|\alpha x| = 1\)</span> 处势能等于能量（粒子速度为 0）：</p>
+<div class="arithmatex">\[\displaystyle V(x)=\frac{1}{2} k x^{2}=\frac{1}{2} k / \alpha^{2}=\frac{1}{2} \hbar \omega_{0}\]</div>
+<p>从量子力学出发，在经典禁区 <span class="arithmatex">\(|\alpha x|&gt;1\)</span> 中，<span class="arithmatex">\(\psi_{0}(x)\)</span> 并不为零，粒子有一定概率在禁区出现。</p>
+<p>对于基态，出现的概率为：</p>
+<div class="arithmatex">\[\frac{\displaystyle \int_{1}^{\infty} \exp \left(-\xi^{2}\right) \mathrm{d} \xi}{\displaystyle \int_{0}^{\infty} \exp \left(-\xi^{2}\right) \mathrm{d} \xi} \approx 16 \%\]</div>
+<h3 id="_11"><strong>谐振子的不确定系关系</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>已知</p>
+<div class="arithmatex">\[\begin{array}{c}\mathrm{H}_{n+1}(x)-2 x \mathrm{H}_{n}(x)+2 n \mathrm{H}_{n-1}(x)=0 \\\displaystyle\psi_{n}(x)=\left(\frac{\alpha}{\sqrt{\pi} 2^{n} n !}\right)^{\frac{1}{2}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}} \mathrm{H}_{n}(\alpha x) \\\displaystyle\psi_{n+1}(x)=\left(\frac{\alpha}{\sqrt{\pi} 2^{n+1}(n+1) !}\right)^{\frac{1}{2}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}} \mathrm{H}_{n+1}(\alpha x) \\\displaystyle\psi_{n-1}(x)=\left(\frac{\alpha}{\sqrt{\pi} 2^{n-1}(n-1) !}\right)^{\frac{1}{2}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}} \mathrm{H}_{n-1}(\alpha x)\end{array}\]</div>
+<p>所以</p>
+<div class="arithmatex">\[\begin{aligned}x \psi_{n}(x)= &amp; \frac{1}{\alpha} \cdot M \cdot\left(\frac{1}{2^{n} n !}\right)^{\frac{1}{2}} \alpha x \mathrm{H}_{n}(\alpha x)\\= &amp; \frac{1}{\alpha} \cdot M \cdot\left(\frac{1}{2^{n} n !}\right)^{\frac{1}{2}}\left(\frac{1}{2} \mathrm{H}_{n+1}(\alpha x)+n \mathrm{H}_{n-1}(\alpha x)\right) \\= &amp; \frac{1}{\alpha} M\left(\frac{1}{2^{n+1}(n+1) !}\right)^{\frac{1}{2}} \sqrt{\frac{n+1}{2}} \mathrm{H}_{n+1}(\alpha x)+\frac{1}{\alpha} M\left(\frac{1}{2^{n-1}(n-1) !}\right)^{\frac{1}{2}} \sqrt{\frac{n}{2}} \mathrm{H}_{n-1}(\alpha x) \\= &amp; \frac{1}{\alpha}\left[\sqrt{\frac{n}{2}} \psi_{n-1}(x)+\sqrt{\frac{n+1}{2}} \psi_{n+1}(x)\right]\end{aligned}\]</div>
+<p>其中 <span class="arithmatex">\(\displaystyle M=\sqrt{\alpha} \pi^{-\frac{1}{4}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}}\)</span>；</p>
+<p>利用本征函数的正交性：</p>
+<div class="arithmatex">\[\begin{aligned}\overline{x} &amp; = \int \psi_{n}^{*} x \psi_{n} \mathrm{~d} x\\&amp;=\int \psi_{n}^{*} \frac{1}{\alpha}\left[\sqrt{\frac{n}{2}} \psi_{n-1}(x)+\sqrt{\frac{n+1}{2}} \psi_{n+1}(x)\right]\mathrm{~d} x\\&amp;=0\end{aligned}\]</div>
+<p>我们可以得到 <span class="arithmatex">\(\overline{x}=0\)</span>。</p>
+<div class="arithmatex">\[\begin{aligned}x^{2} \psi_{n}(x)= &amp; \frac{1}{\alpha}\left[\sqrt{\frac{n}{2}} x \psi_{n-1}(x)+\sqrt{\frac{n+1}{2}} x \psi_{n+1}(x)\right] \\= &amp; \frac{1}{\alpha}\left\{\sqrt{\frac{n}{2}} \cdot \frac{1}{\alpha}\left[\sqrt{\frac{n-1}{2}} \psi_{n-2}(x)+\sqrt{\frac{n}{2}} \psi_{n}(x)\right]\right. \left.+\sqrt{\frac{n+1}{2}} \cdot \frac{1}{\alpha}\left[\sqrt{\frac{n+1}{2}} \psi_{n}+\sqrt{\frac{n+2}{2}} \psi_{n+2}\right]\right\} \\= &amp; \frac{1}{2 \alpha^{2}}\left[\sqrt{n(n-1)} \psi_{n-2}+(2 n+1) \psi_{n}+\sqrt{(n+1)(n+2)} \psi_{n+2}\right]\end{aligned}\]</div>
+<p>同样，利用本征函数的正交归一性，我们可以得到：</p>
+<div class="arithmatex">\[\begin{array}{ll}\displaystyle \overline{V}&amp;\displaystyle=\frac{1}{2} m \omega^{2} \int \psi_{n}^{*} x^{2} \psi_{n} \mathrm{~d} x\\&amp;\displaystyle=\frac{1}{2} m \omega^{2} \int \psi_{n}^{*} \frac{1}{2 \alpha^{2}}\left[\sqrt{n(n-1)} \psi_{n-2}+(2 n+1) \psi_{n}+\sqrt{(n+1)(n+2)} \psi_{n+2}\right] \mathrm{~d} x\\&amp;\displaystyle=\frac{1}{2} m \omega^{2} \frac{2 n+1}{2 \alpha^{2}}\\&amp;\displaystyle=\frac{1}{2}\left(n+\frac{1}{2}\right) \hbar \omega\\&amp;\displaystyle=\frac{E_{n}}{2}\end{array}\]</div>
+<p>从上式，我们也可以得到：<span class="arithmatex">\(\displaystyle \overline{x^{2}}=\frac{2 n+1}{2 \alpha^{2}}\)</span></p>
+<p>在 <span class="arithmatex">\(\psi_{n}\)</span> 态下，<span class="arithmatex">\(\overline{x}=0\)</span>，<span class="arithmatex">\(\displaystyle \overline{x^{2}}=\frac{2 n+1}{2 \alpha^{2}}\)</span>，所以</p>
+<div class="arithmatex">\[\begin{aligned}\Delta x &amp; = \sqrt{\overline{(x-\overline{x})^{2}}} \\&amp;=\sqrt{\overline{\overline{x}^2-2x\overline{x}+x^2}}\\&amp; = \sqrt{\overline{x^{2}}} \\&amp; = \frac{1}{\alpha} \sqrt{\frac{2 n+1}{2}}\end{aligned}\]</div>
+<p>利用</p>
+<div class="arithmatex">\[\begin{array}{c}\displaystyle\mathrm{H}_{n}^{\prime}(x)=2 n \mathrm{H}_{n-1}(x) \\\displaystyle\psi_{n}(x)=\left(\frac{\alpha}{\sqrt{\pi} 2^{n} n !}\right)^{\frac{1}{2}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}} \mathrm{H}_{n}(\alpha x) \\\displaystyle\psi_{n-1}(x)=\left(\frac{\alpha}{\sqrt{\pi} 2^{n-1}(n-1) !}\right)^{\frac{1}{2}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}} \mathrm{H}_{n-1}(\alpha x) \\\displaystyle\psi_{n+1}(x)=\left(\frac{\alpha}{\sqrt{\pi} 2^{n+1}(n+1) !}\right)^{\frac{1}{2}} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}} \mathrm{H}_{n+1}(\alpha x)\end{array}\]</div>
+<p>所以</p>
+<div class="arithmatex">\[\begin{aligned}\frac{\mathrm{d}}{\mathrm{d} x} \psi_{n} &amp; =\left(\frac{\alpha}{\sqrt{\pi} 2^{n} n !}\right)^{\frac{1}{2}} 2 n \alpha \mathrm{H}_{n-1} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}}-\alpha^{2} x \psi_{n} \\&amp;=\left(\frac{\alpha}{\sqrt{\pi} 2^{n} n !}\right)^{\frac{1}{2}} 2 n \alpha \mathrm{H}_{n-1} \mathrm{e}^{-\frac{\alpha^{2} x^{2}}{2}}-\alpha^{2} \frac{1}{\alpha}\left[\sqrt{\frac{n}{2}} \psi_{n-1}(x)+\sqrt{\frac{n+1}{2}} \psi_{n+1}(x)\right] \\&amp; =2 \alpha \sqrt{\frac{n}{2}} \psi_{n-1}-\alpha^{2} \frac{1}{\alpha}\left[\sqrt{\frac{n}{2}} \psi_{n-1}+\sqrt{\frac{n+1}{2}} \psi_{n+1}\right] \\&amp; =\alpha\left[\sqrt{\frac{n}{2}} \psi_{n-1}-\sqrt{\frac{n+1}{2}} \psi_{n+1}\right]\end{aligned}\]</div>
+<p>利用本征函数的正交归一性，我们可知：</p>
+<div class="arithmatex">\[\begin{aligned}\overline{p} &amp; = -i\hbar\int \psi_{n}^{*} \frac{\mathrm{d}}{\mathrm{d}x} \psi_{n} \mathrm{~d} x\\&amp;=-i\hbar\int \psi_{n}^{*} \alpha\left[\sqrt{\frac{n}{2}} \psi_{n-1}-\sqrt{\frac{n+1}{2}} \psi_{n+1}\right] \mathrm{d} x\\&amp;=0\end{aligned}\]</div>
+<p>另外，根据公式 $\displaystyle\frac{\mathrm{d}}{\mathrm{d} x} \psi_{n}(x)=\alpha\left[\sqrt{\frac{n}{2}} \psi_{n-1}-\sqrt{\frac{n+1}{2}} \psi_{n+1}\right] $，我们可以递推得到：</p>
+<div class="arithmatex">\[\begin{array}{ll}\displaystyle\frac{\mathrm{d}^{2}}{\mathrm{~d} x^{2}} \psi_{n}&amp;\displaystyle=\alpha\left[\sqrt{\frac{n}{2}} \frac{\mathrm{d} \psi_{n-1}}{\mathrm{~d} x}-\sqrt{\frac{n+1}{2}} \frac{\mathrm{d} \psi_{n+1}}{\mathrm{~d} x}\right] \\&amp;\displaystyle=\alpha\left\{\sqrt{\frac{n}{2}} \alpha\left[\sqrt{\frac{n-1}{2}} \psi_{n-2}-\sqrt{\frac{n}{2}} \psi_{n}\right]-\sqrt{\frac{n+1}{2}} \alpha\left[\sqrt{\frac{n+1}{2}} \psi_{n}-\sqrt{\frac{n+2}{2}} \psi_{n+2}\right]\right\} \\&amp;\displaystyle=\frac{\alpha^{2}}{2}\left[\sqrt{n(n-1)} \psi_{n-2}-(2 n+1) \psi_{n}+\sqrt{(n+1)(n+2)} \psi_{n+2}\right]\end{array}\]</div>
+<p>类似的，利用本征函数的正交归一性，我们可以得到：</p>
+<div class="arithmatex">\[\begin{aligned}\overline{p^{2}} &amp; = \int_{-\infty}^{+\infty} \psi_{n}^{*}\left(-\hbar^{2} \frac{\partial^{2}}{\partial x^{2}}\right) \psi_{n} \mathrm{~d} x \\&amp; = -\hbar^{2}\int_{-\infty}^{+\infty} \psi_{n}^{*}\frac{\alpha^{2}}{2}\left[\sqrt{n(n-1)} \psi_{n-2}-(2 n+1) \psi_{n}+\sqrt{(n+1)(n+2)} \psi_{n+2}\right] \mathrm{~d} x \\&amp; = \frac{\hbar^{2} \alpha^{2}}{2}(2 n+1)\\\end{aligned}\]</div>
+<p>所以</p>
+<div class="arithmatex">\[\displaystyle \overline{T}=\frac{\overline{p^{2}}}{2 m}=\frac{1}{2}\left(n+\frac{1}{2}\right) \hbar \omega=\frac{E_{n}}{2}\]</div>
+<p>在 <span class="arithmatex">\(\psi_{n}\)</span> 态下，<span class="arithmatex">\(\overline{p}=0\)</span>，<span class="arithmatex">\(\displaystyle \overline{p^{2}}=\frac{\alpha^{2} \hbar^{2}}{2}(2 n+1)\)</span>，所以</p>
+<div class="arithmatex">\[\begin{aligned}\Delta p &amp; =\sqrt{\overline{(p-\overline{p})^{2}}} \\&amp; = \sqrt{\overline{p^2-2p\overline{p}+\overline{p}^2}} \\&amp; = \sqrt{\overline{p^2}} \\&amp; = \alpha \hbar \sqrt{\frac{2 n+1}{2}}\end{aligned}\]</div>
+<p>因此，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \Delta x \Delta p=\frac{1}{\alpha} \sqrt{\frac{2 n+1}{2}}\times \alpha \hbar \sqrt{\frac{2 n+1}{2}}=(n+\frac{1}{2}) \hbar\]</div>
+<p>符合不确定系关系：<span class="arithmatex">\(\displaystyle \Delta x \Delta p \geq \frac{\hbar}{2}\)</span></p>
+<p>在实验上，我们曾经对 <span class="arithmatex">\(\Delta x\)</span> 进行过测量：</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/6.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/6.png" width="600" /></a>
+</figure>
+<p><a href="https://www.science.org/doi/10.1126/science.1094419">图片链接</a></p>
+<p>因为 <span class="arithmatex">\(\displaystyle \alpha=\sqrt{\frac{\mu \omega_{0}}{\hbar}}\)</span> 和 <span class="arithmatex">\(\displaystyle \Delta x  = \frac{1}{\alpha} \sqrt{\frac{2 n+1}{2}}\)</span>，所以在 <span class="arithmatex">\(n=0\)</span> 的时候，<span class="arithmatex">\(\Delta x\)</span> 的表现形式为：</p>
+<div class="arithmatex">\[\displaystyle \Delta x_{\mathrm{SQL}}=\sqrt{\frac{\hbar}{2 \mu \omega_{0}}}\]</div>
+<p>我们称其为标准量子极限（standard quantum limit）。</p>
+<p>在同时考虑了谐振器和线性放大器的量子噪声，我们可以得到：</p>
+<div class="arithmatex">\[\displaystyle \Delta x_{\mathrm{QL}}=\sqrt{\frac{\hbar}{\ln 3 \cdot \mu \omega_{0}}} \approx 1.35 \cdot \Delta x_{\mathrm{SQL}}\]</div>
+<p>当 <span class="arithmatex">\(\mathrm{V}_{\mathrm{NR}}=15 \mathrm{~V}\)</span> 时，我们发现我们的位移传感方案在机械共振时的噪声温度为：</p>
+<div class="arithmatex">\[T_{N}^{S S E T}=16 m K=17 \hbar \omega_{0}=18 T_{Q L}\]</div>
+<p>由此，我们可以给出位置标准偏差：</p>
+<div class="arithmatex">\[\displaystyle \Delta x=\sqrt{\frac{T_{N}^{S S E T}}{T_{Q L}}} \cdot \Delta x_{Q L}=4.3 \cdot \Delta x_{Q L}\]</div>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/7.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E8%B0%90%E6%8C%AF%E5%AD%90%E4%B8%8E%20Hermite%20%E5%A4%9A%E9%A1%B9%E5%BC%8F/7.png" width="600" /></a>
+</figure>
+<p><a href="https://www.science.org/doi/10.1126/science.1094419">图片链接</a></p>
+<p>通过进行实验测量，我们发现实验值与理论值符合的很好。</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+    data-repo="timeti123553/timeti2.github.io"
+    data-repo-id="R_kgDOLSbkvQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLSbkvc4CdR2E"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.prune", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.caa56a14.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
