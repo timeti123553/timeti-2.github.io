@@ -1,0 +1,7 @@
+/* 设置KaTeX的公式容器最大宽度为比文章宽度小100像素 */
+.katex-display,
+.katex {
+    max-width: calc(100% - 1%);
+}
+
+  
