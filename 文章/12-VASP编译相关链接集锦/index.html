@@ -1,0 +1,925 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>VASP编译相关链接集锦 - TIMEti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-3XP0F4X3PX"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-3XP0F4X3PX",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-3XP0F4X3PX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vasp" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="TIMEti" class="md-header__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIMEti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VASP编译相关链接集锦
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  文章
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-tabs__link">
+          
+  
+  专栏
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%83%B3%E6%B3%95/2024.04.02/" class="md-tabs__link">
+          
+  
+  想法
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-tabs__link">
+        
+  
+    
+  
+  收藏
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86%E4%B9%A0%E9%A2%98/%E4%B9%A0%E9%A2%981/" class="md-tabs__link">
+          
+  
+  固体物理习题
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TIMEti" class="md-nav__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    TIMEti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    专栏
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../%E6%83%B3%E6%B3%95/2024.04.02/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    想法
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    收藏
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86%E4%B9%A0%E9%A2%98/%E4%B9%A0%E9%A2%981/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    固体物理习题
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vasp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见 VASP 编译问题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-445" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 4.4.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-520" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 5.2.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-533" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 5.3.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-535" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 5.3.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-541" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 5.4.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-544" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 5.4.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-610" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.1.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-611" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.1.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-620" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.2.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-630" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.3.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-631" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.3.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-632" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.3.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vasp-640" class="md-nav__link">
+    <span class="md-ellipsis">
+      VASP 6.4.0
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="vasp"><strong>VASP编译相关链接集锦</strong><a class="headerlink" href="#vasp" title="Permanent link">&para;</a></h1>
+<p><strong>本篇文章分享有关 VASP 编译的文章！！！</strong></p>
+<p><strong>欢迎各位分享相关的文章！！！</strong></p>
+<h2 id="vasp_1"><strong>常见 VASP 编译问题</strong><a class="headerlink" href="#vasp_1" title="Permanent link">&para;</a></h2>
+<p><a href="https://blog.sciencenet.cn/blog-3486020-1359103.html">科学网—常见vasp编译问题 - 唐昉的博文</a></p>
+<h2 id="vasp-445"><strong>VASP 4.4.5</strong><a class="headerlink" href="#vasp-445" title="Permanent link">&para;</a></h2>
+<p><a href="http://blog.chinaunix.net/uid-28824378-id-3608119.html">VASP单机编译-gegewu2013-ChinaUnix博客</a></p>
+<h2 id="vasp-520"><strong>VASP 5.2.0</strong><a class="headerlink" href="#vasp-520" title="Permanent link">&para;</a></h2>
+<p><a href="https://wp.fungo.me/resources/vasp5-2-compile.html">VASP 5.2 编译安装</a></p>
+<p><a href="https://wp.fungo.me/resources/vasp5-2-compile.html">vasp 5.2 并行版本的编译</a></p>
+<h2 id="vasp-533"><strong>VASP 5.3.3</strong><a class="headerlink" href="#vasp-533" title="Permanent link">&para;</a></h2>
+<p><a href="https://likunwang.wordpress.com/2016/03/15/hpc%E5%B9%B6%E8%A1%8C%E7%BC%96%E8%AF%91vasp-5-3-3-with-vtst/">HPC并行编译VASP 5.3.3 with VTST</a></p>
+<h2 id="vasp-535"><strong>VASP 5.3.5</strong><a class="headerlink" href="#vasp-535" title="Permanent link">&para;</a></h2>
+<p><a href="https://wap.sciencenet.cn/blog-1113299-1239362.html?mobile=1">科学网-Intel+MKL编译vasp-5.3.5-刘晓毅的博文</a></p>
+<h2 id="vasp-541"><strong>VASP 5.4.1</strong><a class="headerlink" href="#vasp-541" title="Permanent link">&para;</a></h2>
+<p><a href="https://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm">VASP 5.4.1+VTST编译安装</a></p>
+<p><a href="http://bbs.keinsci.com/thread-4267-1-1.html">[VASP] 教你从头编译vasp-5.4.1</a></p>
+<p><a href="https://aidme.nimte.ac.cn/install_vasp.html">Installation of VASP - 中国科学院宁波材料技术与工程研究所</a></p>
+<p><a href="http://wiki.tangzeyuan.com/code/vasp-compilation.html">VASP Compilation - Zeyuan Tang's Wiki</a></p>
+<p><a href="https://www.shangyexinzhi.com/article/3246813.html">GNU编译VASP.5.4.1+VTST+VASPsol</a></p>
+<h2 id="vasp-544"><strong>VASP 5.4.4</strong><a class="headerlink" href="#vasp-544" title="Permanent link">&para;</a></h2>
+<p><a href="https://nscc.mrzhenggang.com/vasp/#%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83">VASP编译安装教程 | 超算小站</a></p>
+<p><a href="http://sobereva.com/455">VASP最简单的安装方法(含全程视频演示) - 思想家公社的门口:量子化学·分子模拟·二次元</a></p>
+<p><a href="https://yxli8023.github.io/2020/08/09/VASP-install.html">VASP编译安装 - Yu-Xuan Blog</a></p>
+<p><a href="https://blog.csdn.net/TanWaiwai_yy/article/details/128268867">编译安装vasp|使用oneAPI|老超算_vasp 编译-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/sowhatgavin/article/details/70473526">vasp 编译安装测试说明_for optimal performance we recommend to set | | nc-CSDN博客</a></p>
+<p><a href="https://yxli8023.github.io/2021/03/14/VASP-Wannier90.html">VASP+Wannier90编译计算紧束缚能带 - Yu-Xuan Blog</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/617840534">VASP 5.4.4编译与安装</a></p>
+<p><a href="https://hpc.pku.edu.cn/_book/guide/soft_env/vasp.html">Vasp · Doc</a></p>
+<p><a href="https://www.modb.pro/db/106677">vasp的简单编译 - 墨天轮</a></p>
+<p><a href="https://www.cnblogs.com/liu-shaobo/p/13727145.html">Intel编译器编译VASP</a></p>
+<p><a href="https://ac.sugon.com/doc/1.0.6/11250/general-handbook/compile/VASP5.4.4&amp;VTST.html">VASP5.4.4&amp; VTST · 计算服务</a></p>
+<p><a href="https://hpc.pku.edu.cn/ug/soft/vasp/">VASP - 北京大学高性能计算校级公共平台用户文档</a></p>
+<p><a href="https://www.nvidia.cn/data-center/gpu-accelerated-applications/vasp/">VASP 电子结构应用程序和 GPU 加速 | NVIDIA</a></p>
+<p><a href="http://cyh.wiki/2019/10/19/Ubuntu18.04_VASP5.4.4-VTST/">Ubuntu18.04编译VASP5.4.4+VTST的详细步骤</a></p>
+<p><a href="https://www.bilibili.com/video/BV1vX4y1F7Gi/?vd_source=eb94d534d845c731deff83873982824b">vasp编译_哔哩哔哩_bilibili</a></p>
+<p><a href="http://8.142.125.87/2022/05/29/vasp%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">VASP安装教程</a></p>
+<p><a href="https://www.bilibili.com/video/BV1mt411Z7AY/?vd_source=eb94d534d845c731deff83873982824b">固体与表面，番外篇3-五分钟搞定VASP编译_哔哩哔哩_bilibili</a></p>
+<p><a href="https://lhxone.com/2022/03/02/vasp%E7%BC%96%E8%AF%91-%E6%B5%8B%E8%AF%95/">vasp编译&amp;测试</a></p>
+<p><a href="https://it.shanghaitech.edu.cn/_upload/article/files/75/96/2d1cd43245cab11b9032fceb8c4f/6f77d284-e1cd-4204-9ce4-8a16836caf9d.pdf">物质学院常用软件编译及使用-vasp-2021</a></p>
+<p><a href="https://www.bilibili.com/video/BV1mv4y1A7zy/?vd_source=eb94d534d845c731deff83873982824b">intel oneAPI编译器安装及VASP安装过程全记录_哔哩哔哩_bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1cR4y1F7UE/?vd_source=eb94d534d845c731deff83873982824b">vasp教程第二季-1. Linux上的编译_安装（intel编译器）_哔哩哔哩_bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Vt411B7xL/?vd_source=eb94d534d845c731deff83873982824b">VASP 5.4.4极简安装方法（CentOS 7.6+ifort 19）_哔哩哔哩_bilibili</a></p>
+<h2 id="vasp-610"><strong>VASP 6.1.0</strong><a class="headerlink" href="#vasp-610" title="Permanent link">&para;</a></h2>
+<p><a href="https://lfpara.com/docs/hpc/software/vasp/vasp_610.html">VASP 6.1.0版本 CPU 和GPU 编译 — 孪烽超算平台用户手册 0.1.0 文档</a></p>
+<p><a href="https://it.shanghaitech.edu.cn/_upload/article/files/75/96/2d1cd43245cab11b9032fceb8c4f/732b708f-e4ef-427f-b60a-263b24431e79.pdf">VASP 6.1.0 版本编译报错及解决</a></p>
+<p><a href="http://www.ncwzjz.com/article/jdgssd.html">VASP中GPU并行编译安装的示例分析-南充大橙子建站</a></p>
+<p><a href="https://cloud.tencent.com/developer/news/857748">VASP.6.XX编译VTST版本示例</a></p>
+<p><a href="https://www.bilibili.com/video/BV1vK411F7HR/?vd_source=eb94d534d845c731deff83873982824b">vasp安装 教程vasp.6.1_哔哩哔哩_bilibili</a></p>
+<h2 id="vasp-611"><strong>VASP 6.1.1</strong><a class="headerlink" href="#vasp-611" title="Permanent link">&para;</a></h2>
+<p><a href="https://blog.sbyu.top/post/5#%E7%9B%AE%E5%BD%95%E5%88%86%E5%B8%83">编译版本6的VASP</a></p>
+<h2 id="vasp-620"><strong>VASP 6.2.0</strong><a class="headerlink" href="#vasp-620" title="Permanent link">&para;</a></h2>
+<p><a href="https://doc.nju.edu.cn/books/efe93/page/vasp6-gpu">VASP6 GPU 编译 | e-Science Document</a></p>
+<h2 id="vasp-630"><strong>VASP 6.3.0</strong><a class="headerlink" href="#vasp-630" title="Permanent link">&para;</a></h2>
+<p><a href="https://blog.bitllion.top/docs/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/%E8%BD%AF%E4%BB%B6/vasp%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%E4%B8%80/">Vasp编译安装教程一 | 科学计算 | 一言</a></p>
+<p><a href="https://mxmf.xyz/2022/09/30/vasp%E7%BC%96%E8%AF%91/index.html">vasp编译</a></p>
+<p><a href="https://www.bilibili.com/read/cv17539982/">VASP学习笔记01--基于Ubuntu 20.04.2 编译VASP6.3.0详细教程</a></p>
+<p><a href="https://www.bilibili.com/video/BV1rT4y1k785/?vd_source=eb94d534d845c731deff83873982824b">VASP安装-从操作系统到程序编译全过程_哔哩哔哩_bilibili</a></p>
+<p><a href="http://vaspkit.cn/index.php/106.html">静态编译VASP 6.3.0 串行版本 - VASPKIT与量化软件</a></p>
+<p><a href="http://vaspkit.cn/index.php/100.html">在MacOS系统下编译Intel oneAPI + OpenMPI + VASP 6.3.0 - VASPKIT与量化软件</a></p>
+<p><a href="https://www.bilibili.com/video/BV1ZZ4y1o7rn/?vd_source=eb94d534d845c731deff83873982824b">惊！windows版VASP的编译过程_哔哩哔哩_bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1GG4y1h7yx/?vd_source=eb94d534d845c731deff83873982824b">【VASP】CentOS7系统下编译VASP.6.3.0 + VTST_哔哩哔哩_bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Z34y1y7dj/?vd_source=eb94d534d845c731deff83873982824b">容器中VASP还要更快，Docker中安装运行VASP_哔哩哔哩_bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1sZ4y1Z7hH/?vd_source=eb94d534d845c731deff83873982824b">安排一个HDF5版本的VASP_哔哩哔哩_bilibili</a></p>
+<h2 id="vasp-631"><strong>VASP 6.3.1</strong><a class="headerlink" href="#vasp-631" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.cnblogs.com/scandit/p/16612698.html">VASP-6.3.1编译安装</a></p>
+<h2 id="vasp-632"><strong>VASP 6.3.2</strong><a class="headerlink" href="#vasp-632" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.bilibili.com/video/BV1yu4y1i7Nd/?vd_source=eb94d534d845c731deff83873982824b">Windows下Linux子系统vasp 6.3.2 安装详解：让你轻松入门凝聚态计算！【凝聚态计算入门】_哔哩哔哩_bilibili</a></p>
+<h2 id="vasp-640"><strong>VASP 6.4.0</strong><a class="headerlink" href="#vasp-640" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.jianshu.com/p/54c7d105ce20">编译 VASP 6.4</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+    data-repo="timeti123553/timeti123553.github.io"
+    data-repo-id="R_kgDOLSbkvQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLSbkvc4CdR2E"
+    data-mapping="url"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.prune", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
