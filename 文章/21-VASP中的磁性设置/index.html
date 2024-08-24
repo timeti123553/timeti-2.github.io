@@ -1,0 +1,995 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>VASP中的磁性设置 - TIMEti</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-3XP0F4X3PX"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-3XP0F4X3PX",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-3XP0F4X3PX",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vasp" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="TIMEti" class="md-header__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIMEti
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VASP中的磁性设置
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到暗色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="pink"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  文章
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-tabs__link">
+          
+  
+  专栏
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%83%B3%E6%B3%95/2024.07.28/" class="md-tabs__link">
+          
+  
+  想法
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-tabs__link">
+        
+  
+    
+  
+  收藏
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86%E4%B9%A0%E9%A2%98/%E4%B9%A0%E9%A2%981/" class="md-tabs__link">
+          
+  
+  固体物理习题
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TIMEti" class="md-nav__button md-logo" aria-label="TIMEti" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    TIMEti
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    文章
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../%E4%B8%93%E6%A0%8F/%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    专栏
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../%E6%83%B3%E6%B3%95/2024.07.28/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    想法
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%94%B6%E8%97%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    收藏
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../%E5%9B%BA%E4%BD%93%E7%89%A9%E7%90%86%E4%B9%A0%E9%A2%98/%E4%B9%A0%E9%A2%981/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    固体物理习题
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      背景知识
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      磁性的设置
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      氧原子
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="氧原子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      输入文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      计算结果
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      讨论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="vasp"><strong>VASP中的磁性设置</strong><a class="headerlink" href="#vasp" title="Permanent link">&para;</a></h1>
+<h2 id="_1"><strong>背景知识</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>在居里温度一下，铁磁，反铁磁，亚铁磁都是磁有序的。</p>
+<p>当温度超过居里温度的时候，材料会从磁有序变为磁无序。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/21-VASP%E4%B8%AD%E7%9A%84%E7%A3%81%E6%80%A7%E8%AE%BE%E7%BD%AE/1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/21-VASP%E4%B8%AD%E7%9A%84%E7%A3%81%E6%80%A7%E8%AE%BE%E7%BD%AE/1.png" width="1000" /></a>
+  <figcaption>图1</figcaption>
+</figure>
+<p>其中，铁磁和亚铁磁都有净磁矩，反铁磁和顺磁材料没有净磁矩。</p>
+<p><strong>铁磁性：</strong> 在没有施加磁场的情况下，铁磁材料中的磁矩有序且具有相同的大小。</p>
+<p><strong>亚铁磁性：</strong> 这是在没有施加磁场的情况下，亚铁磁材料中的磁矩是由两种不同的离子组成，并且磁矩相反对齐并且具有不同的大小。 </p>
+<p><strong>顺磁性：</strong> 在没有施加磁场的情况下，顺磁材料中的磁矩是无序的，并且在施加的磁场的情况下变为有序。</p>
+<p><strong>反铁磁性：</strong> 没有施加磁场的情况下，反铁磁材料中的磁矩是相反的，并且具有相同的大小，所以总磁矩为零。</p>
+<p><strong>居里温度（Curie temperature）：</strong> 指磁性材料中自发磁化强度降到零时的温度，是物质由铁磁性或亚铁磁性转变成顺磁性的临界点，记为 <span class="arithmatex">\(T_C\)</span>。低于居里温度时，该物质含有磁性，此时和材料有关的磁场很难改变。高于居里温度时，该物质成为顺磁体，此时磁体的磁场很容易随周围磁场的改变而改变。居里温度由物质的化学成分和晶体结构决定。</p>
+<p><strong>奈尔温度（Néel temperature）：</strong> 指的是反铁磁性材料转变为顺磁性材料所需要达到的温度，记为 <span class="arithmatex">\(T_N\)</span>。当温度升到奈尔温度时，晶体内部的原子内能会大到足以破坏材料内部宏观磁性排列，从而发生相变，物质由反铁磁性转变为顺磁性。</p>
+<p><strong>居里定律：</strong> 在顺磁性材料中，材料的磁化强度大致与施加的磁场强度成正比。然而，若加热材料，则比值减小。对于固定场强的磁场，磁化率大致与温度成反比。</p>
+<div class="arithmatex">\[
+\mathbf{M}=C\cdot \frac{\mathbf{B}}{T}  
+\]</div>
+<p><span class="arithmatex">\(\mathbf{M}\)</span>：磁化强度；
+<span class="arithmatex">\(\mathbf{B}\)</span>：磁感应强度；
+<span class="arithmatex">\(T\)</span>：绝对温度，单位为 <span class="arithmatex">\(K\)</span>；
+<span class="arithmatex">\(C\)</span>：居里常数；</p>
+<p><strong>居里-韦斯定律（Curie-Weiss law）：</strong> 居里-韦斯定律为居里定律的修正公式，用来补足该公式的不足。当一物质的温度大于居里温度（<span class="arithmatex">\(T_C\)</span>）时，其磁化率 <span class="arithmatex">\(\chi\)</span> 与温度 <span class="arithmatex">\(T\)</span> 的关系式为：</p>
+<div class="arithmatex">\[
+\chi=\frac{C}{T-T_C}
+\]</div>
+<p><span class="arithmatex">\(C\)</span>：居里常数；
+<span class="arithmatex">\(T\)</span>：绝对温度，单位为 <span class="arithmatex">\(K\)</span>；
+<span class="arithmatex">\(T_C\)</span>：居里温度，单位为 <span class="arithmatex">\(K\)</span>；</p>
+<h2 id="_2"><strong>磁性的设置</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>在 VASP 中进行磁性材料计算之前，我们需要在 INCAR 中设置相关的磁性参数。</p>
+<p>对于简单的磁性材料，我们只需要在 INCAR 中设置 <code>ISPIN=2</code>，不需要设置 <code>MAGMOM</code>。</p>
+<p>对于复杂的磁性体系，我们除了需要在 INCAR 中设置 <code>ISPIN=2</code>，还需要设置 <code>MAGMOM</code>。</p>
+<p><code>MAGMOM</code> 可以指定体系中原子的初始磁矩。</p>
+<p>合理的初始值可以加快计算速度，并保持计算结果的正确性。</p>
+<p><code>MAGMOM</code> 写入参数最简单的方式就是对照 POSCAR 中原子的顺序，依次在 <code>MAGMOM</code> 中写入磁矩：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a>MAGMOM = m1 m2 m3 m4 ...
+</code></pre></div>
+<p>也可以在磁矩前面加上数字：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos="1 "></span></a>MAGMOM = n*m
+</code></pre></div>
+<p>上述代表有 n 个原子的磁矩都是 <code>m</code>。</p>
+<p>对于包含许多原子的系统，单行上的 <code>MAGMOM</code> 输入可能很难读取，特别是在非共线的情况下。可以使用反斜杠（\）作为换行符在多行上提供 INCAR 输入。例如，对于具有 AFM 排列和 16 个原子（其中前 8 个是磁性的）的非共线系统，多线输入可能如下：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a>MAGMOM =  3.0  2.0  1.0 \
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a>         -3.0 -2.0 -1.0 \
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos="3 "></span></a>          3.0  2.0  1.0 \
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos="4 "></span></a>         -3.0 -2.0 -1.0 \
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><a href="#__codelineno-2-5"><span class="linenos" data-linenos="5 "></span></a>          3.0  2.0  1.0 \
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><a href="#__codelineno-2-6"><span class="linenos" data-linenos="6 "></span></a>         -3.0 -2.0 -1.0 \
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><a href="#__codelineno-2-7"><span class="linenos" data-linenos="7 "></span></a>          3.0  2.0  1.0 \
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><a href="#__codelineno-2-8"><span class="linenos" data-linenos="8 "></span></a>         -3.0 -2.0 -1.0 \
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><a href="#__codelineno-2-9"><span class="linenos" data-linenos="9 "></span></a>          24*0.0
+</code></pre></div>
+<p><strong>注：当只设置 <code>ISPIN=2</code> 的时候，体系的每个原子都默认加上磁矩 1。</strong></p>
+<p><strong>注：为了收敛到磁基态，建议将磁矩设置为略大于预期值，例如，使用实验磁矩乘以 1.2 或 1.5。</strong></p>
+<p><strong>注：最终的磁性状态在很大程度上取决于 <code>MAGMOM</code> 的初始值。即使没有使用对称性（<code>ISYM=-1</code>），结果也是这样，因为大多数交换相关泛函在自旋密度泛函理论中都有许多局部最小值。</strong></p>
+<h2 id="_3"><strong>氧原子</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><span class="arithmatex">\(\rm O_2\)</span> 分子中有 12 个价电子。<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>以 x 轴作为键轴，两个氧原子的一对 <span class="arithmatex">\(2s\)</span> 轨道组合得到氧分子的成键轨道 <span class="arithmatex">\(\sigma_{2 s}\)</span> 和反键轨道 <span class="arithmatex">\(\sigma_{2 s}^*\)</span>；</p>
+<p>两个 <span class="arithmatex">\(2p_x\)</span> 原子轨道“头碰头”组合得到 <span class="arithmatex">\(\sigma_{2 p_{x}}\)</span> 和 <span class="arithmatex">\(\sigma_{2 p_{x}}^*\)</span>；</p>
+<p>两个 <span class="arithmatex">\(2p_y\)</span> 和两个 <span class="arithmatex">\(2p_z\)</span> 轨道分别组合，得到两个简并的成键轨道（<span class="arithmatex">\(\pi_{2 p_{y}}\)</span> 和 <span class="arithmatex">\(\pi_{2 p_{z}}\)</span>）和两个简并的反键轨道(<span class="arithmatex">\(\pi_{2 p_{y}}^*\)</span> 和 <span class="arithmatex">\(\pi_{2 p_{z}}^*\)</span>)。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/21-VASP%E4%B8%AD%E7%9A%84%E7%A3%81%E6%80%A7%E8%AE%BE%E7%BD%AE/2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/21-VASP%E4%B8%AD%E7%9A%84%E7%A3%81%E6%80%A7%E8%AE%BE%E7%BD%AE/2.png" width="600" /></a>
+  <figcaption>图2</figcaption>
+</figure>
+<p><a href="https://sketchfab.com/3d-models/molecular-orbital-diagram-oxygen-661d1bc6f0904cb181e36143ff145281">图片链接</a></p>
+<p><span class="arithmatex">\(O_2\)</span> 电子组态的表示方法：<span class="arithmatex">\(\left(\sigma_{1 s}\right)^{2}\left(\sigma_{1 s}^{*}\right)^{2}\left(\sigma_{2 s}\right)^{2}\left(\sigma_{2 s}{ }^{*}\right)^{2}\left(\sigma_{2 p}\right)^{2}\left(\pi_{2 p}\right)^{4}\left(\pi_{2 p}{ }^{*}\right)^{2}\)</span></p>
+<p><span class="arithmatex">\(\pi_{2 p_{y}}^*\)</span> 和 <span class="arithmatex">\(\pi_{2 p_{z}}^*\)</span> 中填充了两个单电子，根据洪特规则，这两个电子应自旋平行地排列在两个简并轨道中，从而成功解释了 <span class="arithmatex">\(\rm O_2\)</span> 的顺磁性。</p>
+<figure>
+  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/21-VASP%E4%B8%AD%E7%9A%84%E7%A3%81%E6%80%A7%E8%AE%BE%E7%BD%AE/3.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/21-VASP%E4%B8%AD%E7%9A%84%E7%A3%81%E6%80%A7%E8%AE%BE%E7%BD%AE/3.png" width="600" /></a>
+  <figcaption>图3</figcaption>
+</figure>
+<p><a href="https://chem.libretexts.org/Courses/Pacific_Union_College/Quantum_Chemistry/09%3A_Chemical_Bonding_in_Diatomic_Molecules/9.10%3A_Molecular_Orbital_Theory_Predicts_that_Molecular_Oxygen_is_Paramagnetic">图片链接</a></p>
+<p>通过上图可以知道：<span class="arithmatex">\(\rm O_2\)</span> 分子的基态是三重态，也就是每个原子都有一点单电子，所以每个氧原子的初始的磁矩可以设置为 1。</p>
+<p>但 VASP 对 MAGMOM 的要求不一定非得是 1，也就是初始值是一个可以模糊也可以精确的数值。因为很多时候，我们不知道确切的磁矩是多少。如果我们已经知道磁矩是多少（比如 <span class="arithmatex">\(\rm O_2\)</span> ），可以直接写上去，也可以差不多写一个。如果不知道的话，就需要根据自己的假设，猜一个初始值了。<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<h3 id="_4"><strong>输入文件</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>INCAR、POTCAR 和 KPOINTS 是通过 vaspkit 生成。</p>
+<p><strong>INCAR</strong></p>
+<p>INCAR 参数在 vaspkit 生成的基础上，添加了相关的磁性参数。</p>
+<p><div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos=" 1 "></span></a>Global Parameters
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos=" 2 "></span></a>ISTART =  1            (Read existing wavefunction, if there)
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos=" 3 "></span></a>ISPIN  =  2            (Non-Spin polarised DFT)
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos=" 4 "></span></a>MAGMOM =  1.5 1.5 1.5 1.5
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><a href="#__codelineno-3-5"><span class="linenos" data-linenos=" 5 "></span></a># ICHARG =  11         (Non-self-consistent: GGA/LDA band structures)
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><a href="#__codelineno-3-6"><span class="linenos" data-linenos=" 6 "></span></a>LREAL  = .FALSE.       (Projection operators: automatic)
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><a href="#__codelineno-3-7"><span class="linenos" data-linenos=" 7 "></span></a># ENCUT  =  400        (Cut-off energy for plane wave basis set, in eV)
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><a href="#__codelineno-3-8"><span class="linenos" data-linenos=" 8 "></span></a># PREC   =  Accurate   (Precision level: Normal or Accurate, set Accurate when perform structure lattice relaxation calculation)
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><a href="#__codelineno-3-9"><span class="linenos" data-linenos=" 9 "></span></a>LWAVE  = .TRUE.        (Write WAVECAR or not)
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><a href="#__codelineno-3-10"><span class="linenos" data-linenos="10 "></span></a>LCHARG = .TRUE.        (Write CHGCAR or not)
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><a href="#__codelineno-3-11"><span class="linenos" data-linenos="11 "></span></a>ADDGRID= .TRUE.        (Increase grid, helps GGA convergence)
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><a href="#__codelineno-3-12"><span class="linenos" data-linenos="12 "></span></a># LVTOT  = .TRUE.      (Write total electrostatic potential into LOCPOT or not)
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><a href="#__codelineno-3-13"><span class="linenos" data-linenos="13 "></span></a># LVHAR  = .TRUE.      (Write ionic + Hartree electrostatic potential into LOCPOT or not)
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><a href="#__codelineno-3-14"><span class="linenos" data-linenos="14 "></span></a># NELECT =             (No. of electrons: charged cells, be careful)
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><a href="#__codelineno-3-15"><span class="linenos" data-linenos="15 "></span></a># LPLANE = .TRUE.      (Real space distribution, supercells)
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><a href="#__codelineno-3-16"><span class="linenos" data-linenos="16 "></span></a># NWRITE = 2           (Medium-level output)
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><a href="#__codelineno-3-17"><span class="linenos" data-linenos="17 "></span></a># KPAR   = 2           (Divides k-grid into separate groups)
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><a href="#__codelineno-3-18"><span class="linenos" data-linenos="18 "></span></a># NGXF    = 300        (FFT grid mesh density for nice charge/potential plots)
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><a href="#__codelineno-3-19"><span class="linenos" data-linenos="19 "></span></a># NGYF    = 300        (FFT grid mesh density for nice charge/potential plots)
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><a href="#__codelineno-3-20"><span class="linenos" data-linenos="20 "></span></a># NGZF    = 300        (FFT grid mesh density for nice charge/potential plots)
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><a href="#__codelineno-3-21"><span class="linenos" data-linenos="21 "></span></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><a href="#__codelineno-3-22"><span class="linenos" data-linenos="22 "></span></a>Static Calculation
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><a href="#__codelineno-3-23"><span class="linenos" data-linenos="23 "></span></a>ISMEAR =  0            (gaussian smearing method)
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><a href="#__codelineno-3-24"><span class="linenos" data-linenos="24 "></span></a>SIGMA  =  0.05         (please check the width of the smearing)
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a><a href="#__codelineno-3-25"><span class="linenos" data-linenos="25 "></span></a>LORBIT =  11           (PAW radii for projected DOS)
+<a id="__codelineno-3-26" name="__codelineno-3-26"></a><a href="#__codelineno-3-26"><span class="linenos" data-linenos="26 "></span></a>NEDOS  =  2001         (DOSCAR points)
+<a id="__codelineno-3-27" name="__codelineno-3-27"></a><a href="#__codelineno-3-27"><span class="linenos" data-linenos="27 "></span></a>NELM   =  60           (Max electronic SCF steps)
+<a id="__codelineno-3-28" name="__codelineno-3-28"></a><a href="#__codelineno-3-28"><span class="linenos" data-linenos="28 "></span></a>EDIFF  =  1E-08        (SCF energy convergence, in eV)
+</code></pre></div>
+<strong>KPOINTS</strong>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a>K-Spacing Value to Generate K-Mesh: 0.020
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a>0
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos="3 "></span></a>Gamma
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos="4 "></span></a>  10  15  14
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos="5 "></span></a>0.0  0.0  0.0
+</code></pre></div>
+<strong>POSCAR</strong>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos=" 1 "></span></a>O4
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos=" 2 "></span></a>1.0
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos=" 3 "></span></a>   0.0000000000000000    5.7028057065333089    0.0000000000000000
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos=" 4 "></span></a>   3.3248318800000001    0.0000000000000000    0.0000000000000000
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos=" 5 "></span></a>   0.0000000000000000   -2.3944914034358917   -3.6470501823735777
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos=" 6 "></span></a>O
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><a href="#__codelineno-5-7"><span class="linenos" data-linenos=" 7 "></span></a>4
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><a href="#__codelineno-5-8"><span class="linenos" data-linenos=" 8 "></span></a>direct
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><a href="#__codelineno-5-9"><span class="linenos" data-linenos=" 9 "></span></a>   0.9745461700000000    0.0000000000000000    0.8444259800000000 O
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><a href="#__codelineno-5-10"><span class="linenos" data-linenos="10 "></span></a>   0.5254538300000000    0.5000000000000000    0.1555740200000000 O
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><a href="#__codelineno-5-11"><span class="linenos" data-linenos="11 "></span></a>   0.4745461700000000    0.5000000000000000    0.8444259800000000 O
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><a href="#__codelineno-5-12"><span class="linenos" data-linenos="12 "></span></a>   0.0254538300000000    0.0000000000000000    0.1555740200000000 O
+</code></pre></div></p>
+<h3 id="_5"><strong>计算结果</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>OUTCAR 文件中有关磁性的输出结果：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a># of ion       s       p       d       tot
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a>------------------------------------------
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos="3 "></span></a>    1        0.010   0.803   0.000   0.814
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos="4 "></span></a>    2        0.010   0.803   0.000   0.814
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><a href="#__codelineno-6-5"><span class="linenos" data-linenos="5 "></span></a>    3        0.010   0.803   0.000   0.814
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><a href="#__codelineno-6-6"><span class="linenos" data-linenos="6 "></span></a>    4        0.010   0.803   0.000   0.814
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><a href="#__codelineno-6-7"><span class="linenos" data-linenos="7 "></span></a>--------------------------------------------------
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><a href="#__codelineno-6-8"><span class="linenos" data-linenos="8 "></span></a>tot          0.042   3.213   0.000   3.255
+</code></pre></div>
+<p>OUTCAR 文件中有关计算时间的输出结果：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><a href="#__codelineno-7-1"><span class="linenos" data-linenos="1 "></span></a> General timing and accounting informations for this job:
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><a href="#__codelineno-7-2"><span class="linenos" data-linenos="2 "></span></a> ========================================================
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><a href="#__codelineno-7-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><a href="#__codelineno-7-4"><span class="linenos" data-linenos="4 "></span></a>                  Total CPU time used (sec):      624.047
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><a href="#__codelineno-7-5"><span class="linenos" data-linenos="5 "></span></a>                            User time (sec):      613.420
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><a href="#__codelineno-7-6"><span class="linenos" data-linenos="6 "></span></a>                          System time (sec):       10.627
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><a href="#__codelineno-7-7"><span class="linenos" data-linenos="7 "></span></a>                         Elapsed time (sec):      629.221
+</code></pre></div>
+<h3 id="_6"><strong>讨论</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>在 VASP 的官方手册中，有这样一句话：<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<blockquote>
+<p>If you have problems converging to a desired magnetic solution, try to calculate first the non-magnetic ground state and continue from the generated WAVECAR and CHGCAR. </p>
+</blockquote>
+<p>我们根据这一句话，先进行非磁性的基态计算，求出 WAVECAR 和 CHGCAR。然后再磁性基态计算的时候读取 WAVECAR 和 CHGCAR 文件。</p>
+<p>读取 WAVECAR 和 CHGCAR 文件后，OUTCAR 文件中有关磁性的输出结果为：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><a href="#__codelineno-8-1"><span class="linenos" data-linenos="1 "></span></a># of ion       s       p       d       tot
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><a href="#__codelineno-8-2"><span class="linenos" data-linenos="2 "></span></a>------------------------------------------
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><a href="#__codelineno-8-3"><span class="linenos" data-linenos="3 "></span></a>    1        0.010   0.803   0.000   0.814
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><a href="#__codelineno-8-4"><span class="linenos" data-linenos="4 "></span></a>    2        0.010   0.803   0.000   0.814
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><a href="#__codelineno-8-5"><span class="linenos" data-linenos="5 "></span></a>    3        0.010   0.803   0.000   0.814
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><a href="#__codelineno-8-6"><span class="linenos" data-linenos="6 "></span></a>    4        0.010   0.803   0.000   0.814
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><a href="#__codelineno-8-7"><span class="linenos" data-linenos="7 "></span></a>--------------------------------------------------
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><a href="#__codelineno-8-8"><span class="linenos" data-linenos="8 "></span></a>tot          0.042   3.213   0.000   3.255
+</code></pre></div>
+<p>读取 WAVECAR 和 CHGCAR 文件后，OUTCAR 文件中有关计算时间的输出结果为：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><a href="#__codelineno-9-1"><span class="linenos" data-linenos="1 "></span></a> General timing and accounting informations for this job:
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><a href="#__codelineno-9-2"><span class="linenos" data-linenos="2 "></span></a> ========================================================
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><a href="#__codelineno-9-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><a href="#__codelineno-9-4"><span class="linenos" data-linenos="4 "></span></a>                  Total CPU time used (sec):      476.579
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><a href="#__codelineno-9-5"><span class="linenos" data-linenos="5 "></span></a>                            User time (sec):      466.093
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><a href="#__codelineno-9-6"><span class="linenos" data-linenos="6 "></span></a>                          System time (sec):       10.486
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><a href="#__codelineno-9-7"><span class="linenos" data-linenos="7 "></span></a>                         Elapsed time (sec):      487.039
+</code></pre></div>
+<p>磁矩的收敛结果一样。</p>
+<p>和 629.221 秒相比，计算时间有了很大的提升。</p>
+<p><strong>但是，这只是表象。</strong></p>
+<p>进行非磁性计算所需要的时间为：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><a href="#__codelineno-10-1"><span class="linenos" data-linenos="1 "></span></a> General timing and accounting informations for this job:
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><a href="#__codelineno-10-2"><span class="linenos" data-linenos="2 "></span></a> ========================================================
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><a href="#__codelineno-10-3"><span class="linenos" data-linenos="3 "></span></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><a href="#__codelineno-10-4"><span class="linenos" data-linenos="4 "></span></a>                  Total CPU time used (sec):      277.846
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><a href="#__codelineno-10-5"><span class="linenos" data-linenos="5 "></span></a>                            User time (sec):      271.680
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><a href="#__codelineno-10-6"><span class="linenos" data-linenos="6 "></span></a>                          System time (sec):        6.166
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><a href="#__codelineno-10-7"><span class="linenos" data-linenos="7 "></span></a>                         Elapsed time (sec):      283.972
+</code></pre></div>
+<p>所以，这样计算所花费的总时间为 771.011 秒。</p>
+<p>和 629.221 秒相比，多出来了 22.5% 的时间。</p>
+<p><strong>结论：非磁性计算可以降低磁性计算的时间，但是计算的总时间会增加。</strong></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.dxhx.pku.edu.cn/article/2023/1000-8438/20230548.shtml">https://www.dxhx.pku.edu.cn/article/2023/1000-8438/20230548.shtml</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://www.bigbrosci.com/2017/12/04/ex12/">https://www.bigbrosci.com/2017/12/04/ex12/</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://www.vasp.at/wiki/index.php/MAGMOM">https://www.vasp.at/wiki/index.php/MAGMOM</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+  <h2 id="__comments">评论</h2>
+  <!-- Insert generated snippet here -->
+  <script src="https://giscus.app/client.js"
+    data-repo="timeti123553/timeti123553.github.io"
+    data-repo-id="R_kgDOLSbkvQ"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOLSbkvc4CdR2E"
+    data-mapping="url"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme) 
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.prune", "toc.follow", "navigation.top", "search.suggest", "search.highlight", "search.share", "navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -16,7 +16,7 @@
     
     
       
-        <title>二维无限深势阱 - TIMEti</title>
+        <title>VASP中如何固定磁矩大小和方向？ - TIMEti</title>
       
     
     
@@ -95,7 +95,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#vasp" class="md-skip">
           跳转至
         </a>
       
@@ -129,7 +129,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              二维无限深势阱
+              VASP中如何固定磁矩大小和方向？
             
           </span>
         </div>
@@ -589,47 +589,117 @@
                   
 
 
-<h1 id="_1"><strong>二维无限深势阱</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>一个粒子束缚于二维无限深方形阱内，阱宽在 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(y\)</span> 方向，分别为 <span class="arithmatex">\(L_{x}\)</span>，<span class="arithmatex">\(L_{y}\)</span>。</p>
-<p>阱内位势为 0 ，阱外位势为无限大。</p>
-<p>粒子只能移动于束缚的方向（<span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(y\)</span> 方向）。</p>
-<p>设二维无限深势阱的势能分布如下：</p>
-<div class="arithmatex">\[U(x,y)=\left\{\begin{array}{ll}0 &amp; if~~0&lt;x&lt;L_x~~and~~0&lt;y&lt;L_y  \\\infty &amp; otherwise \end{array}\right.\]</div>
-<p><figure markdown="span">
-  <a class="glightbox" href="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E4%BA%8C%E7%BB%B4%E6%97%A0%E9%99%90%E6%B7%B1%E5%8A%BF%E9%98%B1/1.PNG" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image title" src="https://timetidemo.oss-cn-hangzhou.aliyuncs.com/%E4%BA%8C%E7%BB%B4%E6%97%A0%E9%99%90%E6%B7%B1%E5%8A%BF%E9%98%B1/1.PNG" width="600" /></a>
-</figure></p>
-<p><a href="https://en.wikipedia.org/wiki/Particle_in_a_box">图片链接</a></p>
-<p>在这二维的问题里，粒子束缚于一个二维势阱内。</p>
-<p>在<strong>阱外</strong>，设波函数为 <span class="arithmatex">\(\psi_e\)</span>，定态薛定谔方程为：</p>
-<div class="arithmatex">\[\displaystyle-\frac{\hbar}{2 m}(\frac{\mathrm{d}^{2} \psi_{\mathrm{e}}}{\mathrm{d} x^{2}}+\frac{\mathrm{d}^{2} \psi_{\mathrm{e}}}{\mathrm{d} y^{2}})+(E-U(x,y)) \psi_{\mathrm{e}}=0\]</div>
-<p>由于在阱外，<span class="arithmatex">\(U(x,y)\rightarrow \infty\)</span>，对于 <span class="arithmatex">\(E\)</span> 为有限值的粒子，要使上述方程成立，唯有<span class="arithmatex">\(\psi_e=0\)</span>。</p>
-<p>在阱内，设波函数为 <span class="arithmatex">\(\psi_i\)</span>，定态薛定谔方程为：</p>
-<div class="arithmatex">\[\displaystyle-\frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2} \psi_i}{\partial x^{2}}+\frac{\partial^{2} \psi_i}{\partial y^{2}}\right)=E \psi_i\]</div>
-<p>使用分立变量法，我们假设 <span class="arithmatex">\(\psi_i(x, y)\)</span> 是两个不相关的函数 <span class="arithmatex">\(X(x)\)</span> 和 <span class="arithmatex">\(Y(y)\)</span> 的乘积：</p>
-<div class="arithmatex">\[\psi_i(x, y)=X(x) Y(y)\]</div>
-<p>将上式带入阱内的薛定谔方程：</p>
-<div class="arithmatex">\[\displaystyle-\frac{\hbar^{2}}{2 m}\left(Y \frac{\partial^{2} X}{\partial x^{2}}+X \frac{\partial^{2} Y}{\partial y^{2}}\right)=E X Y\]</div>
-<p>将方程两边都除以 <span class="arithmatex">\(XY\)</span>，我们可以得到：</p>
-<div class="arithmatex">\[\displaystyle-\frac{\hbar^{2}}{2 m}\left(\frac{X^{\prime \prime}}{X}+\frac{Y^{\prime \prime}}{Y}\right)=E\]</div>
-<p>由于 <span class="arithmatex">\(\displaystyle\frac{X^{\prime \prime}}{X}\)</span> 和 <span class="arithmatex">\(\displaystyle\frac{Y^{\prime \prime}}{Y}\)</span> 分别只和 <span class="arithmatex">\(x\)</span>、<span class="arithmatex">\(y\)</span> 有关，则上式右边的能量可以写成 <span class="arithmatex">\(E_{x}+E_{y}=E\)</span>。</p>
-<p>我们可以将上式分量，分量的两个式子分别等于对应的常数：</p>
-<div class="arithmatex">\[
-\begin{array}{c}\displaystyle-\frac{\hbar^{2}}{2 m} \frac{X^{\prime \prime}}{X}=E_{x}\\\displaystyle-\frac{\hbar^{2}}{2 m} \frac{Y^{\prime \prime}}{Y}=E_{y}\end{array}
-\]</div>
-<p>上述两式也可以写成：</p>
-<div class="arithmatex">\[
-\begin{array}{c}\displaystyle-\frac{\hbar^{2}}{2 m} \frac{d^{2} X}{d x^{2}}=E_{x} X\\\displaystyle-\frac{\hbar^{2}}{2 m} \frac{d^{2} Y}{d y^{2}}=E_{y} Y\end{array}
-\]</div>
-<p>根据之前的“一维无限深势阱”的文章：</p>
-<p><a href="../%E4%B8%80%E7%BB%B4%E6%97%A0%E9%99%90%E6%B7%B1%E5%8A%BF%E9%98%B1/">一维无限深势阱</a></p>
-<p>上述两式的解可以写成：</p>
-<div class="arithmatex">\[
-\begin{array}{c}\displaystyle X_{n_{x}}(x)=\sqrt{\frac{2}{L_{x}}} \sin \left(\frac{n_{x} \pi x}{L_{x}}\right),\quad n_{x}=1,2,3, \cdots\\\displaystyle E_{n_x}=\frac{n_x^{2} \pi^{2} \hbar^{2}}{2 m L_x^{2}}\\\displaystyle Y_{n_{y}}(y)=\sqrt{\frac{2}{L_{y}}} \sin \left(\frac{n_{y} \pi y}{L_{y}}\right),\quad n_{y}=1,2,3, \cdots\\\displaystyle E_{n_y}=\frac{n_y^{2} \pi^{2} \hbar^{2}}{2 m L_y^{2}}\end{array}
-\]</div>
-<p>根据式子 <span class="arithmatex">\(\psi_i(x, y)=X(x) Y(y)\)</span>，我们可以得到：</p>
-<div class="arithmatex">\[
-\begin{array}{c}\displaystyle\psi_{n_{x}, n_{y}}(x,y)=\sqrt{\frac{4}{L_{x} L_{y}}} \sin \left(\frac{n_{x} \pi x}{L_{x}}\right) \sin \left(\frac{n_{y} \pi y}{L_{y}}\right)\\\displaystyle E_{n_x,n_y}=E_{n_x}+E_{n_y}=\frac{ \pi^{2} \hbar^{2}}{2 m}\left[\left(\frac{n_{x}}{L_{x}}\right)^{2}+\left(\frac{n_{y}}{L_{y}}\right)^{2}\right]\\n_{x}=1,2,3, \cdots\\n_{y}=1,2,3, \cdots\end{array}
-\]</div>
+<h1 id="vasp"><strong>VASP中如何固定磁矩大小和方向？</strong><a class="headerlink" href="#vasp" title="Permanent link">&para;</a></h1>
+<p><a href="https://phadwiki.com/dry/details.html?id=47">https://phadwiki.com/dry/details.html?id=47</a></p>
+<p>之前的文章讲到过，在材料体系性质研究过程中，往往我们会使用一些假体系来对比研究：</p>
+<p>为了研究材料体系中的相互作用，我们需要研究一些假体系，例如，明明是有自旋轨道耦合（Spin-orbit coupling，SOC）相互作用的 Bi2Se 3我们会先不加 SOC 再加 SOC，研究自旋轨道耦合对能带反转的作用。</p>
+<p>在有些体系中我们还会用到调节自旋轨道耦合强度的来研究自旋轨道耦合强度对体系性质的影响。</p>
+<p>对于一个给定材料体系的磁矩而言，如果不考虑外场的影响，只考虑材料最初始/稳定的状态，可以说一个材料组分和结构确定后就应该只有一种稳定的磁构型（磁矩大小和方向），即磁基态。<strong>然而，物理人喜欢研究不同的相之间的相变，因此，计算过程中各种磁构型都可能会计算。</strong></p>
+<p>但是对于第一性原理软件 VASP 而言，只设置 ISPIN=2，LSORBIT=T，MAGMOM= 3*Nions*moment。磁矩的大小和方向都有可能被优化到基态。</p>
+<p><strong>如何实现固定磁矩方向和大小就成了一个问题。</strong></p>
+<p>于是，限制磁矩大小和方向的方法被开发出来。</p>
+<p>见：<a href="https://www.vasp.at/wiki/index.php/Constraining_local_magnetic_moments">https://www.vasp.at/wiki/index.php/Constraining_local_magnetic_moments</a></p>
+<p>VASP中给的案例是Fe的dimer。</p>
+<p><strong>POSCAR</strong></p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><a href="#__codelineno-0-1"><span class="linenos" data-linenos="1 "></span></a>Fe dimer                                
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><a href="#__codelineno-0-2"><span class="linenos" data-linenos="2 "></span></a>1.00000000000000000     
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><a href="#__codelineno-0-3"><span class="linenos" data-linenos="3 "></span></a>8.0000000000000000    0.0000000000000000    0.0000000000000000     
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><a href="#__codelineno-0-4"><span class="linenos" data-linenos="4 "></span></a>0.0000000000000000    8.0000000000000000    0.0000000000000000     
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><a href="#__codelineno-0-5"><span class="linenos" data-linenos="5 "></span></a>0.0000000000000000    0.0000000000000000    8.0000000000000000   
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><a href="#__codelineno-0-6"><span class="linenos" data-linenos="6 "></span></a>2
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><a href="#__codelineno-0-7"><span class="linenos" data-linenos="7 "></span></a>Cartesian 
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><a href="#__codelineno-0-8"><span class="linenos" data-linenos="8 "></span></a>3.00  0.00  0.00 
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><a href="#__codelineno-0-9"><span class="linenos" data-linenos="9 "></span></a>5.00  0.00  0.00
+</code></pre></div>
+<p><strong>INCAR</strong></p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><a href="#__codelineno-1-1"><span class="linenos" data-linenos=" 1 "></span></a>SYSTEM        = Fe dimer
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><a href="#__codelineno-1-2"><span class="linenos" data-linenos=" 2 "></span></a>ISTART        = 0
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><a href="#__codelineno-1-3"><span class="linenos" data-linenos=" 3 "></span></a>ISYM          = 0
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><a href="#__codelineno-1-4"><span class="linenos" data-linenos=" 4 "></span></a>LNONCOLLINEAR = .TRUE.
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><a href="#__codelineno-1-5"><span class="linenos" data-linenos=" 5 "></span></a>MAGMOM        = 0 0 3   0 0 3
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><a href="#__codelineno-1-6"><span class="linenos" data-linenos=" 6 "></span></a>VOSKOWN       = 1
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><a href="#__codelineno-1-7"><span class="linenos" data-linenos=" 7 "></span></a>LORBIT        = 11  
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><a href="#__codelineno-1-8"><span class="linenos" data-linenos=" 8 "></span></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><a href="#__codelineno-1-9"><span class="linenos" data-linenos=" 9 "></span></a>! mix slowly when increasing LAMBDA 
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><a href="#__codelineno-1-10"><span class="linenos" data-linenos="10 "></span></a># AMIX          = 0.1
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><a href="#__codelineno-1-11"><span class="linenos" data-linenos="11 "></span></a># BMIX          = 0.00001
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><a href="#__codelineno-1-12"><span class="linenos" data-linenos="12 "></span></a># AMIX_MAG      = 0.2
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><a href="#__codelineno-1-13"><span class="linenos" data-linenos="13 "></span></a># BMIX_MAG      = 0.00001  
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><a href="#__codelineno-1-14"><span class="linenos" data-linenos="14 "></span></a># I_CONSTRAINED_M = 1
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><a href="#__codelineno-1-15"><span class="linenos" data-linenos="15 "></span></a># RWIGS           = 1.0
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><a href="#__codelineno-1-16"><span class="linenos" data-linenos="16 "></span></a># LAMBDA         = 10
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><a href="#__codelineno-1-17"><span class="linenos" data-linenos="17 "></span></a># M_CONSTR        = 0 0 1  0 0 1
+</code></pre></div>
+<p>注意，体系设置 ISYM=0 关了对称性，然后设置两个 Fe 原子具有001方向的 3muB 初始磁矩。</p>
+<p><strong>KPOINTS</strong></p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><a href="#__codelineno-2-1"><span class="linenos" data-linenos="1 "></span></a>k-points
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><a href="#__codelineno-2-2"><span class="linenos" data-linenos="2 "></span></a>0
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><a href="#__codelineno-2-3"><span class="linenos" data-linenos="3 "></span></a>Monkhorst Pack  
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><a href="#__codelineno-2-4"><span class="linenos" data-linenos="4 "></span></a>1   1   1  
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><a href="#__codelineno-2-5"><span class="linenos" data-linenos="5 "></span></a>0.  0.  0.
+</code></pre></div>
+<p>利用 MAGMOM = 0 0 3 0 0 3 的初始初始铁磁态，在 OSZICAR 文件中得到如下磁矩:</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><a href="#__codelineno-3-1"><span class="linenos" data-linenos="1 "></span></a>...
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><a href="#__codelineno-3-2"><span class="linenos" data-linenos="2 "></span></a>DAV:  20    -0.929676054634E+01   -0.26101E-03   -0.16780E-03    60   0.102E-01    0.537E-02
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><a href="#__codelineno-3-3"><span class="linenos" data-linenos="3 "></span></a>DAV:  21    -0.929679955346E+01   -0.39007E-04   -0.30319E-04    60   0.590E-02   
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><a href="#__codelineno-3-4"><span class="linenos" data-linenos="4 "></span></a>1 F= -.92967996E+01 E0= -.93047629E+01  d E =0.238900E-01  mag= -0.0006 -0.0003  6.0537
+</code></pre></div>
+<p>利用 MAGMOM = 0 0 3 0 2 2 的初始初始铁磁态，在 OSZICAR 文件中得到如下磁矩:</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><a href="#__codelineno-4-1"><span class="linenos" data-linenos="1 "></span></a> magnetization (y)                          magnetization (z)
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><a href="#__codelineno-4-2"><span class="linenos" data-linenos="2 "></span></a># of ion     s       p       d       tot   # of ion     s       p       d       tot
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><a href="#__codelineno-4-3"><span class="linenos" data-linenos="3 "></span></a>----------------------------------------   ----------------------------------------  
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><a href="#__codelineno-4-4"><span class="linenos" data-linenos="4 "></span></a>1        0.018  -0.001   1.071   1.087     1        0.045  -0.003   2.587   2.628  
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><a href="#__codelineno-4-5"><span class="linenos" data-linenos="5 "></span></a>2        0.019  -0.001   1.069   1.087     2        0.045  -0.003   2.588   2.629
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><a href="#__codelineno-4-6"><span class="linenos" data-linenos="6 "></span></a>----------------------------------------   ----------------------------------------
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><a href="#__codelineno-4-7"><span class="linenos" data-linenos="7 "></span></a>tot        0.037  -0.003   2.140   2.174   tot        0.089  -0.007   5.175   5.257
+</code></pre></div>
+<p>在系统中加入一个惩罚函数，将体系的局部磁矩驱动到期望的方向，当在输入中修改以下步骤时(注意惩罚函数对总能量的贡献):</p>
+<p>磁矩约束的开关(I_CONSTRAINED_M=1)。</p>
+<p>设置积分半径来确定局部矩(RWIGS=1.0)。</p>
+<p>惩罚函数中的权重(LAMBDA=10)。</p>
+<p>磁矩约束的目标方向(M_CONSTR= 0 0 1 0 1 1)。</p>
+<p>在 OSZICAR 中的关键信息为：</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><a href="#__codelineno-5-1"><span class="linenos" data-linenos="1 "></span></a>E_p =  0.35424E-02  lambda =  0.100E+02 
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><a href="#__codelineno-5-2"><span class="linenos" data-linenos="2 "></span></a>ion        MW_int                 M_int  
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><a href="#__codelineno-5-3"><span class="linenos" data-linenos="3 "></span></a>1  0.000  0.013  1.557    0.000  0.014  2.674  
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><a href="#__codelineno-5-4"><span class="linenos" data-linenos="4 "></span></a>2  0.000  1.092  1.110    0.000  1.880  1.901
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><a href="#__codelineno-5-5"><span class="linenos" data-linenos="5 "></span></a>DAV:  35    -0.905322335169E+01    0.58398E-04   -0.60872E-04    60   0.734E-02   
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><a href="#__codelineno-5-6"><span class="linenos" data-linenos="6 "></span></a>1 F= -.90532234E+01 E0= -.90355617E+01  d E =-.529849E-01  mag= -0.0005  2.1161  5.1088
+</code></pre></div>
+<p>E_p 是惩罚函数产生的能量。随着 LAMBDA 增加而减小。</p>
+<p>通过逐步增加 LAMBDA，可以降低 E_p (缓慢地使结果保持稳定):</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><a href="#__codelineno-6-1"><span class="linenos" data-linenos="1 "></span></a> E_p =  0.22591E-03  lambda =  0.500E+02 
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><a href="#__codelineno-6-2"><span class="linenos" data-linenos="2 "></span></a>ion        MW_int                 M_int  
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><a href="#__codelineno-6-3"><span class="linenos" data-linenos="3 "></span></a>1  0.000  0.002  1.545    0.001 -0.005  2.654  
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><a href="#__codelineno-6-4"><span class="linenos" data-linenos="4 "></span></a>2  0.000  1.086  1.087    0.001  1.871  1.862
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><a href="#__codelineno-6-5"><span class="linenos" data-linenos="5 "></span></a>DAV:  33    -0.907152551238E+01    0.48186E-04   -0.33125E-04    60   0.163E-01   
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><a href="#__codelineno-6-6"><span class="linenos" data-linenos="6 "></span></a>1 F= -.90715255E+01 E0= -.90541505E+01  d E =-.521251E-01  mag=  0.0042  2.0902  5.0659
+</code></pre></div>
+<p>这样就可以得到给定磁结构的 LSDA 总能量。</p>
+<p>当收敛性不好时，我们能做什么:</p>
+<ol>
+<li>
+<p>从ISTART=0 (或删除WAVECAR文件)和ICHARG=1计算非自旋极化的电荷密度开始。</p>
+</li>
+<li>
+<p>通过设置BMIX=0.0001和BMIX_MAG=0.0001来使用线性混合。</p>
+</li>
+<li>
+<p>慢慢混合，即减少AMIX和AMIX_MAG。</p>
+</li>
+<li>
+<p>减少MAXMIX，存储在Broyden混合器中的步骤数(默认MAXMIX=45)。</p>
+</li>
+<li>
+<p>从部分收敛的结果重新启动(大约20步后停止计算，然后从WAVECAR文件重新启动计算)。</p>
+</li>
+<li>
+<p>使用约束来稳定磁配置。</p>
+</li>
+</ol>
+<p><strong>注意：</strong></p>
+<p>当 I_CONSTRAINED_M=1 时，只固定磁矩方向不固定大小，M_CONSTR= 0 0 1 0 1 1 表示方向。</p>
+<p>当 I_CONSTRAINED_M=2 时，既固定磁矩方向也固定磁矩大小，M_CONSTR= 0 0 3 0 0 3 表示方向和大小。</p>
 
 
 
